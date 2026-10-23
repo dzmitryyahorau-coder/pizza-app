@@ -1,4 +1,7 @@
 {
-    "@@locale": "ru",
-    "appTitle": "Пиццерия"
+  "@@locale": "ru",
+  "appTitle": "Пицца",
+  "menuHeaderDeliveryFree": "Доставка бесплатная",
+  "menuHeaderDeliveryTime": "{minutes, plural, one{около {minutes} минуты} few{около {minutes} минут} many{около {minutes} минут} other{около {minutes} минуты}}",
+  "featuresSectionTitle": "Выгодно и вкусно"
 }

@@ -1,4 +1,13 @@
 {
-    "@@locale": "en",
-    "appTitle": "Pizza App"
+  "@@locale": "en",
+  "appTitle": "Pizza App",
+  "menuHeaderDeliveryFree": "Free delivery",
+  "menuHeaderDeliveryTime": "{minutes, plural, one{about {minutes} minute} other{about {minutes} minutes}}",
+  "@menuHeaderDeliveryTime": {
+    "description": "Estimated delivery time, shown next to the free delivery label",
+    "placeholders": {
+      "minutes": { "type": "int" }
+    }
+  },
+  "featuresSectionTitle": "Featured"
 }

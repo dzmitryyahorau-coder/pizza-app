@@ -103,6 +103,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pizza App'**
   String get appTitle;
+
+  /// No description provided for @menuHeaderDeliveryFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free delivery'**
+  String get menuHeaderDeliveryFree;
+
+  /// Estimated delivery time, shown next to the free delivery label
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes, plural, one{about {minutes} minute} other{about {minutes} minutes}}'**
+  String menuHeaderDeliveryTime(int minutes);
+
+  /// No description provided for @featuresSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured'**
+  String get featuresSectionTitle;
 }
 
 class _AppLocalizationsDelegate

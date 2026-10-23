@@ -11,4 +11,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appTitle => 'Pizza App';
+
+  @override
+  String get menuHeaderDeliveryFree => 'Free delivery';
+
+  @override
+  String menuHeaderDeliveryTime(int minutes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      minutes,
+      locale: localeName,
+      other: 'about $minutes minutes',
+      one: 'about $minutes minute',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get featuresSectionTitle => 'Featured';
 }
