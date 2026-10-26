@@ -10,8 +10,8 @@ class MenuHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.directional(
-        start: AppSpacing.screenHorizontal,
-        end: AppSpacing.screenHorizontal,
+        start: AppSpacing.l,
+        end: AppSpacing.l,
       ),
       child: Row(
         spacing: 4,

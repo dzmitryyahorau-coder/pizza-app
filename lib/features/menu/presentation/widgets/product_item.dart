@@ -9,47 +9,43 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 172,
-      child: Row(
-        key: ValueKey(product.id),
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsetsGeometry.directional(end: 5),
-            child: Image.asset(
-              'assets/images/pizza.png',
-              width: 108,
-              height: 108,
-            ),
+    return Row(
+      key: ValueKey(product.id),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsetsGeometry.directional(end: 5),
+          child: Image.asset(
+            'assets/images/pizza.png',
+            width: 108,
+            height: 108,
           ),
-          SizedBox(
-            height: 172,
-            width: 192,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 4,
-              children: [
-                Text(
-                  product.name,
-                  style: TextStyle(fontWeight: FontWeight(700), fontSize: 16),
-                  maxLines: 2,
+        ),
+        SizedBox(
+          width: 192,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 4,
+            children: [
+              Text(
+                product.name,
+                style: TextStyle(fontWeight: FontWeight(700), fontSize: 16),
+                maxLines: 2,
+              ),
+              Text(
+                product.description,
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 12,
+                  fontWeight: FontWeight(400),
                 ),
-                Text(
-                  product.description,
-                  style: TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 12,
-                    fontWeight: FontWeight(400),
-                  ),
-                  maxLines: 5,
-                ),
-                PriceChip(price: product.price.toString()),
-              ],
-            ),
+                maxLines: 5,
+              ),
+              PriceChip(price: product.price.toString()),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

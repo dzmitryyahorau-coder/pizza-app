@@ -10,7 +10,7 @@ class MenuSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsGeometry.directional(top: AppSpacing.screenHorizontal),
+      padding: EdgeInsetsGeometry.directional(top: AppSpacing.l),
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
@@ -21,15 +21,15 @@ class MenuSheet extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsetsGeometry.directional(
-                start: AppSpacing.screenHorizontal,
-                top: AppSpacing.screenHorizontal,
+                start: AppSpacing.l,
+                top: AppSpacing.l,
               ),
               child: StoriesList(),
             ),
             Padding(
               padding: EdgeInsetsGeometry.directional(
-                start: AppSpacing.screenHorizontal,
-                top: AppSpacing.screenHorizontal,
+                start: AppSpacing.l,
+                top: AppSpacing.l,
               ),
               child: FeaturedList(),
             ),

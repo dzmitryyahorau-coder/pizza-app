@@ -73,9 +73,7 @@ class FeaturedList extends StatelessWidget {
             children: [
               for (int i = 0; i < 5; i++)
                 Padding(
-                  padding: EdgeInsetsGeometry.directional(
-                    end: AppSpacing.screenHorizontal,
-                  ),
+                  padding: EdgeInsetsGeometry.directional(end: AppSpacing.l),
                   child: FeaturedItem(
                     label: 'Бруслетики с клюквой',
                     price: 'от 669 P',
