@@ -48,5 +48,30 @@ class _MenuListState extends State<MenuList> {
         ),
       ],
     );
+
+    // return CustomScrollView(
+    //   slivers: <Widget>[
+    //     SliverAppBar(
+    //       flexibleSpace: CategoriesList(
+    //         categories: mocks.categories,
+    //         activeCategoryId: selectedCategoryId,
+    //         onChangeActiveCategoryId: (id) => setState(() {
+    //           selectedCategoryId = id;
+    //         }),
+    //       ),
+    //     ),
+    //     SliverList.builder(
+    //       itemBuilder: (BuildContext context, int index) {
+    //         return Padding(
+    //           padding: EdgeInsetsGeometry.symmetric(
+    //             vertical: 5,
+    //             horizontal: AppSpacing.screenHorizontal,
+    //           ),
+    //           child: ProductItem(product: mocks.products[index]),
+    //         );
+    //       },
+    //     ),
+    //   ],
+    // );
   }
 }
