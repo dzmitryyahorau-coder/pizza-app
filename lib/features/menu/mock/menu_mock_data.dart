@@ -1,5 +1,26 @@
+import 'package:flutter/animation.dart';
 import 'package:pizza_app/features/menu/data/category.dart';
 import 'package:pizza_app/features/menu/data/product.dart';
+import 'package:pizza_app/features/menu/data/story.dart';
+
+const stories = [
+  Story(
+    label: 'Призы за пикники',
+    image: 'assets/images/altyn.jpg',
+    badge: 'stars',
+    bgColor: Color(0XFF5DA8FF),
+  ),
+  Story(
+    label: 'Завтраки в меню',
+    image: 'assets/images/cheese-pnks.png',
+    badge: 'fire',
+    bgColor: Color(0xFFFF6900),
+  ),
+  Story(label: 'Лучшее начало дня', image: 'no_image'),
+  Story(label: 'Доставка за 10 минут', image: 'no_image'),
+  Story(label: 'Ура, лето!', image: 'no_image'),
+  Story(label: 'Ешь и худей', image: 'no_image'),
+];
 
 const categories = [
   Category(id: 'pizza', name: 'Пицца'),

@@ -22,6 +22,20 @@ class _MenuScreenState extends State<MenuScreen> {
     for (final category in mocks.categories) category.id: GlobalKey(),
   };
 
+  late final ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController()..addListener(() {});
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,8 +79,8 @@ class _MenuScreenState extends State<MenuScreen> {
                     SliverToBoxAdapter(key: categoryIdToKey[category.id]),
                     SliverList.builder(
                       itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsetsGeometry.all(
-                          AppSpacing.screenHorizontal,
+                        padding: EdgeInsetsGeometry.symmetric(
+                          horizontal: AppSpacing.screenHorizontal,
                         ),
                         child: ProductItem(
                           product: mocks.products

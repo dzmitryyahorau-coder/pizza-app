@@ -17,10 +17,10 @@ class ProductItem extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsetsGeometry.directional(end: 5),
-            child: Container(
-              width: 136,
-              height: 136,
-              decoration: BoxDecoration(color: Colors.grey),
+            child: Image.asset(
+              'assets/images/pizza.png',
+              width: 108,
+              height: 108,
             ),
           ),
           SizedBox(

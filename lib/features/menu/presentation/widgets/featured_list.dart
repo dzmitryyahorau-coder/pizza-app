@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/l10n/app_localizations.dart';
 import 'package:pizza_app/shared/widgets/price_chip.dart';
 
@@ -12,18 +13,26 @@ Widget tempImg = Container(
 class FeaturedItem extends StatelessWidget {
   final String label;
   final String price;
+  final String? image;
 
-  const FeaturedItem({super.key, required this.label, required this.price});
+  const FeaturedItem({
+    super.key,
+    required this.label,
+    required this.price,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // final image = image == null ? tempImg : Image.asset('assets/brusletiki.png', width: 108, height: 108,);
+
     return SizedBox(
       height: 108,
       width: 230,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          tempImg,
+          Image.asset('assets/images/brusletiki.png', width: 108, height: 108),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +72,15 @@ class FeaturedList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             children: [
               for (int i = 0; i < 5; i++)
-                FeaturedItem(label: 'Бруслетики с клюквой', price: 'от 669 P'),
+                Padding(
+                  padding: EdgeInsetsGeometry.directional(
+                    end: AppSpacing.screenHorizontal,
+                  ),
+                  child: FeaturedItem(
+                    label: 'Бруслетики с клюквой',
+                    price: 'от 669 P',
+                  ),
+                ),
             ],
           ),
         ),

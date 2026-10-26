@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/l10n/app_localizations.dart';
 
@@ -15,7 +16,15 @@ class MenuHeader extends StatelessWidget {
       child: Row(
         spacing: 4,
         children: [
-          CircleAvatar(backgroundColor: Colors.white, radius: 18),
+          CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 18,
+            child: SvgPicture.asset(
+              'assets/icons/m_courier.svg',
+              width: 20,
+              height: 20,
+            ),
+          ),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -47,7 +56,7 @@ class MenuHeader extends StatelessWidget {
               ],
             ),
           ),
-          CircleAvatar(backgroundColor: Color(0xFFFF7AA5), radius: 18),
+          SvgPicture.asset('assets/icons/avatar.svg', width: 36, height: 36),
         ],
       ),
     );
