@@ -9,5 +9,7 @@
       "minutes": { "type": "int" }
     }
   },
-  "featuresSectionTitle": "Featured"
+  "featuresSectionTitle": "Featured",
+  "productPriceFrom": "from {price} $",
+  "productPrice": "{price} $"
 }

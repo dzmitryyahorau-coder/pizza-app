@@ -30,4 +30,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get featuresSectionTitle => 'Выгодно и вкусно';
+
+  @override
+  String productPriceFrom(Object price) {
+    return 'от $price ₽';
+  }
+
+  @override
+  String productPrice(Object price) {
+    return '$price ₽';
+  }
 }

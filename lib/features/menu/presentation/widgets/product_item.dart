@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:pizza_app/features/menu/data/product.dart';
+import 'package:pizza_app/shared/widgets/price_chip.dart';
+
+class ProductItem extends StatelessWidget {
+  final Product product;
+
+  const ProductItem({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 172,
+      child: Row(
+        key: ValueKey(product.id),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.directional(end: 5),
+            child: Container(
+              width: 136,
+              height: 136,
+              decoration: BoxDecoration(color: Colors.grey),
+            ),
+          ),
+          SizedBox(
+            height: 172,
+            width: 192,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 4,
+              children: [
+                Text(
+                  product.name,
+                  style: TextStyle(fontWeight: FontWeight(700), fontSize: 16),
+                  maxLines: 2,
+                ),
+                Text(
+                  product.description,
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 12,
+                    fontWeight: FontWeight(400),
+                  ),
+                  maxLines: 5,
+                ),
+                PriceChip(price: product.price.toString()),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

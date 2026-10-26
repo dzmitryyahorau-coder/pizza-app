@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/theme/app_spacing.dart';
+import 'package:pizza_app/features/menu/data/product.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/categories_list.dart';
 import 'package:pizza_app/features/menu/mock/menu_mock_data.dart' as mocks;
+import 'package:pizza_app/features/menu/presentation/widgets/product_item.dart';
 
 class MenuList extends StatefulWidget {
   const MenuList({super.key});
@@ -14,6 +17,14 @@ class _MenuListState extends State<MenuList> {
 
   @override
   Widget build(BuildContext context) {
+    List<Product> filteredProducts = mocks.products
+        .where(
+          (p) => selectedCategoryId != null
+              ? p.categoryId == selectedCategoryId
+              : true,
+        )
+        .toList();
+
     return Column(
       children: [
         CategoriesList(
@@ -22,6 +33,18 @@ class _MenuListState extends State<MenuList> {
           onChangeActiveCategoryId: (id) => setState(() {
             selectedCategoryId = id;
           }),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) => Padding(
+              padding: EdgeInsetsGeometry.symmetric(
+                vertical: 5,
+                horizontal: AppSpacing.screenHorizontal,
+              ),
+              child: ProductItem(product: filteredProducts[index]),
+            ),
+            itemCount: filteredProducts.length,
+          ),
         ),
       ],
     );

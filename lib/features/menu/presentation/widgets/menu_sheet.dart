@@ -34,7 +34,7 @@ class MenuSheet extends StatelessWidget {
               ),
               child: FeaturedList(),
             ),
-            MenuList(),
+            Expanded(child: MenuList()),
           ],
         ),
       ),

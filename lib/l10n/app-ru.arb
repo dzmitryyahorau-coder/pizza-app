@@ -3,5 +3,7 @@
   "appTitle": "Пицца",
   "menuHeaderDeliveryFree": "Доставка бесплатная",
   "menuHeaderDeliveryTime": "{minutes, plural, one{около {minutes} минуты} few{около {minutes} минут} many{около {minutes} минут} other{около {minutes} минуты}}",
-  "featuresSectionTitle": "Выгодно и вкусно"
+  "featuresSectionTitle": "Выгодно и вкусно",
+  "productPriceFrom": "от {price} ₽",
+  "productPrice": "{price} ₽"
 }

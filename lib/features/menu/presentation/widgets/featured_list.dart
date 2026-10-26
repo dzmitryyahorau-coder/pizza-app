@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/l10n/app_localizations.dart';
+import 'package:pizza_app/shared/widgets/price_chip.dart';
 
 Widget tempImg = Container(
   width: 108,
@@ -34,16 +35,7 @@ class FeaturedItem extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Chip(
-                  label: Text(price),
-                  backgroundColor: Colors.grey.shade200,
-                  side: BorderSide.none,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  labelStyle: TextStyle(fontWeight: FontWeight.w500),
-                ),
+                PriceChip(price: price),
               ],
             ),
           ),

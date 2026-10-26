@@ -121,6 +121,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Featured'**
   String get featuresSectionTitle;
+
+  /// No description provided for @productPriceFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'from {price} \$'**
+  String productPriceFrom(Object price);
+
+  /// No description provided for @productPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} \$'**
+  String productPrice(Object price);
 }
 
 class _AppLocalizationsDelegate

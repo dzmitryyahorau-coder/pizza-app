@@ -28,4 +28,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get featuresSectionTitle => 'Featured';
+
+  @override
+  String productPriceFrom(Object price) {
+    return 'from $price \$';
+  }
+
+  @override
+  String productPrice(Object price) {
+    return '$price \$';
+  }
 }

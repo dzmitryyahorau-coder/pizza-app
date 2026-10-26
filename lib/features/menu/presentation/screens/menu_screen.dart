@@ -10,7 +10,15 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.scaffoldBackgroundColor,
-      body: SafeArea(child: Column(children: [MenuHeader(), MenuSheet()])),
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            MenuHeader(),
+            Expanded(child: MenuSheet()),
+          ],
+        ),
+      ),
     );
   }
 }
