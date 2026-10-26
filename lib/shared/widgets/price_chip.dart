@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/l10n/app_localizations.dart';
 
 class PriceChip extends StatelessWidget {
@@ -15,6 +16,7 @@ class PriceChip extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       labelStyle: TextStyle(fontWeight: FontWeight.w500),
+      labelPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 1),
     );
   }
 }
