@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/featured_list.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/stories_list.dart';
 
@@ -14,7 +13,6 @@ class MenuSheet extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: AppTheme.surfaceBackgroundColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
         child: Column(

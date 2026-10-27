@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
 
 import 'l10n/app_localizations.dart';
@@ -17,9 +18,9 @@ class MainApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: MenuScreen(),
-      theme: ThemeData(
-        fontFamily: 'Roboto'
-      )
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
     );
   }
 }

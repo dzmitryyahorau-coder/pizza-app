@@ -7,7 +7,7 @@ const stories = [
   Story(
     label: 'Призы за пикники',
     image: 'assets/images/altyn.jpg',
-    badge: 'stars',
+    badge: 'sparkles',
     bgColor: Color(0XFF5DA8FF),
   ),
   Story(
@@ -16,10 +16,10 @@ const stories = [
     badge: 'fire',
     bgColor: Color(0xFFFF6900),
   ),
-  Story(label: 'Лучшее начало дня', image: 'no_image'),
-  Story(label: 'Доставка за 10 минут', image: 'no_image'),
-  Story(label: 'Ура, лето!', image: 'no_image'),
-  Story(label: 'Ешь и худей', image: 'no_image'),
+  Story(label: 'Лучшее начало дня', image: 'assets/images/best-begin-day.png'),
+  Story(label: 'Доставка за 10 минут', image: 'assets/images/delivery-10.png'),
+  Story(label: 'Ура, лето!', image: 'assets/images/best-begin-day.png'),
+  Story(label: 'Ешь и худей', image: 'assets/images/delivery-10.png'),
 ];
 
 const categories = [

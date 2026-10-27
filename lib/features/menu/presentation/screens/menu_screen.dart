@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/features/menu/mock/menu_mock_data.dart' as mocks;
 import 'package:pizza_app/features/menu/presentation/widgets/categories_list.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_header.dart';
@@ -97,7 +96,6 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
@@ -111,7 +109,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             PinnedHeaderSliver(
               child: ColoredBox(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 child: CategoriesList(
                   categories: mocks.categories,
                   activeCategoryId: selectedCategoryId,
@@ -121,7 +119,9 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             for (final category in mocks.categories)
               DecoratedSliver(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     SliverToBoxAdapter(key: categoryIdToKey[category.id]),

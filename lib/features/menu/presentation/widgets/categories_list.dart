@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/features/menu/data/category.dart';
 
-/*
-warning • This class (or a class that this class
-       inherits from) is marked as '@immutable', but
-       one or more of its instance fields aren't
-       final: CategoriesList.activeCategoryId •
-       lib/features/menu/presentation/widgets/categor
-       ies_list.dart:4:7 • must_be_immutable
-       */
 class CategoriesList extends StatelessWidget {
   const CategoriesList({
     super.key,
@@ -23,6 +15,8 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return SizedBox(
       height: 56,
       child: ListView.separated(
@@ -39,12 +33,9 @@ class CategoriesList extends StatelessWidget {
           child: Text(
             categories[index].name,
             style: TextStyle(
-              color: Color.fromARGB(
-                categories[index].id == activeCategoryId ? 255 : 60,
-                23,
-                23,
-                23,
-              ),
+              color: activeCategoryId == categories[index].id
+                  ? colors.onSurface
+                  : colors.onSurfaceVariant,
             ),
           ),
         ),

@@ -17,7 +17,7 @@ class MenuHeader extends StatelessWidget {
         spacing: 4,
         children: [
           CircleAvatar(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             radius: 18,
             child: SvgPicture.asset(
               'assets/icons/m_courier.svg',
@@ -32,11 +32,7 @@ class MenuHeader extends StatelessWidget {
               children: [
                 Text(
                   "Тентюковская улица, 333",
-                  style: TextStyle(
-                    color: Color(0xFF171717),
-                    fontSize: 14,
-                    fontWeight: FontWeight(590),
-                  ),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight(590)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -50,7 +46,7 @@ class MenuHeader extends StatelessWidget {
                         style: TextStyle(color: Color(0xFF00AB48)),
                       ),
                     ],
-                    style: TextStyle(color: Color(0xAA171717), fontSize: 12),
+                    style: TextStyle(fontSize: 12),
                   ),
                 ),
               ],
