@@ -11,5 +11,6 @@
   },
   "featuresSectionTitle": "Featured",
   "productPriceFrom": "from {price} $",
-  "productPrice": "{price} $"
+  "productPrice": "{price} $",
+  "productSizeCm": "{size} cm"
 }

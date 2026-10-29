@@ -133,6 +133,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{price} \$'**
   String productPrice(Object price);
+
+  /// No description provided for @productSizeCm.
+  ///
+  /// In en, this message translates to:
+  /// **'{size} cm'**
+  String productSizeCm(Object size);
 }
 
 class _AppLocalizationsDelegate

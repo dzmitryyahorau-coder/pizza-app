@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
-import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
+// import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
+import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
 
 import 'l10n/app_localizations.dart';
 
@@ -17,7 +18,7 @@ class MainApp extends StatelessWidget {
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: MenuScreen(),
+      home: ProductDetailsScreen(productId: 'p4'),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,

@@ -38,4 +38,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String productPrice(Object price) {
     return '$price \$';
   }
+
+  @override
+  String productSizeCm(Object size) {
+    return '$size cm';
+  }
 }
