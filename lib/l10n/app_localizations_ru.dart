@@ -13,6 +13,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appTitle => 'Пицца';
 
   @override
+  String get showAllLabel => 'Показать все';
+
+  @override
   String get menuHeaderDeliveryFree => 'Доставка бесплатная';
 
   @override
@@ -44,5 +47,16 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String productSizeCm(Object size) {
     return '$size см';
+  }
+
+  @override
+  String get productCustomizationButtonLabel => 'Сделать вкуснее';
+
+  @override
+  String get productAddToTasteSectionTitle => 'Добавьте по вкусу';
+
+  @override
+  String itemWeightInGrams(Object weight) {
+    return '$weight g';
   }
 }

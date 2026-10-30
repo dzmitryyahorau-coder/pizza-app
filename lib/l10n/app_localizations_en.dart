@@ -13,6 +13,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Pizza App';
 
   @override
+  String get showAllLabel => 'Show all';
+
+  @override
   String get menuHeaderDeliveryFree => 'Free delivery';
 
   @override
@@ -42,5 +45,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String productSizeCm(Object size) {
     return '$size cm';
+  }
+
+  @override
+  String get productCustomizationButtonLabel => 'Customize recipe';
+
+  @override
+  String get productAddToTasteSectionTitle => 'Add to your taste';
+
+  @override
+  String itemWeightInGrams(Object weight) {
+    return '$weight g';
   }
 }

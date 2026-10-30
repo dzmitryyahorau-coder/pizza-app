@@ -10,6 +10,6 @@ class Topping {
   final String id;
   final String name;
   final int weightGrams;
-  final int price;
+  final double price;
   final String imageAsset;
 }

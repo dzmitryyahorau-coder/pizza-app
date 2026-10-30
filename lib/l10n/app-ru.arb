@@ -1,10 +1,14 @@
 {
   "@@locale": "ru",
   "appTitle": "Пицца",
+  "showAllLabel": "Показать все",
   "menuHeaderDeliveryFree": "Доставка бесплатная",
   "menuHeaderDeliveryTime": "{minutes, plural, one{около {minutes} минуты} few{около {minutes} минут} many{около {minutes} минут} other{около {minutes} минуты}}",
   "featuresSectionTitle": "Выгодно и вкусно",
   "productPriceFrom": "от {price} ₽",
   "productPrice": "{price} ₽",
-  "productSizeCm": "{size} см"
+  "productSizeCm": "{size} см",
+  "productCustomizationButtonLabel": "Сделать вкуснее",
+  "productAddToTasteSectionTitle": "Добавьте по вкусу",
+  "itemWeightInGrams": "{weight} g"
 }

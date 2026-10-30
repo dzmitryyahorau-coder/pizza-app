@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
   "appTitle": "Pizza App",
+  "showAllLabel": "Show all",
   "menuHeaderDeliveryFree": "Free delivery",
   "menuHeaderDeliveryTime": "{minutes, plural, one{about {minutes} minute} other{about {minutes} minutes}}",
   "@menuHeaderDeliveryTime": {
@@ -12,5 +13,8 @@
   "featuresSectionTitle": "Featured",
   "productPriceFrom": "from {price} $",
   "productPrice": "{price} $",
-  "productSizeCm": "{size} cm"
+  "productSizeCm": "{size} cm",
+  "productCustomizationButtonLabel": "Customize recipe",
+  "productAddToTasteSectionTitle": "Add to your taste",
+  "itemWeightInGrams": "{weight} g"
 }

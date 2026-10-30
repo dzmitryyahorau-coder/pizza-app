@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/product_details/presentation/widgets/blured_surface.dart';
+import 'package:pizza_app/features/product_details/presentation/widgets/common/blured_surface.dart';
 
 class HorizontalSelector<T> extends StatelessWidget {
   final List<T> options;

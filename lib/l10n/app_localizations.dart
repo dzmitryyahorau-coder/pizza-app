@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Pizza App'**
   String get appTitle;
 
+  /// No description provided for @showAllLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Show all'**
+  String get showAllLabel;
+
   /// No description provided for @menuHeaderDeliveryFree.
   ///
   /// In en, this message translates to:
@@ -139,6 +145,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{size} cm'**
   String productSizeCm(Object size);
+
+  /// No description provided for @productCustomizationButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize recipe'**
+  String get productCustomizationButtonLabel;
+
+  /// No description provided for @productAddToTasteSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to your taste'**
+  String get productAddToTasteSectionTitle;
+
+  /// No description provided for @itemWeightInGrams.
+  ///
+  /// In en, this message translates to:
+  /// **'{weight} g'**
+  String itemWeightInGrams(Object weight);
 }
 
 class _AppLocalizationsDelegate
