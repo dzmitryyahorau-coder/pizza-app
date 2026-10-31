@@ -163,6 +163,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{weight} g'**
   String itemWeightInGrams(Object weight);
+
+  /// No description provided for @deliveryAddresesScreenHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery addresses'**
+  String get deliveryAddresesScreenHead;
+
+  /// No description provided for @addYourDeliveryAddressHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your address'**
+  String get addYourDeliveryAddressHead;
+
+  /// No description provided for @addYourDeliveryAddressBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll deliver your order fresh and hot'**
+  String get addYourDeliveryAddressBody;
+
+  /// No description provided for @addAddressButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add address'**
+  String get addAddressButton;
+
+  /// No description provided for @notNowButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNowButton;
+
+  /// No description provided for @closeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get closeButton;
 }
 
 class _AppLocalizationsDelegate

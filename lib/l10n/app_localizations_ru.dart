@@ -59,4 +59,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String itemWeightInGrams(Object weight) {
     return '$weight g';
   }
+
+  @override
+  String get deliveryAddresesScreenHead => 'Адреса доставки';
+
+  @override
+  String get addYourDeliveryAddressHead => 'Добавьте свой адрес';
+
+  @override
+  String get addYourDeliveryAddressBody => 'А мы привезем всё свежим и горям';
+
+  @override
+  String get addAddressButton => 'Добавить адрес';
+
+  @override
+  String get notNowButton => 'Не сейчас';
+
+  @override
+  String get closeButton => 'Закрыть';
 }

@@ -16,5 +16,11 @@
   "productSizeCm": "{size} cm",
   "productCustomizationButtonLabel": "Customize recipe",
   "productAddToTasteSectionTitle": "Add to your taste",
-  "itemWeightInGrams": "{weight} g"
+  "itemWeightInGrams": "{weight} g",
+  "deliveryAddresesScreenHead": "Delivery addresses",
+  "addYourDeliveryAddressHead": "Add your address",
+  "addYourDeliveryAddressBody": "We'll deliver your order fresh and hot",
+  "addAddressButton": "Add address",
+  "notNowButton": "Not now",
+  "closeButton": "Close"
 }

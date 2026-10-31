@@ -4,7 +4,7 @@ import 'package:pizza_app/features/product_details/data/topping.dart';
 import 'package:pizza_app/features/product_details/data/product_size.dart';
 
 class ProductDetails {
-   ProductDetails({
+  ProductDetails({
     required this.id,
     required this.name,
     required this.description,
@@ -22,7 +22,7 @@ class ProductDetails {
   final String imageAsset;
   final List<ProductSize> sizes;
   final String defaultSizeId;
-   Dough dough;
+  Dough dough;
   final List<Topping> toppings;
   final List<Ingredient> ingredients; // можно убрать
 }

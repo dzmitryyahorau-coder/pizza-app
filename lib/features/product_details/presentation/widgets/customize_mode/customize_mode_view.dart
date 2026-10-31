@@ -3,7 +3,6 @@ import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/product_details/data/dough.dart';
 import 'package:pizza_app/features/product_details/data/ingredient.dart';
 import 'package:pizza_app/features/product_details/data/product_size.dart';
-import 'package:pizza_app/features/product_details/mock/product_details_mock.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/close_icon_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/add_topings.dart';
@@ -29,7 +28,7 @@ class CustomizeModeView extends StatelessWidget {
     required this.ingredients,
     required this.selectedDough,
     required this.doughs,
-    required this.onSelectDoughType
+    required this.onSelectDoughType,
   });
 
   static const TextStyle sectionTitleStyle = TextStyle(
@@ -93,7 +92,11 @@ class CustomizeModeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SelectDough(items: doughs, onSelect: onSelectDoughType, selected: selectedDough),
+              SelectDough(
+                items: doughs,
+                onSelect: onSelectDoughType,
+                selected: selectedDough,
+              ),
               AddTopings(),
               SettingsIngredients(items: ingredients),
               SliverToBoxAdapter(child: SizedBox(height: 100)),

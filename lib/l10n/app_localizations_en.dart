@@ -57,4 +57,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String itemWeightInGrams(Object weight) {
     return '$weight g';
   }
+
+  @override
+  String get deliveryAddresesScreenHead => 'Delivery addresses';
+
+  @override
+  String get addYourDeliveryAddressHead => 'Add your address';
+
+  @override
+  String get addYourDeliveryAddressBody =>
+      'We\'ll deliver your order fresh and hot';
+
+  @override
+  String get addAddressButton => 'Add address';
+
+  @override
+  String get notNowButton => 'Not now';
+
+  @override
+  String get closeButton => 'Close';
 }

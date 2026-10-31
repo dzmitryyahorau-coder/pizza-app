@@ -10,5 +10,12 @@
   "productSizeCm": "{size} см",
   "productCustomizationButtonLabel": "Сделать вкуснее",
   "productAddToTasteSectionTitle": "Добавьте по вкусу",
-  "itemWeightInGrams": "{weight} g"
+  "itemWeightInGrams": "{weight} g",
+  "deliveryAddresesScreenHead": "Адреса доставки",
+  "addYourDeliveryAddressHead": "Добавьте свой адрес",
+  "addYourDeliveryAddressBody": "А мы привезем всё свежим и горям",
+  "addAddressButton": "Добавить адрес",
+  "notNowButton": "Не сейчас",
+  "closeButton": "Закрыть"
+
 }
