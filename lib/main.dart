@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/theme/app_theme.dart';
+// import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
+import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
+
+import 'l10n/app_localizations.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,8 +14,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+    return MaterialApp(
+      onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: ProductDetailsScreen(productId: 'p4'),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
     );
   }
 }
