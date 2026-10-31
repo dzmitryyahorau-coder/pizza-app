@@ -67,7 +67,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get addYourDeliveryAddressHead => 'Добавьте свой адрес';
 
   @override
-  String get addYourDeliveryAddressBody => 'А мы привезем всё свежим и горям';
+  String get addYourDeliveryAddressBody => 'А мы привезем всё свежим и горячим';
 
   @override
   String get addAddressButton => 'Добавить адрес';
