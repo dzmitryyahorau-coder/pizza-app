@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
 
 class CustomizeButton extends StatelessWidget {
-  final void Function() onPressed;
+  final VoidCallback onPressed;
 
   const CustomizeButton({super.key, required this.onPressed});
 
@@ -47,7 +47,7 @@ class CustomizeButton extends StatelessWidget {
             ),
           ),
           Text(
-            AppLocalizations.of(context).productCustomizationButtonLabel,
+            context.l10n.productCustomizationButtonLabel,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w500,

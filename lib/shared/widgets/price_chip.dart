@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
 
 class PriceChip extends StatelessWidget {
   final String price;
@@ -11,7 +11,7 @@ class PriceChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       label: Text(
-        AppLocalizations.of(context).productPrice(price),
+        context.l10n.productPrice(price),
         style: TextStyle(color: context.appColors.onChip),
       ),
       backgroundColor: context.appColors.chipBackground,

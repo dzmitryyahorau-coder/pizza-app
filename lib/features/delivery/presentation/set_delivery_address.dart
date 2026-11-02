@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
+import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
 import 'package:pizza_app/shared/widgets/primary_filled_button.dart';
 
 class SetDeliveryAddress extends StatelessWidget {
@@ -8,8 +9,8 @@ class SetDeliveryAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    final l = AppLocalizations.of(context);
+    final colors = context.appColors;
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: colors.surface,
@@ -37,16 +38,18 @@ class SetDeliveryAddress extends StatelessWidget {
                         child: TextButton(
                           onPressed: () {},
                           child: Text(
-                            l.closeButton,
-                            style: TextStyle(color: Color(0xFFFF6400)),
+                            l10n.closeButton,
+                            style: TextStyle(
+                              color: context.appColors.brandColor,
+                            ),
                           ),
                         ),
                       ),
                       Text(
-                        l.deliveryAddresesScreenHead,
+                        l10n.deliveryAddresesScreenHead,
                         style: TextStyle(
                           color: colors.onSurface,
-                          fontWeight: FontWeight(590),
+                          fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
@@ -58,7 +61,7 @@ class SetDeliveryAddress extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      l.addYourDeliveryAddressHead,
+                      l10n.addYourDeliveryAddressHead,
                       style: TextStyle(
                         color: colors.onSurface,
                         fontSize: 20,
@@ -67,7 +70,7 @@ class SetDeliveryAddress extends StatelessWidget {
                     ),
 
                     Text(
-                      l.addYourDeliveryAddressBody,
+                      l10n.addYourDeliveryAddressBody,
                       style: TextStyle(
                         color: colors.onSurface,
                         fontSize: 14,
@@ -75,17 +78,17 @@ class SetDeliveryAddress extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 10),
+                    SizedBox(height: AppSpacing.l),
 
                     PrimaryFilledButton(
                       onPressed: () {},
-                      label: l.addAddressButton,
+                      label: l10n.addAddressButton,
                     ),
 
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        l.notNowButton,
+                        l10n.notNowButton,
                         style: TextStyle(color: colors.onSurface),
                       ),
                     ),

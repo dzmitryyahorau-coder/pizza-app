@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 
 class ShowMoreButton extends StatelessWidget {
   const ShowMoreButton({super.key, required this.onPressed});
@@ -12,7 +12,7 @@ class ShowMoreButton extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            AppLocalizations.of(context).showAllLabel,
+            context.l10n.showAllLabel,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w500,

@@ -6,12 +6,12 @@ class DoughButton extends StatelessWidget {
     super.key,
     required this.dough,
     required this.isActive,
-    required this.onPress,
+    required this.onPressed,
   });
 
   final Dough dough;
   final bool isActive;
-  final VoidCallback onPress;
+  final VoidCallback onPressed;
 
   static const double _plateHeight = 56;
   static const double _overhang = 20;
@@ -26,7 +26,7 @@ class DoughButton extends StatelessWidget {
       selected: isActive,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: onPress,
+        onTap: onPressed,
         child: SizedBox(
           height: _plateHeight + _overhang,
           child: Stack(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 
 class TopingCard extends StatelessWidget {
   final String title;
@@ -17,7 +17,7 @@ class TopingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
+    final l10n = context.l10n;
 
     return SizedBox(
       width: 114,
@@ -44,7 +44,7 @@ class TopingCard extends StatelessWidget {
               ),
             ),
             Text(
-              l.itemWeightInGrams(weight),
+              l10n.itemWeightInGrams(weight),
               textAlign: TextAlign.center,
               maxLines: 2,
               style: TextStyle(
@@ -55,7 +55,7 @@ class TopingCard extends StatelessWidget {
             ),
             Spacer(),
             Text(
-              l.productPrice(price),
+              l10n.productPrice(price),
               style: TextStyle(fontSize: 12, color: Colors.white),
             ),
             SizedBox(height: 10),

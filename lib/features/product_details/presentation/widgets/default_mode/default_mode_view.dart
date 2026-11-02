@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/product_details/data/product_size.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
@@ -6,7 +7,6 @@ import 'package:pizza_app/features/product_details/presentation/widgets/common/c
 import 'package:pizza_app/features/product_details/presentation/widgets/common/background.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/default_mode/customize_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/horizontal_selector.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
 
 class DefaultModeView extends StatelessWidget {
   final String title;
@@ -44,7 +44,7 @@ class DefaultModeView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsetsGeometry.all(AppSpacing.l),
-                  child: CloseIconButton(onPress: () => {}),
+                  child: CloseIconButton(onPress: () {}),
                 ),
               ),
               Column(
@@ -83,10 +83,10 @@ class DefaultModeView extends StatelessWidget {
                           selected: selectedSize,
                           onSelected: onSelectedSize,
                           labelBuilder: (ProductSize p) =>
-                              AppLocalizations.of(context).productSizeCm(p.cm),
+                              context.l10n.productSizeCm(p.cm),
                         ),
                         PriceButton(
-                          label: AppLocalizations.of(context).productPrice(549),
+                          label: context.l10n.productPrice(549),
                           onPress: () {},
                         ),
                       ],

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/product_details/mock/product_details_mock.dart'
     as mocks;
 import 'package:pizza_app/features/product_details/presentation/widgets/common/show_more_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/toping_card.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
 
 class AddTopings extends StatelessWidget {
   const AddTopings({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
+    final l10n = context.l10n;
 
     return SliverMainAxisGroup(
       slivers: [
@@ -19,7 +19,7 @@ class AddTopings extends StatelessWidget {
           child: Padding(
             padding: EdgeInsetsGeometry.all(AppSpacing.l),
             child: Text(
-              l.productAddToTasteSectionTitle,
+              l10n.productAddToTasteSectionTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,

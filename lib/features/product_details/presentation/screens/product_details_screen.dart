@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/features/product_details/data/dough.dart';
 import 'package:pizza_app/features/product_details/data/product_details.dart';
 import 'package:pizza_app/features/product_details/data/product_size.dart';
 import 'package:pizza_app/features/product_details/mock/product_details_mock.dart'
@@ -7,20 +8,19 @@ import 'package:pizza_app/features/product_details/presentation/widgets/customiz
 import 'package:pizza_app/features/product_details/presentation/widgets/default_mode/default_mode_view.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final String productId;
-
   const ProductDetailsScreen({super.key, required this.productId});
 
+  final String productId;
+
   @override
-  State<ProductDetailsScreen> createState() {
-    return _ProductDetailsState();
-  }
+  State<ProductDetailsScreen> createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetailsScreen> {
   late final ProductDetails productDetails;
 
-  ProductSize? selectedProductSize;
+  late ProductSize selectedProductSize;
+  late Dough selectedDough;
   bool _isCustomizeMode = false;
 
   @override
@@ -30,7 +30,12 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
       (p) => p.id == widget.productId,
     );
 
-    selectedProductSize = productDetails.sizes[1];
+    selectedProductSize = productDetails.sizes.firstWhere(
+      (s) => s.id == productDetails.defaultSizeId,
+    );
+    selectedDough = productDetails.doughs.firstWhere(
+      (d) => d.id == productDetails.defaultDoughId,
+    );
   }
 
   void toggleCustomizationMode() {
@@ -44,28 +49,20 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
     final body = _isCustomizeMode
         ? CustomizeModeView(
             title: productDetails.name,
-            size: selectedProductSize!,
+            size: selectedProductSize,
             ingredients: productDetails.ingredients,
-            selectedDough: productDetails.dough,
-            doughs: mock.doughs,
-            onSelectDoughType: (d) {
-              setState(() {
-                productDetails.dough = d;
-              });
-            },
+            selectedDough: selectedDough,
+            doughs: productDetails.doughs,
+            onSelectDoughType: (d) => setState(() => selectedDough = d),
             onCloseView: toggleCustomizationMode,
           )
         : DefaultModeView(
             title: productDetails.name,
             description: productDetails.description,
             sizes: productDetails.sizes,
-            selectedSize: selectedProductSize!,
-            price: 699,
-            onSelectedSize: (ProductSize s) {
-              setState(() {
-                selectedProductSize = s;
-              });
-            },
+            selectedSize: selectedProductSize,
+            price: selectedProductSize.price,
+            onSelectedSize: (s) => setState(() => selectedProductSize = s),
             onPressCustomizationButton: toggleCustomizationMode,
           );
 

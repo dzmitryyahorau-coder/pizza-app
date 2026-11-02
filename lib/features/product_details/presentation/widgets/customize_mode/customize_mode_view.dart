@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/product_details/data/dough.dart';
 import 'package:pizza_app/features/product_details/data/ingredient.dart';
@@ -8,7 +9,6 @@ import 'package:pizza_app/features/product_details/presentation/widgets/common/p
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/add_topings.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/select_dough.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/settings_ingredients.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
 
 class CustomizeModeView extends StatelessWidget {
   final String title;
@@ -39,7 +39,7 @@ class CustomizeModeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
+    final l10n = context.l10n;
 
     return Stack(
       fit: StackFit.expand,
@@ -75,8 +75,7 @@ class CustomizeModeView extends StatelessWidget {
                               style: sectionTitleStyle,
                               children: [
                                 TextSpan(
-                                  text:
-                                      ' ${localizations.productSizeCm(size.cm)}',
+                                  text: ' ${l10n.productSizeCm(size.cm)}',
                                   style: TextStyle(
                                     color: Colors.white.withValues(alpha: 0.7),
                                   ),
@@ -108,10 +107,7 @@ class CustomizeModeView extends StatelessWidget {
           right: 0,
           bottom: AppSpacing.xl * 2,
           child: Center(
-            child: PriceButton(
-              label: localizations.productPrice(700),
-              onPress: () {},
-            ),
+            child: PriceButton(label: l10n.productPrice(700), onPress: () {}),
           ),
         ),
       ],

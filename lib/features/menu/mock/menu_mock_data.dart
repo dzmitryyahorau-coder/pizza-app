@@ -28,14 +28,10 @@ const categories = [
   Category(id: 'combo', name: 'Комбо'),
   Category(id: 'snacks', name: 'Закуски'),
   Category(id: 'drinks', name: 'Напитки'),
-  Category(
-    id: 'desserts',
-    name: 'Десерты',
-  ), // намеренно без товаров: проверка пустого состояния
+  Category(id: 'desserts', name: 'Десерты'),
 ];
 
 const products = [
-  // Пицца
   Product(
     id: 'p1',
     categoryId: 'pizza',
@@ -86,7 +82,6 @@ const products = [
     price: 429,
   ),
 
-  // Завтраки
   Product(
     id: 'b1',
     categoryId: 'breakfast',
@@ -109,7 +104,6 @@ const products = [
     price: 229,
   ),
 
-  // Комбо
   Product(
     id: 'c1',
     categoryId: 'combo',
@@ -126,7 +120,6 @@ const products = [
     price: 599,
   ),
 
-  // Закуски
   Product(
     id: 's1',
     categoryId: 'snacks',
@@ -149,7 +142,6 @@ const products = [
     price: 219,
   ),
 
-  // Напитки
   Product(
     id: 'd1',
     categoryId: 'drinks',

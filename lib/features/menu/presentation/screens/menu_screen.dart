@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
+import 'package:pizza_app/features/menu/data/product.dart';
 import 'package:pizza_app/features/menu/mock/menu_mock_data.dart' as mocks;
 import 'package:pizza_app/features/menu/presentation/widgets/categories_list.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_header.dart';
@@ -11,26 +12,32 @@ class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return _MenuScreenState();
-  }
+  State<MenuScreen> createState() => _MenuScreenState();
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  String? selectedCategoryId;
-  Map<String, GlobalKey> categoryIdToKey = {
-    for (final category in mocks.categories) category.id: GlobalKey(),
-  };
+  static const double _tabsHeight = 56;
 
   late final ScrollController _controller;
 
-  bool _isProgmmaticScroll = false;
-  static const double _tabsHeight = 56;
+  final Map<String, double> _sectionOffsets = {};
+
+  /// Products by category, calculated once
+  late final _productsByCategory = {
+    for (final category in mocks.categories)
+      category.id: mocks.products
+          .where((p) => p.categoryId == category.id)
+          .toList(),
+  };
+
+  String? selectedCategoryId;
+  bool _isProgrammaticScroll = false;
 
   @override
   void initState() {
     super.initState();
     _controller = ScrollController()..addListener(_onScroll);
+    selectedCategoryId = mocks.categories.firstOrNull?.id;
   }
 
   @override
@@ -40,68 +47,68 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   void _onScroll() {
-    if (_isProgmmaticScroll || !_controller.hasClients) return;
+    if (_isProgrammaticScroll ||
+        !_controller.hasClients ||
+        _sectionOffsets.isEmpty) {
+      return;
+    }
 
     final position = _controller.position;
-    final theshold = position.pixels + _tabsHeight + 1;
+    final line = position.pixels + _tabsHeight + 1;
     final atBottom = position.pixels >= position.maxScrollExtent - 1;
 
     String? activeId;
-
     for (final category in mocks.categories) {
-      final renderObject = categoryIdToKey[category.id]?.currentContext
-          ?.findRenderObject();
-      if (renderObject == null) continue;
+      final start = _sectionOffsets[category.id];
+      if (start == null) continue;
 
-      final headerOffset = RenderAbstractViewport.of(renderObject)
-          .getOffsetToReveal(renderObject, 0)
-          .offset;
-
-      if (atBottom || headerOffset <= theshold) {
+      if (atBottom || start <= line) {
         activeId = category.id;
       } else {
         break;
       }
     }
 
-    activeId ??= mocks.categories.first.id;
-    if (activeId != selectedCategoryId) {
-      setState(() {
-        selectedCategoryId = activeId;
-      });
+    activeId ??= mocks.categories.firstOrNull?.id;
+    if (activeId != null && activeId != selectedCategoryId) {
+      setState(() => selectedCategoryId = activeId);
     }
   }
 
   Future<void> _scrollToCategory(String id) async {
-    setState(() {
-      selectedCategoryId = id;
-    });
+    setState(() => selectedCategoryId = id);
 
-    final context = categoryIdToKey[id]?.currentContext;
-    if (context == null) return;
+    final start = _sectionOffsets[id];
+    if (start == null || !_controller.hasClients) return;
 
-    _isProgmmaticScroll = true;
+    final position = _controller.position;
+    final target = (start - _tabsHeight)
+        .clamp(position.minScrollExtent, position.maxScrollExtent)
+        .toDouble();
 
+    _isProgrammaticScroll = true;
     try {
-      await Scrollable.ensureVisible(
-        context,
+      await _controller.animateTo(
+        target,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } finally {
-      _isProgmmaticScroll = false;
+      _isProgrammaticScroll = false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final surface = context.appColors.surface;
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
           controller: _controller,
           slivers: [
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [MenuHeader(), MenuSheet()],
@@ -109,7 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             PinnedHeaderSliver(
               child: ColoredBox(
-                color: Theme.of(context).colorScheme.surface,
+                color: surface,
                 child: CategoriesList(
                   categories: mocks.categories,
                   activeCategoryId: selectedCategoryId,
@@ -119,33 +126,46 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             for (final category in mocks.categories)
               DecoratedSliver(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                ),
+                decoration: BoxDecoration(color: surface),
                 sliver: SliverMainAxisGroup(
                   slivers: [
-                    SliverToBoxAdapter(key: categoryIdToKey[category.id]),
-                    SliverList.builder(
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsetsGeometry.symmetric(
-                          horizontal: AppSpacing.l,
-                          vertical: 8,
-                        ),
-                        child: ProductItem(
-                          product: mocks.products
-                              .where((p) => p.categoryId == category.id)
-                              .toList()[index],
-                        ),
-                      ),
-                      itemCount: mocks.products
-                          .where((p) => p.categoryId == category.id)
-                          .length,
+                    SliverLayoutBuilder(
+                      builder: (context, constraints) {
+                        _sectionOffsets[category.id] =
+                            constraints.precedingScrollExtent;
+                        return const SliverToBoxAdapter(
+                          child: SizedBox.shrink(),
+                        );
+                      },
+                    ),
+                    _ProductsSliver(
+                      products: _productsByCategory[category.id] ?? const [],
                     ),
                   ],
                 ),
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ProductsSliver extends StatelessWidget {
+  const _ProductsSliver({required this.products});
+
+  final List<Product> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList.builder(
+      itemCount: products.length,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.l,
+          vertical: 8,
+        ),
+        child: ProductItem(product: products[index]),
       ),
     );
   }

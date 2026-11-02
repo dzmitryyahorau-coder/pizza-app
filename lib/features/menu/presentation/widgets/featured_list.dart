@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/l10n/app_localizations.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/shared/widgets/price_chip.dart';
 
 Widget tempImg = Container(
@@ -24,8 +24,6 @@ class FeaturedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final image = image == null ? tempImg : Image.asset('assets/brusletiki.png', width: 108, height: 108,);
-
     return SizedBox(
       height: 108,
       width: 230,
@@ -40,7 +38,7 @@ class FeaturedItem extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: TextStyle(fontWeight: FontWeight(500)),
+                  style: TextStyle(fontWeight: FontWeight.w500),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -63,8 +61,8 @@ class FeaturedList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context).featuresSectionTitle,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight(700)),
+          context.l10n.featuresSectionTitle,
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
         ),
         SizedBox(
           height: 152,

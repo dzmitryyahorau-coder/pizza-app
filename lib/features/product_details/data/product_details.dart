@@ -1,17 +1,18 @@
 import 'package:pizza_app/features/product_details/data/dough.dart';
 import 'package:pizza_app/features/product_details/data/ingredient.dart';
-import 'package:pizza_app/features/product_details/data/topping.dart';
 import 'package:pizza_app/features/product_details/data/product_size.dart';
+import 'package:pizza_app/features/product_details/data/topping.dart';
 
 class ProductDetails {
-  ProductDetails({
+  const ProductDetails({
     required this.id,
     required this.name,
     required this.description,
     required this.imageAsset,
     required this.sizes,
     required this.defaultSizeId,
-    required this.dough,
+    required this.doughs,
+    required this.defaultDoughId,
     required this.toppings,
     required this.ingredients,
   });
@@ -22,7 +23,8 @@ class ProductDetails {
   final String imageAsset;
   final List<ProductSize> sizes;
   final String defaultSizeId;
-  Dough dough;
+  final List<Dough> doughs;
+  final String defaultDoughId;
   final List<Topping> toppings;
-  final List<Ingredient> ingredients; // можно убрать
+  final List<Ingredient> ingredients;
 }

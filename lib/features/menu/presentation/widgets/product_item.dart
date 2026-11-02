@@ -22,15 +22,13 @@ class ProductItem extends StatelessWidget {
           ),
         ),
         Expanded(
-          // width: 192,
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 4,
             children: [
               Text(
                 product.name,
-                style: TextStyle(fontWeight: FontWeight(700), fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 maxLines: 2,
               ),
               Text(
@@ -38,7 +36,7 @@ class ProductItem extends StatelessWidget {
                 style: TextStyle(
                   overflow: TextOverflow.ellipsis,
                   fontSize: 12,
-                  fontWeight: FontWeight(400),
+                  fontWeight: FontWeight.w400,
                 ),
                 maxLines: 5,
               ),

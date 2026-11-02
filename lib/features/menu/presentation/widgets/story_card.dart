@@ -6,8 +6,8 @@ class StoryCard extends StatelessWidget {
 
   final Story story;
 
-  static const double width = 88;
-  static const double height = 110;
+  static const double _width = 88;
+  static const double _height = 110;
   static const double _radius = 16;
 
   @override
@@ -18,8 +18,8 @@ class StoryCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(_radius),
       child: SizedBox(
-        width: width,
-        height: height,
+        width: _width,
+        height: _height,
         child: Stack(
           fit: StackFit.expand,
           children: [

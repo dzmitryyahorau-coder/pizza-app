@@ -28,7 +28,7 @@ class SelectDough extends StatelessWidget {
                 child: DoughButton(
                   dough: item,
                   isActive: selected.id == item.id,
-                  onPress: () => onSelect(item),
+                  onPressed: () => onSelect(item),
                 ),
               ),
           ],
