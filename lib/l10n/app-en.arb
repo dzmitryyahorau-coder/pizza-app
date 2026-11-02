@@ -1,0 +1,26 @@
+{
+  "@@locale": "en",
+  "appTitle": "Pizza App",
+  "showAllLabel": "Show all",
+  "menuHeaderDeliveryFree": "Free delivery",
+  "menuHeaderDeliveryTime": "{minutes, plural, one{about {minutes} minute} other{about {minutes} minutes}}",
+  "@menuHeaderDeliveryTime": {
+    "description": "Estimated delivery time, shown next to the free delivery label",
+    "placeholders": {
+      "minutes": { "type": "int" }
+    }
+  },
+  "featuresSectionTitle": "Featured",
+  "productPriceFrom": "from {price} $",
+  "productPrice": "{price} $",
+  "productSizeCm": "{size} cm",
+  "productCustomizationButtonLabel": "Customize recipe",
+  "productAddToTasteSectionTitle": "Add to your taste",
+  "itemWeightInGrams": "{weight} g",
+  "deliveryAddresesScreenHead": "Delivery addresses",
+  "addYourDeliveryAddressHead": "Add your address",
+  "addYourDeliveryAddressBody": "We'll deliver your order fresh and hot",
+  "addAddressButton": "Add address",
+  "notNowButton": "Not now",
+  "closeButton": "Close"
+}
