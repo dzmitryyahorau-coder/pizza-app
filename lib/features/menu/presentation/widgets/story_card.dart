@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/features/menu/data/story.dart';
+import 'package:pizza_app/features/menu/data/models/story.dart';
 
 class StoryCard extends StatelessWidget {
   const StoryCard({super.key, required this.story});

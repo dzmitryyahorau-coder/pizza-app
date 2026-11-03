@@ -4,7 +4,7 @@ import 'package:pizza_app/core/l10n_x.dart';
 class TopingCard extends StatelessWidget {
   final String title;
   final int weight;
-  final double price;
+  final int price;
   final String imgPath;
 
   const TopingCard({

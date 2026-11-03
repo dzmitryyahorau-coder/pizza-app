@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/product_details/data/dough.dart';
-import 'package:pizza_app/features/product_details/data/ingredient.dart';
-import 'package:pizza_app/features/product_details/data/product_size.dart';
+import 'package:pizza_app/features/product_details/data/models/dough.dart';
+import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
+import 'package:pizza_app/features/product_details/data/models/product_size.dart';
+import 'package:pizza_app/features/product_details/data/models/topping.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/close_icon_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/add_topings.dart';
@@ -14,6 +15,7 @@ class CustomizeModeView extends StatelessWidget {
   final String title;
   final ProductSize size;
   final void Function() onCloseView;
+  final List<Topping> toppings;
   final List<Ingredient> ingredients;
   final List<Dough> doughs;
   final Dough selectedDough;
@@ -25,9 +27,10 @@ class CustomizeModeView extends StatelessWidget {
     required this.title,
     required this.size,
     required this.onCloseView,
-    required this.ingredients,
+    required this.toppings,
     required this.selectedDough,
     required this.doughs,
+    required this.ingredients,
     required this.onSelectDoughType,
   });
 
@@ -96,7 +99,7 @@ class CustomizeModeView extends StatelessWidget {
                 onSelect: onSelectDoughType,
                 selected: selectedDough,
               ),
-              AddTopings(),
+              AddTopings(topings: toppings,),
               SettingsIngredients(items: ingredients),
               SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],

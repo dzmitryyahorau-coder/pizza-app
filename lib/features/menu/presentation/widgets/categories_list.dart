@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/features/menu/data/category.dart';
+import 'package:pizza_app/features/menu/data/models/category.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/category_tab_item.dart';
 
 class CategoriesList extends StatelessWidget {
@@ -12,7 +12,7 @@ class CategoriesList extends StatelessWidget {
 
   final List<Category> categories;
   final String? activeCategoryId;
-  final void Function(String id) onChangeActiveCategoryId;
+  final void Function(String) onChangeActiveCategoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CategoriesList extends StatelessWidget {
         itemCount: categories.length,
         itemBuilder: (context, index) => CategoryTabItem(
           category: categories[index],
-          onSelected: onChangeActiveCategoryId,
+          onSelected: () => onChangeActiveCategoryId(categories[index].id),
           isActive: activeCategoryId == categories[index].id,
         ),
         separatorBuilder: (context, index) => Center(),
