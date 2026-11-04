@@ -76,4 +76,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get closeButton => 'Close';
+
+  @override
+  String get cartEnterDeliveryAddress => 'Enter delivery address';
+
+  @override
+  String get changeButton => 'Change';
+
+  @override
+  String get cartUpcellSectionHead => 'Add it to your order?';
+
+  @override
+  String proceedToCheckoutForButton(Object price) {
+    return 'Proceed to checkout for $price \$';
+  }
+
+  @override
+  String get enterPromoCodePlaceholder => 'Enter promo code';
+
+  @override
+  String positionsLabel(Object count) {
+    return 'Items: $count';
+  }
 }

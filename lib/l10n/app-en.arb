@@ -22,5 +22,11 @@
   "addYourDeliveryAddressBody": "We'll deliver your order fresh and hot",
   "addAddressButton": "Add address",
   "notNowButton": "Not now",
-  "closeButton": "Close"
+  "closeButton": "Close",
+  "cartEnterDeliveryAddress": "Enter delivery address",
+  "changeButton": "Change",
+  "cartUpcellSectionHead": "Add it to your order?",
+  "proceedToCheckoutForButton": "Proceed to checkout for {price} $",
+  "enterPromoCodePlaceholder": "Enter promo code",
+  "positionsLabel": "Items: {count}"
 }

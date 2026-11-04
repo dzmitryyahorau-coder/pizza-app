@@ -199,6 +199,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get closeButton;
+
+  /// No description provided for @cartEnterDeliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter delivery address'**
+  String get cartEnterDeliveryAddress;
+
+  /// No description provided for @changeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeButton;
+
+  /// No description provided for @cartUpcellSectionHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Add it to your order?'**
+  String get cartUpcellSectionHead;
+
+  /// No description provided for @proceedToCheckoutForButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to checkout for {price} \$'**
+  String proceedToCheckoutForButton(Object price);
+
+  /// No description provided for @enterPromoCodePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter promo code'**
+  String get enterPromoCodePlaceholder;
+
+  /// No description provided for @positionsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Items: {count}'**
+  String positionsLabel(Object count);
 }
 
 class _AppLocalizationsDelegate

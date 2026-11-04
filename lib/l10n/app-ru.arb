@@ -16,6 +16,11 @@
   "addYourDeliveryAddressBody": "А мы привезем всё свежим и горячим",
   "addAddressButton": "Добавить адрес",
   "notNowButton": "Не сейчас",
-  "closeButton": "Закрыть"
-
+  "closeButton": "Закрыть",
+  "cartEnterDeliveryAddress": "Ввести адресс доставки" ,
+  "changeButton": "Изменить",
+  "cartUpcellSectionHead": "Добавим в заказ?",
+  "proceedToCheckoutForButton": "Перейти к оплате {price} ₽",
+  "enterPromoCodePlaceholder": "Ввести промокод",
+  "positionsLabel": "Позиций: {count}"
 }

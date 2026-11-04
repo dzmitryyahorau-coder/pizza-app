@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
+import 'package:pizza_app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories_repository.dart';
@@ -23,6 +24,7 @@ void main() async {
 }
 
 final GoRouter _router = GoRouter(
+  initialLocation: '/cart',
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -41,6 +43,11 @@ final GoRouter _router = GoRouter(
               ProductDetailsScreen(productId: state.pathParameters['id']!),
         ),
       ],
+    ),
+    GoRoute(
+      path: '/cart',
+      name: 'cart',
+      builder: (context, state) => const CartScreen(),
     ),
   ],
 );

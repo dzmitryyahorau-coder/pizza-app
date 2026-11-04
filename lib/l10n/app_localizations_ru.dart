@@ -77,4 +77,26 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get closeButton => 'Закрыть';
+
+  @override
+  String get cartEnterDeliveryAddress => 'Ввести адресс доставки';
+
+  @override
+  String get changeButton => 'Изменить';
+
+  @override
+  String get cartUpcellSectionHead => 'Добавим в заказ?';
+
+  @override
+  String proceedToCheckoutForButton(Object price) {
+    return 'Перейти к оплате $price ₽';
+  }
+
+  @override
+  String get enterPromoCodePlaceholder => 'Ввести промокод';
+
+  @override
+  String positionsLabel(Object count) {
+    return 'Позиций: $count';
+  }
 }
