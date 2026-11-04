@@ -64,29 +64,29 @@ class CartUpsellCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 32,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: colors.chipBackground,
-                          foregroundColor: colors.onChip,
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 32,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: colors.chipBackground,
+                        foregroundColor: colors.onChip,
+                        padding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: onAdd,
-                        child: Text(
-                          l10n.productPrice(price),
-                          style: TextStyle(
-                            color: colors.onChip,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      ),
+                      onPressed: onAdd,
+                      child: Text(
+                        l10n.productPrice(price),
+                        style: TextStyle(
+                          color: colors.onChip,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
+                  ),
                 ],
               ),
             ),

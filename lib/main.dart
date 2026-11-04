@@ -2,7 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
+import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
+import 'package:pizza_app/features/cart/data/repositories/cart_repository.dart';
 import 'package:pizza_app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
@@ -24,7 +27,7 @@ void main() async {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/cart',
+  // initialLocation: '/cart',
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -68,15 +71,21 @@ class MainApp extends StatelessWidget {
         RepositoryProvider<IStoriesRepository>(
           create: (_) => FirestoreStoriesRepository(),
         ),
+        RepositoryProvider<ICartRepository>(
+          create: (_) => DriftCartRepository(AppDatabase()),
+        ),
       ],
-      child: MaterialApp.router(
-        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        themeMode: ThemeMode.system,
-        routerConfig: _router,
+      child: BlocProvider<CartCubit>(
+        create: (context) => CartCubit(context.read<ICartRepository>()),
+        child: MaterialApp.router(
+          onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.system,
+          routerConfig: _router,
+        ),
       ),
     );
   }
