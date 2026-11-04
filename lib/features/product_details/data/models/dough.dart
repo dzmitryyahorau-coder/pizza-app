@@ -13,13 +13,15 @@ class Dough {
   final String imageAsset;
   final int extraPrice;
 
-  factory Dough.fromFireStore(DocumentSnapshot snapshot, SnapshotOptions? options) {
+  factory Dough.fromFireStore(
+    DocumentSnapshot snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data() as Map<String, dynamic>?;
     if (data == null) {
       throw StateError('Empty state');
     }
 
-    
     return Dough.fromMap(data);
   }
 

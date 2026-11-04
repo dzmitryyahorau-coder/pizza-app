@@ -1,7 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
+import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
+import 'package:pizza_app/features/menu/bloc/menu_event.dart';
+import 'package:pizza_app/features/menu/data/repositories/categories_repository.dart';
+import 'package:pizza_app/features/menu/data/repositories/product_repository.dart';
+import 'package:pizza_app/features/menu/data/repositories/stories_repository.dart';
 import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:pizza_app/firebase_options.dart';
@@ -20,7 +26,14 @@ final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) => MenuScreen(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => MenuBloc(
+          products: context.read<IProductsRepository>(),
+          categories: context.read<ICategoriesRepository>(),
+          stories: context.read<IStoriesRepository>(),
+        )..add(const MenuLoadRequested()),
+        child: const MenuScreen(),
+      ),
       routes: [
         GoRoute(
           path: 'products/:id',
@@ -37,14 +50,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      routerConfig: _router,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<IProductsRepository>(
+          create: (_) => FirestoreProductsRepository(),
+        ),
+        RepositoryProvider<ICategoriesRepository>(
+          create: (_) => FirestoreCategoriesRepository(),
+        ),
+        RepositoryProvider<IStoriesRepository>(
+          create: (_) => FirestoreStoriesRepository(),
+        ),
+      ],
+      child: MaterialApp.router(
+        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
+        routerConfig: _router,
+      ),
     );
   }
 }

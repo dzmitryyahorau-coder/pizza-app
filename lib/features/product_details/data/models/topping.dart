@@ -15,8 +15,10 @@ class Topping {
   final int price;
   final String imageAsset;
 
-  factory Topping.fromFireStore(DocumentSnapshot snapshot, SnapshotOptions? options) {
-
+  factory Topping.fromFireStore(
+    DocumentSnapshot snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data() as Map<String, dynamic>?;
     if (data == null) {
       throw StateError('Empty state');

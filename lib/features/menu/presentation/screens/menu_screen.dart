@@ -1,125 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/menu/data/models/category.dart';
+import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
+import 'package:pizza_app/features/menu/bloc/menu_event.dart';
+import 'package:pizza_app/features/menu/bloc/menu_state.dart';
 import 'package:pizza_app/features/menu/data/models/product.dart';
-import 'package:pizza_app/features/menu/data/models/story.dart';
-import 'package:pizza_app/features/menu/data/repositories/categories_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/product_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/stories_repository.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/categories_list.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_header.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_sheet.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/product_item.dart';
 
-class MenuScreen extends StatefulWidget {
-  const MenuScreen({
-    super.key,
-    this.productsRepository,
-    this.categoriesRepository,
-    this.storiesRepository,
-  });
-
-  final IProductsRepository? productsRepository;
-  final ICategoriesRepository? categoriesRepository;
-  final IStoriesRepository? storiesRepository;
+class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
 
   @override
-  State<MenuScreen> createState() => _MenuScreenState();
+  Widget build(BuildContext context) {
+    return BlocConsumer<MenuBloc, MenuState>(
+      builder: ((context, state) {
+        if ([
+          MenuStatus.loading,
+          MenuStatus.refreshing,
+        ].contains(state.status)) {
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
+        }
+
+        if (state.status == MenuStatus.failure && state.categories.isEmpty) {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                spacing: AppSpacing.l,
+                children: [
+                  const Text('Error during the loading of menu data'),
+                  FilledButton(
+                    onPressed: () =>
+                        context.read<MenuBloc>().add(const MenuLoadRequested()),
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return MenuView(state: state);
+      }),
+      listener: (BuildContext context, MenuState state) {},
+    );
+  }
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class MenuView extends StatefulWidget {
+  final MenuState state;
+
+  const MenuView({super.key, required this.state});
+
+  @override
+  State<MenuView> createState() => _MenuViewState();
+}
+
+class _MenuViewState extends State<MenuView> {
   static const double _tabsHeight = 56;
 
   late final ScrollController _controller;
-  late final IProductsRepository _productsRepository;
-  late final ICategoriesRepository _categoriesRepository;
-  late final IStoriesRepository _storiesRepository;
 
   final Map<String, double> _sectionOffsets = {};
 
-  List<Category> _categories = [];
-  List<Story> _stories = [];
-  Map<String, List<Product>> _productsByCategory = {};
-
-  bool _isLoading = true;
-  String? _errorMessage;
-
   String? selectedCategoryId;
   bool _isProgrammaticScroll = false;
-
-  Future<void> _fetchMenu() async {
-    final isInitialLoad = _categories.isEmpty;
-
-    setState(() {
-      _errorMessage = null;
-      if (isInitialLoad) _isLoading = true;
-    });
-
-    try {
-      final (categories, products, stories) = await (
-        _categoriesRepository.getCategories(),
-        _productsRepository.getProducts(),
-        _storiesRepository.getStories(),
-      ).wait;
-
-      final grouped = <String, List<Product>>{
-        for (final category in categories) category.id: [],
-      };
-      for (final product in products) {
-        grouped[product.categoryId]?.add(product);
-      }
-
-      if (!mounted) return;
-      setState(() {
-        _categories = categories;
-        _stories = stories;
-        _productsByCategory = grouped;
-
-        final selectedStillExists = categories.any(
-          (c) => c.id == selectedCategoryId,
-        );
-        if (!selectedStillExists) {
-          selectedCategoryId = categories.firstOrNull?.id;
-        }
-
-        _sectionOffsets.clear();
-        _isLoading = false;
-      });
-    } catch (e) {
-      debugPrint('Menu load failed: $e');
-      if (!mounted) return;
-      if (isInitialLoad) {
-        setState(() {
-          _errorMessage = 'Error during the loading of menu data';
-          _isLoading = false;
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not refresh the menu')),
-        );
-      }
-    }
-  }
 
   @override
   void initState() {
     super.initState();
     _controller = ScrollController()..addListener(_onScroll);
-    _productsRepository =
-        widget.productsRepository ?? FirestoreProductsRepository();
-    _categoriesRepository =
-        widget.categoriesRepository ?? FirestoreCategoriesRepository();
-    _storiesRepository =
-        widget.storiesRepository ?? FirestoreStoriesRepository();
-    _fetchMenu();
+    selectedCategoryId = widget.state.categories.firstOrNull?.id;
   }
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  Future<void> _onRefresh() async {
+    final bloc = context.read<MenuBloc>();
+    if (bloc.state.status == MenuStatus.refreshing) return;
+
+    bloc.add(const MenuLoadRequested());
+    await bloc.stream.firstWhere((s) => s.status != MenuStatus.refreshing);
   }
 
   void _onScroll() {
@@ -134,7 +104,7 @@ class _MenuScreenState extends State<MenuScreen> {
     final atBottom = position.pixels >= position.maxScrollExtent - 1;
 
     String? activeId;
-    for (final category in _categories) {
+    for (final category in widget.state.categories) {
       final start = _sectionOffsets[category.id];
       if (start == null) continue;
 
@@ -145,7 +115,7 @@ class _MenuScreenState extends State<MenuScreen> {
       }
     }
 
-    activeId ??= _categories.firstOrNull?.id;
+    activeId ??= widget.state.categories.firstOrNull?.id;
     if (activeId != null && activeId != selectedCategoryId) {
       setState(() => selectedCategoryId = activeId);
     }
@@ -176,36 +146,14 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
-
-    final errorMessage = _errorMessage;
-    if (errorMessage != null) {
-      return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            spacing: AppSpacing.l,
-            children: [
-              Text(errorMessage),
-              FilledButton(
-                onPressed: _fetchMenu,
-                child: const Text('Retry'),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     final surface = context.appColors.surface;
+    final menu = widget.state;
 
     return Scaffold(
       body: SafeArea(
         bottom: false,
         child: RefreshIndicator(
-          onRefresh: _fetchMenu,
+          onRefresh: _onRefresh,
           child: CustomScrollView(
             controller: _controller,
             slivers: [
@@ -214,7 +162,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const MenuHeader(),
-                    MenuSheet(storiesList: _stories),
+                    MenuSheet(storiesList: menu.stories),
                   ],
                 ),
               ),
@@ -222,13 +170,13 @@ class _MenuScreenState extends State<MenuScreen> {
                 child: ColoredBox(
                   color: surface,
                   child: CategoriesList(
-                    categories: _categories,
+                    categories: menu.categories,
                     activeCategoryId: selectedCategoryId,
                     onChangeActiveCategoryId: _scrollToCategory,
                   ),
                 ),
               ),
-              for (final category in _categories)
+              for (final category in menu.categories)
                 DecoratedSliver(
                   decoration: BoxDecoration(color: surface),
                   sliver: SliverMainAxisGroup(
@@ -243,7 +191,8 @@ class _MenuScreenState extends State<MenuScreen> {
                         },
                       ),
                       _ProductsSliver(
-                        products: _productsByCategory[category.id] ?? const [],
+                        products:
+                            menu.productsByCategory[category.id] ?? const [],
                       ),
                     ],
                   ),

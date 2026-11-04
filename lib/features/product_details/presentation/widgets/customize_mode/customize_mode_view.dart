@@ -99,7 +99,7 @@ class CustomizeModeView extends StatelessWidget {
                 onSelect: onSelectDoughType,
                 selected: selectedDough,
               ),
-              AddTopings(topings: toppings,),
+              AddTopings(topings: toppings),
               SettingsIngredients(items: ingredients),
               SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],

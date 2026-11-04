@@ -7,7 +7,10 @@ class ProductSize {
   final int cm;
   final int price;
 
-  factory ProductSize.fromFireStore(DocumentSnapshot snapshot, SnapshotOptions? options) {
+  factory ProductSize.fromFireStore(
+    DocumentSnapshot snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data() as Map<String, dynamic>?;
     if (data == null) {
       throw StateError('Empty state');

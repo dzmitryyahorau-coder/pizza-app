@@ -7,7 +7,10 @@ class Ingredient {
   final String name;
   final String? imgPath;
 
-  factory Ingredient.fromFireStore(DocumentSnapshot snapshot, SnapshotOptions? options) {
+  factory Ingredient.fromFireStore(
+    DocumentSnapshot snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data() as Map<String, dynamic>?;
     if (data == null) {
       throw StateError("Document is empty: ${snapshot.id}");

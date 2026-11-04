@@ -27,7 +27,7 @@ class MenuSheet extends StatelessWidget {
                 start: AppSpacing.l,
                 top: AppSpacing.l,
               ),
-              child: StoriesList(stories: storiesList,),
+              child: StoriesList(stories: storiesList),
             ),
             Padding(
               padding: EdgeInsetsGeometry.directional(

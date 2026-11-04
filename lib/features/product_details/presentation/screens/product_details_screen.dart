@@ -52,7 +52,9 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
     });
 
     try {
-      final details = await  _productDetailsRepository.getProductDetails(widget.productId);
+      final details = await _productDetailsRepository.getProductDetails(
+        widget.productId,
+      );
       if (!mounted) return;
 
       setState(() {
@@ -118,9 +120,12 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _productDetailsRepository = widget.productDetailsRepository ?? FirestoreProductDetailsRepository();
-    _toppingsRepository = widget.toppingsRepository ?? FirestoreToppingsRepository();
-    _ingredientsRepository = widget.ingredientsRepository ?? FirestoreIngredientsRepository();
+    _productDetailsRepository =
+        widget.productDetailsRepository ?? FirestoreProductDetailsRepository();
+    _toppingsRepository =
+        widget.toppingsRepository ?? FirestoreToppingsRepository();
+    _ingredientsRepository =
+        widget.ingredientsRepository ?? FirestoreIngredientsRepository();
 
     (_fetchProductDetails(), _fetchToppings(), _fetchIngredients()).wait;
   }
@@ -151,7 +156,9 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
             mainAxisSize: MainAxisSize.min,
             spacing: 16,
             children: [
-              Text(_errorMessage ?? 'This product cannot be customized'), /// temporary filling, will be another screen
+              Text(_errorMessage ?? 'This product cannot be customized'),
+
+              /// temporary filling, will be another screen
               FilledButton(
                 onPressed: _fetchProductDetails,
                 child: const Text('Retry'),
@@ -162,12 +169,20 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
       );
     }
 
-    return _ProductDetailsView(details: details, toppings: toppings, ingredients: ingredients);
+    return _ProductDetailsView(
+      details: details,
+      toppings: toppings,
+      ingredients: ingredients,
+    );
   }
 }
 
 class _ProductDetailsView extends StatefulWidget {
-  const _ProductDetailsView({required this.details, required this.toppings, required this.ingredients});
+  const _ProductDetailsView({
+    required this.details,
+    required this.toppings,
+    required this.ingredients,
+  });
 
   final ProductDetails details;
   final List<Topping> toppings;
@@ -203,7 +218,11 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final (details, toppings, ingredients) = (widget.details, widget.toppings, widget.ingredients);
+    final (details, toppings, ingredients) = (
+      widget.details,
+      widget.toppings,
+      widget.ingredients,
+    );
 
     final body = _isCustomizeMode
         ? CustomizeModeView(
