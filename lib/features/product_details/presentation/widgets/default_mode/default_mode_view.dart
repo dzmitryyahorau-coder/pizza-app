@@ -18,6 +18,7 @@ class DefaultModeView extends StatelessWidget {
 
   final void Function(ProductSize) onSelectedSize;
   final VoidCallback onPressCustomizationButton;
+  final VoidCallback onPressAddToCart;
   final VoidCallback onClose;
 
   const DefaultModeView({
@@ -30,6 +31,7 @@ class DefaultModeView extends StatelessWidget {
     required this.onSelectedSize,
     required this.onPressCustomizationButton,
     required this.onClose,
+    required this.onPressAddToCart,
   });
 
   @override
@@ -89,7 +91,7 @@ class DefaultModeView extends StatelessWidget {
                         ),
                         PriceButton(
                           label: context.l10n.productPrice(549),
-                          onPress: () {},
+                          onPress: onPressAddToCart,
                         ),
                       ],
                     ),

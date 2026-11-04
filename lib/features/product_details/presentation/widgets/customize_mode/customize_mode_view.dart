@@ -21,6 +21,7 @@ class CustomizeModeView extends StatelessWidget {
   final Dough selectedDough;
 
   final void Function(Dough) onSelectDoughType;
+  final VoidCallback onPressAddToCart;
 
   const CustomizeModeView({
     super.key,
@@ -32,6 +33,7 @@ class CustomizeModeView extends StatelessWidget {
     required this.doughs,
     required this.ingredients,
     required this.onSelectDoughType,
+    required this.onPressAddToCart,
   });
 
   static const TextStyle sectionTitleStyle = TextStyle(
@@ -110,7 +112,10 @@ class CustomizeModeView extends StatelessWidget {
           right: 0,
           bottom: AppSpacing.xl * 2,
           child: Center(
-            child: PriceButton(label: l10n.productPrice(700), onPress: () {}),
+            child: PriceButton(
+              label: l10n.productPrice(700),
+              onPress: onPressAddToCart,
+            ),
           ),
         ),
       ],

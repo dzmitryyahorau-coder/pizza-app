@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
+import 'package:pizza_app/features/cart/presentation/widgets/cart_floating_button.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/bloc/menu_state.dart';
@@ -201,6 +202,7 @@ class _MenuViewState extends State<MenuView> {
           ),
         ),
       ),
+      floatingActionButton: CartFloatingButton(),
     );
   }
 }

@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
+import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
+import 'package:pizza_app/features/cart/bloc/cart_state.dart';
 
 class CartFloatingButton extends StatelessWidget {
-  final AppDatabase database;
-
-  const CartFloatingButton({super.key, required this.database});
+  const CartFloatingButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return StreamBuilder<List<CartItem>>(
-      stream: database.watchCartItems(),
-      builder: (context, snapshot) {
-        final items = snapshot.data ?? [];
-
-        if (items.isEmpty) {
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        if (state.items.isEmpty) {
           return const SizedBox.shrink();
         }
-        final totalPrice = items.fold<int>(
+        final totalPrice = state.items.fold<int>(
           0,
           (sum, item) => sum + (item.price * item.quantity),
         );
 
         return FloatingActionButton.extended(
           onPressed: () {
-            context.go('/cart');
+            context.push('/cart');
           },
           backgroundColor: context.appColors.brandColor,
           foregroundColor: Colors.white,

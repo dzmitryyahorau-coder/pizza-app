@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/database/app_database.dart';
+import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/features/product_details/data/models/dough.dart';
 import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
 import 'package:pizza_app/features/product_details/data/models/product_details.dart';
@@ -217,6 +219,21 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
     setState(() => _isCustomizeMode = !_isCustomizeMode);
   }
 
+  void _addProductToCart(BuildContext context, ProductDetails details) {
+    final newItemToCart = CartItem(
+      id: 0,
+      productId: details.id,
+      name: details.name,
+      imageAsset: details.imageAsset,
+      price: 549,
+      quantity: 1,
+      selectedToppingsJson: '[]',
+    );
+
+    context.read<CartCubit>().addToCart(newItemToCart);
+    context.pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     final (details, toppings, ingredients) = (
@@ -224,8 +241,6 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
       widget.toppings,
       widget.ingredients,
     );
-
-    final newItemToCart = new CartItem(id: id, productId: productId, name: name, imageAsset: imageAsset, price: price, quantity: quantity, selectedToppingsJson: selectedToppingsJson)
 
     final body = _isCustomizeMode
         ? CustomizeModeView(
@@ -237,6 +252,7 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
             doughs: details.doughs,
             onSelectDoughType: (d) => setState(() => selectedDough = d),
             onCloseView: _toggleCustomizationMode,
+            onPressAddToCart: () => _addProductToCart(context, details),
           )
         : DefaultModeView(
             title: details.name,
@@ -247,6 +263,7 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
             onSelectedSize: (s) => setState(() => selectedProductSize = s),
             onPressCustomizationButton: _toggleCustomizationMode,
             onClose: () => context.pop(),
+            onPressAddToCart: () => _addProductToCart(context, details),
           );
 
     return Scaffold(body: body);

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/features/cart/bloc/cart_state.dart';
 import 'package:pizza_app/features/cart/data/repositories/cart_repository.dart';
 
@@ -19,7 +20,11 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  void updatedQuantity(int id, int quantity) =>
+  void addToCart(CartItem item) => _repository.addToCart(item);
+
+  void clearCart() => _repository.clearCart();
+
+  void updateQuantity(int id, int quantity) =>
       _repository.updateQuantity(id, quantity);
 
   @override

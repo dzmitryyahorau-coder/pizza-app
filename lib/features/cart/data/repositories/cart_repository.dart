@@ -4,6 +4,7 @@ abstract interface class ICartRepository {
   Stream<List<CartItem>> watchCart();
   Future<void> addToCart(CartItem item);
   Future<void> updateQuantity(int id, int quantity);
+  Future<void> clearCart();
 }
 
 class DriftCartRepository implements ICartRepository {
@@ -20,4 +21,7 @@ class DriftCartRepository implements ICartRepository {
 
   @override
   Stream<List<CartItem>> watchCart() => _db.watchCartItems();
+
+  @override
+  Future<void> clearCart() => _db.clearCart();
 }
