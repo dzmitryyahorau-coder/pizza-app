@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/features/product_details/data/models/dough.dart';
 import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
 import 'package:pizza_app/features/product_details/data/models/product_details.dart';
@@ -223,6 +224,8 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
       widget.toppings,
       widget.ingredients,
     );
+
+    final newItemToCart = new CartItem(id: id, productId: productId, name: name, imageAsset: imageAsset, price: price, quantity: quantity, selectedToppingsJson: selectedToppingsJson)
 
     final body = _isCustomizeMode
         ? CustomizeModeView(
