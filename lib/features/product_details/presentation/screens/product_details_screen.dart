@@ -122,7 +122,8 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
                 context.read<ProductDetailsCubit>().selectDough(d.id),
             onSelectTopping: (t) =>
                 context.read<ProductDetailsCubit>().toggleTopping(t.id),
-            onTapIngredient: (i) => context.read<ProductDetailsCubit>().toggleIngredient(i.id),
+            onTapIngredient: (i) =>
+                context.read<ProductDetailsCubit>().toggleIngredient(i.id),
             onCloseView: _toggleCustomizationMode,
             onPressAddToCart: () => _addProductToCart(state),
           )

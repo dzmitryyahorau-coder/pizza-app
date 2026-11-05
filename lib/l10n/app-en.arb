@@ -28,5 +28,15 @@
   "cartUpcellSectionHead": "Add it to your order?",
   "proceedToCheckoutForButton": "Proceed to checkout for {price} $",
   "enterPromoCodePlaceholder": "Enter promo code",
-  "positionsLabel": "Items: {count}"
+  "positionsLabel": "Items: {count}",
+  "loginTitle": "Login",
+  "emailHint": "Email",
+  "passwordHint": "Password",
+  "loginButton": "Sign In",
+  "logoutButton": "Log Out",
+  "loadingText": "Loading...",
+  "errorEmptyFields": "Fields cannot be empty",
+  "errorInvalidCredentials": "Invalid email or password is too short",
+  "errorUnknown": "An unexpected error occurred",
+  "profileTitle": "Profile"
 }

@@ -98,4 +98,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String positionsLabel(Object count) {
     return 'Items: $count';
   }
+
+  @override
+  String get loginTitle => 'Login';
+
+  @override
+  String get emailHint => 'Email';
+
+  @override
+  String get passwordHint => 'Password';
+
+  @override
+  String get loginButton => 'Sign In';
+
+  @override
+  String get logoutButton => 'Log Out';
+
+  @override
+  String get loadingText => 'Loading...';
+
+  @override
+  String get errorEmptyFields => 'Fields cannot be empty';
+
+  @override
+  String get errorInvalidCredentials =>
+      'Invalid email or password is too short';
+
+  @override
+  String get errorUnknown => 'An unexpected error occurred';
+
+  @override
+  String get profileTitle => 'Profile';
 }

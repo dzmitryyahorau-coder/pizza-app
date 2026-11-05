@@ -99,4 +99,35 @@ class AppLocalizationsRu extends AppLocalizations {
   String positionsLabel(Object count) {
     return 'Позиций: $count';
   }
+
+  @override
+  String get loginTitle => 'Вход';
+
+  @override
+  String get emailHint => 'Email';
+
+  @override
+  String get passwordHint => 'Пароль';
+
+  @override
+  String get loginButton => 'Войти';
+
+  @override
+  String get logoutButton => 'Выйти';
+
+  @override
+  String get loadingText => 'Загрузка...';
+
+  @override
+  String get errorEmptyFields => 'Поля не могут быть пустыми';
+
+  @override
+  String get errorInvalidCredentials =>
+      'Неверный email или слишком короткий пароль';
+
+  @override
+  String get errorUnknown => 'Произошла непредвиденная ошибка';
+
+  @override
+  String get profileTitle => 'Профиль';
 }

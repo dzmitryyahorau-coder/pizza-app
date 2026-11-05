@@ -22,5 +22,15 @@
   "cartUpcellSectionHead": "Добавим в заказ?",
   "proceedToCheckoutForButton": "Перейти к оплате {price} ₽",
   "enterPromoCodePlaceholder": "Ввести промокод",
-  "positionsLabel": "Позиций: {count}"
+  "positionsLabel": "Позиций: {count}",
+  "loginTitle": "Вход",
+  "emailHint": "Email",
+  "passwordHint": "Пароль",
+  "loginButton": "Войти",
+  "logoutButton": "Выйти",
+  "loadingText": "Загрузка...",
+  "errorEmptyFields": "Поля не могут быть пустыми",
+  "errorInvalidCredentials": "Неверный email или слишком короткий пароль",
+  "errorUnknown": "Произошла непредвиденная ошибка",
+  "profileTitle": "Профиль"
 }

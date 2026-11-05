@@ -1,67 +1,49 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/database/app_database.dart';
+import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/features/cart/data/repositories/cart_repository.dart';
-import 'package:pizza_app/features/cart/presentation/screens/cart_screen.dart';
-import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
-import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/product_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/stories_repository.dart';
-import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details_repository.dart';
-import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
-import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:pizza_app/firebase_options.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 
 import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   runApp(const MainApp());
 }
 
-final GoRouter _router = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (context, state) => BlocProvider(
-        create: (context) => MenuBloc(
-          products: context.read<IProductsRepository>(),
-          categories: context.read<ICategoriesRepository>(),
-          stories: context.read<IStoriesRepository>(),
-        )..add(const MenuLoadRequested()),
-        child: const MenuScreen(),
-      ),
-      routes: [
-        GoRoute(
-          path: 'products/:id',
-          builder: (BuildContext context, GoRouterState state) => BlocProvider(
-            create: (context) =>
-                ProductDetailsCubit(context.read<IProductDetailsRepository>())
-                  ..load(state.pathParameters['id']!),
-            child: ProductDetailsScreen(productId: state.pathParameters['id']!),
-          ),
-        ),
-      ],
-    ),
-    GoRoute(
-      path: '/cart',
-      name: 'cart',
-      builder: (context, state) => const CartScreen(),
-    ),
-  ],
-);
-
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  late final AuthCubit _authCubit;
+  late final AppRouter _appRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _authCubit = AuthCubit();
+    _appRouter = AppRouter(_authCubit);
+  }
+
+  @override
+  void dispose() {
+    _authCubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +65,13 @@ class MainApp extends StatelessWidget {
           create: (_) => FirestoreProductDetailsRepository(),
         ),
       ],
-      child: BlocProvider<CartCubit>(
-        create: (context) => CartCubit(context.read<ICartRepository>()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthCubit>.value(value: _authCubit),
+          BlocProvider<CartCubit>(
+            create: (context) => CartCubit(context.read<ICartRepository>()),
+          ),
+        ],
         child: MaterialApp.router(
           onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -92,7 +79,7 @@ class MainApp extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           themeMode: ThemeMode.system,
-          routerConfig: _router,
+          routerConfig: _appRouter.router,
         ),
       ),
     );
