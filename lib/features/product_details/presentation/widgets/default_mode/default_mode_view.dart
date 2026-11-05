@@ -90,7 +90,7 @@ class DefaultModeView extends StatelessWidget {
                               context.l10n.productSizeCm(p.cm),
                         ),
                         PriceButton(
-                          label: context.l10n.productPrice(549),
+                          label: context.l10n.productPrice(price),
                           onPress: onPressAddToCart,
                         ),
                       ],

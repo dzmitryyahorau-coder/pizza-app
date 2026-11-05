@@ -12,4 +12,6 @@ class CartItems extends Table {
   TextColumn get doughName => text().nullable()();
   TextColumn get selectedToppingsJson =>
       text().withDefault(const Constant('[]'))();
+  TextColumn get removedIngredientsJson =>
+      text().withDefault(const Constant('[]'))();
 }

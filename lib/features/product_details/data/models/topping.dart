@@ -37,7 +37,7 @@ class Topping {
     );
   }
 
-  Map<String, dynamic> toFireStore() => {
+  Map<String, dynamic> toMap() => {
     'id': id,
     'name': name,
     'weightGrams': weightGrams,

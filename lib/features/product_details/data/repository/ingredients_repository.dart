@@ -17,7 +17,7 @@ class FirestoreIngredientsRepository implements IIngredientsRepository {
       .withConverter<Ingredient>(
         fromFirestore: ((snapshot, options) =>
             Ingredient.fromFireStore(snapshot, options)),
-        toFirestore: (product, _) => product.toFireStore(),
+        toMap: (product, _) => product.toMap(),
       );
 
   @override

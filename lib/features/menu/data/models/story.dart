@@ -32,7 +32,7 @@ class Story {
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toMap() {
     return {
       'label': label,
       'image': image,

@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class IngredientChip extends StatelessWidget {
   final String title;
+  final bool isRemoved;
 
-  const IngredientChip({super.key, required this.title});
+  const IngredientChip({
+    super.key,
+    required this.title,
+    this.isRemoved = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,14 @@ class IngredientChip extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: TextStyle(color: Colors.white, fontSize: 14)),
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                decoration: isRemoved ? TextDecoration.lineThrough : null,
+              ),
+            ),
             Icon(Icons.close, color: Colors.white, size: 16),
           ],
         ),

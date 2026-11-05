@@ -108,6 +108,18 @@ class $CartItemsTable extends CartItems
         requiredDuringInsert: false,
         defaultValue: const Constant('[]'),
       );
+  static const VerificationMeta _removedIngredientsJsonMeta =
+      const VerificationMeta('removedIngredientsJson');
+  @override
+  late final GeneratedColumn<String> removedIngredientsJson =
+      GeneratedColumn<String>(
+        'removed_ingredients_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -119,6 +131,7 @@ class $CartItemsTable extends CartItems
     sizeName,
     doughName,
     selectedToppingsJson,
+    removedIngredientsJson,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -194,6 +207,15 @@ class $CartItemsTable extends CartItems
         ),
       );
     }
+    if (data.containsKey('removed_ingredients_json')) {
+      context.handle(
+        _removedIngredientsJsonMeta,
+        removedIngredientsJson.isAcceptableOrUnknown(
+          data['removed_ingredients_json']!,
+          _removedIngredientsJsonMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -239,6 +261,10 @@ class $CartItemsTable extends CartItems
         DriftSqlType.string,
         data['${effectivePrefix}selected_toppings_json'],
       )!,
+      removedIngredientsJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}removed_ingredients_json'],
+      )!,
     );
   }
 
@@ -258,6 +284,7 @@ class CartItem extends DataClass implements Insertable<CartItem> {
   final String? sizeName;
   final String? doughName;
   final String selectedToppingsJson;
+  final String removedIngredientsJson;
   const CartItem({
     required this.id,
     required this.productId,
@@ -268,6 +295,7 @@ class CartItem extends DataClass implements Insertable<CartItem> {
     this.sizeName,
     this.doughName,
     required this.selectedToppingsJson,
+    required this.removedIngredientsJson,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -285,6 +313,7 @@ class CartItem extends DataClass implements Insertable<CartItem> {
       map['dough_name'] = Variable<String>(doughName);
     }
     map['selected_toppings_json'] = Variable<String>(selectedToppingsJson);
+    map['removed_ingredients_json'] = Variable<String>(removedIngredientsJson);
     return map;
   }
 
@@ -303,6 +332,7 @@ class CartItem extends DataClass implements Insertable<CartItem> {
           ? const Value.absent()
           : Value(doughName),
       selectedToppingsJson: Value(selectedToppingsJson),
+      removedIngredientsJson: Value(removedIngredientsJson),
     );
   }
 
@@ -323,6 +353,9 @@ class CartItem extends DataClass implements Insertable<CartItem> {
       selectedToppingsJson: serializer.fromJson<String>(
         json['selectedToppingsJson'],
       ),
+      removedIngredientsJson: serializer.fromJson<String>(
+        json['removedIngredientsJson'],
+      ),
     );
   }
   @override
@@ -338,6 +371,9 @@ class CartItem extends DataClass implements Insertable<CartItem> {
       'sizeName': serializer.toJson<String?>(sizeName),
       'doughName': serializer.toJson<String?>(doughName),
       'selectedToppingsJson': serializer.toJson<String>(selectedToppingsJson),
+      'removedIngredientsJson': serializer.toJson<String>(
+        removedIngredientsJson,
+      ),
     };
   }
 
@@ -351,6 +387,7 @@ class CartItem extends DataClass implements Insertable<CartItem> {
     Value<String?> sizeName = const Value.absent(),
     Value<String?> doughName = const Value.absent(),
     String? selectedToppingsJson,
+    String? removedIngredientsJson,
   }) => CartItem(
     id: id ?? this.id,
     productId: productId ?? this.productId,
@@ -361,6 +398,8 @@ class CartItem extends DataClass implements Insertable<CartItem> {
     sizeName: sizeName.present ? sizeName.value : this.sizeName,
     doughName: doughName.present ? doughName.value : this.doughName,
     selectedToppingsJson: selectedToppingsJson ?? this.selectedToppingsJson,
+    removedIngredientsJson:
+        removedIngredientsJson ?? this.removedIngredientsJson,
   );
   CartItem copyWithCompanion(CartItemsCompanion data) {
     return CartItem(
@@ -377,6 +416,9 @@ class CartItem extends DataClass implements Insertable<CartItem> {
       selectedToppingsJson: data.selectedToppingsJson.present
           ? data.selectedToppingsJson.value
           : this.selectedToppingsJson,
+      removedIngredientsJson: data.removedIngredientsJson.present
+          ? data.removedIngredientsJson.value
+          : this.removedIngredientsJson,
     );
   }
 
@@ -391,7 +433,8 @@ class CartItem extends DataClass implements Insertable<CartItem> {
           ..write('quantity: $quantity, ')
           ..write('sizeName: $sizeName, ')
           ..write('doughName: $doughName, ')
-          ..write('selectedToppingsJson: $selectedToppingsJson')
+          ..write('selectedToppingsJson: $selectedToppingsJson, ')
+          ..write('removedIngredientsJson: $removedIngredientsJson')
           ..write(')'))
         .toString();
   }
@@ -407,6 +450,7 @@ class CartItem extends DataClass implements Insertable<CartItem> {
     sizeName,
     doughName,
     selectedToppingsJson,
+    removedIngredientsJson,
   );
   @override
   bool operator ==(Object other) =>
@@ -420,7 +464,8 @@ class CartItem extends DataClass implements Insertable<CartItem> {
           other.quantity == this.quantity &&
           other.sizeName == this.sizeName &&
           other.doughName == this.doughName &&
-          other.selectedToppingsJson == this.selectedToppingsJson);
+          other.selectedToppingsJson == this.selectedToppingsJson &&
+          other.removedIngredientsJson == this.removedIngredientsJson);
 }
 
 class CartItemsCompanion extends UpdateCompanion<CartItem> {
@@ -433,6 +478,7 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
   final Value<String?> sizeName;
   final Value<String?> doughName;
   final Value<String> selectedToppingsJson;
+  final Value<String> removedIngredientsJson;
   const CartItemsCompanion({
     this.id = const Value.absent(),
     this.productId = const Value.absent(),
@@ -443,6 +489,7 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
     this.sizeName = const Value.absent(),
     this.doughName = const Value.absent(),
     this.selectedToppingsJson = const Value.absent(),
+    this.removedIngredientsJson = const Value.absent(),
   });
   CartItemsCompanion.insert({
     this.id = const Value.absent(),
@@ -454,6 +501,7 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
     this.sizeName = const Value.absent(),
     this.doughName = const Value.absent(),
     this.selectedToppingsJson = const Value.absent(),
+    this.removedIngredientsJson = const Value.absent(),
   }) : productId = Value(productId),
        name = Value(name),
        imageAsset = Value(imageAsset),
@@ -468,6 +516,7 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
     Expression<String>? sizeName,
     Expression<String>? doughName,
     Expression<String>? selectedToppingsJson,
+    Expression<String>? removedIngredientsJson,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -480,6 +529,8 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
       if (doughName != null) 'dough_name': doughName,
       if (selectedToppingsJson != null)
         'selected_toppings_json': selectedToppingsJson,
+      if (removedIngredientsJson != null)
+        'removed_ingredients_json': removedIngredientsJson,
     });
   }
 
@@ -493,6 +544,7 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
     Value<String?>? sizeName,
     Value<String?>? doughName,
     Value<String>? selectedToppingsJson,
+    Value<String>? removedIngredientsJson,
   }) {
     return CartItemsCompanion(
       id: id ?? this.id,
@@ -504,6 +556,8 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
       sizeName: sizeName ?? this.sizeName,
       doughName: doughName ?? this.doughName,
       selectedToppingsJson: selectedToppingsJson ?? this.selectedToppingsJson,
+      removedIngredientsJson:
+          removedIngredientsJson ?? this.removedIngredientsJson,
     );
   }
 
@@ -539,6 +593,11 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
         selectedToppingsJson.value,
       );
     }
+    if (removedIngredientsJson.present) {
+      map['removed_ingredients_json'] = Variable<String>(
+        removedIngredientsJson.value,
+      );
+    }
     return map;
   }
 
@@ -553,7 +612,8 @@ class CartItemsCompanion extends UpdateCompanion<CartItem> {
           ..write('quantity: $quantity, ')
           ..write('sizeName: $sizeName, ')
           ..write('doughName: $doughName, ')
-          ..write('selectedToppingsJson: $selectedToppingsJson')
+          ..write('selectedToppingsJson: $selectedToppingsJson, ')
+          ..write('removedIngredientsJson: $removedIngredientsJson')
           ..write(')'))
         .toString();
   }
@@ -580,6 +640,7 @@ typedef $$CartItemsTableCreateCompanionBuilder = CartItemsCompanion Function({
   Value<String?> sizeName,
   Value<String?> doughName,
   Value<String> selectedToppingsJson,
+  Value<String> removedIngredientsJson,
 });
 typedef $$CartItemsTableUpdateCompanionBuilder = CartItemsCompanion Function({
   Value<int> id,
@@ -591,6 +652,7 @@ typedef $$CartItemsTableUpdateCompanionBuilder = CartItemsCompanion Function({
   Value<String?> sizeName,
   Value<String?> doughName,
   Value<String> selectedToppingsJson,
+  Value<String> removedIngredientsJson,
 });
 
 class $$CartItemsTableFilterComposer
@@ -644,6 +706,11 @@ class $$CartItemsTableFilterComposer
 
   ColumnFilters<String> get selectedToppingsJson => $composableBuilder(
     column: $table.selectedToppingsJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get removedIngredientsJson => $composableBuilder(
+    column: $table.removedIngredientsJson,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -701,6 +768,11 @@ class $$CartItemsTableOrderingComposer
     column: $table.selectedToppingsJson,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get removedIngredientsJson => $composableBuilder(
+    column: $table.removedIngredientsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$CartItemsTableAnnotationComposer
@@ -742,6 +814,11 @@ class $$CartItemsTableAnnotationComposer
     column: $table.selectedToppingsJson,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get removedIngredientsJson => $composableBuilder(
+    column: $table.removedIngredientsJson,
+    builder: (column) => column,
+  );
 }
 
 class $$CartItemsTableTableManager
@@ -781,6 +858,7 @@ class $$CartItemsTableTableManager
                 Value<String?> sizeName = const Value.absent(),
                 Value<String?> doughName = const Value.absent(),
                 Value<String> selectedToppingsJson = const Value.absent(),
+                Value<String> removedIngredientsJson = const Value.absent(),
               }) => CartItemsCompanion(
                 id: id,
                 productId: productId,
@@ -791,6 +869,7 @@ class $$CartItemsTableTableManager
                 sizeName: sizeName,
                 doughName: doughName,
                 selectedToppingsJson: selectedToppingsJson,
+                removedIngredientsJson: removedIngredientsJson,
               ),
           createCompanionCallback:
               ({
@@ -803,6 +882,7 @@ class $$CartItemsTableTableManager
                 Value<String?> sizeName = const Value.absent(),
                 Value<String?> doughName = const Value.absent(),
                 Value<String> selectedToppingsJson = const Value.absent(),
+                Value<String> removedIngredientsJson = const Value.absent(),
               }) => CartItemsCompanion.insert(
                 id: id,
                 productId: productId,
@@ -813,6 +893,7 @@ class $$CartItemsTableTableManager
                 sizeName: sizeName,
                 doughName: doughName,
                 selectedToppingsJson: selectedToppingsJson,
+                removedIngredientsJson: removedIngredientsJson,
               ),
           withReferenceMapper: (p0) => p0
               .map(

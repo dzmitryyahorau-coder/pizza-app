@@ -4,9 +4,17 @@ import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/ingredient_chip.dart';
 
 class SettingsIngredients extends StatelessWidget {
-  const SettingsIngredients({super.key, required this.items});
+  const SettingsIngredients({
+    super.key,
+    required this.items,
+    required this.onTapIngredient,
+    this.removedIngredientIds = const {},
+  });
+
+  final void Function(Ingredient) onTapIngredient;
 
   final List<Ingredient> items;
+  final Set<String> removedIngredientIds;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +25,14 @@ class SettingsIngredients extends StatelessWidget {
           spacing: AppSpacing.s,
           runSpacing: AppSpacing.s,
           children: [
-            for (final item in items) IngredientChip(title: item.name),
+            for (final item in items)
+              InkWell(
+                child: IngredientChip(
+                  title: item.name,
+                  isRemoved: removedIngredientIds.contains(item.id),
+                ),
+                onTap: () => onTapIngredient(item),
+              ),
           ],
         ),
       ),

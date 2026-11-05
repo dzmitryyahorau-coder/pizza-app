@@ -17,7 +17,7 @@ class FirestoreCategoriesRepository implements ICategoriesRepository {
       .withConverter<Category>(
         fromFirestore: ((snapshot, options) =>
             Category.fromFireStore(snapshot, options)),
-        toFirestore: (category, _) => category.toFirestore(),
+        toFirestore: (category, _) => category.toMap(),
       );
 
   @override

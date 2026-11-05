@@ -27,7 +27,7 @@ class ProductSize {
     );
   }
 
-  Map<String, dynamic> toFireStore() => {'id': id, 'cm': cm, 'price': price};
+  Map<String, dynamic> toMap() => {'id': id, 'cm': cm, 'price': price};
 
   @override
   bool operator ==(Object other) {

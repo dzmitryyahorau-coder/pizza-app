@@ -12,6 +12,8 @@ import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/product_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/stories_repository.dart';
+import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
+import 'package:pizza_app/features/product_details/data/repository/product_details_repository.dart';
 import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:pizza_app/firebase_options.dart';
@@ -27,7 +29,6 @@ void main() async {
 }
 
 final GoRouter _router = GoRouter(
-  // initialLocation: '/cart',
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -42,8 +43,12 @@ final GoRouter _router = GoRouter(
       routes: [
         GoRoute(
           path: 'products/:id',
-          builder: (BuildContext context, GoRouterState state) =>
-              ProductDetailsScreen(productId: state.pathParameters['id']!),
+          builder: (BuildContext context, GoRouterState state) => BlocProvider(
+            create: (context) =>
+                ProductDetailsCubit(context.read<IProductDetailsRepository>())
+                  ..load(state.pathParameters['id']!),
+            child: ProductDetailsScreen(productId: state.pathParameters['id']!),
+          ),
         ),
       ],
     ),
@@ -73,6 +78,9 @@ class MainApp extends StatelessWidget {
         ),
         RepositoryProvider<ICartRepository>(
           create: (_) => DriftCartRepository(AppDatabase()),
+        ),
+        RepositoryProvider<IProductDetailsRepository>(
+          create: (_) => FirestoreProductDetailsRepository(),
         ),
       ],
       child: BlocProvider<CartCubit>(

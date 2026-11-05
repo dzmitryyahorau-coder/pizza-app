@@ -17,7 +17,7 @@ class FirestoreToppingsRepository implements IToppingsRepository {
       .withConverter<Topping>(
         fromFirestore: ((snapshot, options) =>
             Topping.fromFireStore(snapshot, options)),
-        toFirestore: (product, _) => product.toFireStore(),
+        toMap: (product, _) => product.toMap(),
       );
 
   @override

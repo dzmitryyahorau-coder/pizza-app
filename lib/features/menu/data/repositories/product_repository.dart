@@ -17,7 +17,7 @@ class FirestoreProductsRepository implements IProductsRepository {
       .withConverter<Product>(
         fromFirestore: ((snapshot, options) =>
             Product.fromFireStore(snapshot, options)),
-        toFirestore: (product, _) => product.toFirestore(),
+        toFirestore: (product, _) => product.toMap(),
       );
 
   @override

@@ -13,6 +13,7 @@ import 'package:pizza_app/features/product_details/presentation/widgets/customiz
 
 class CustomizeModeView extends StatelessWidget {
   final String title;
+  final int price;
   final ProductSize size;
   final void Function() onCloseView;
   final List<Topping> toppings;
@@ -20,12 +21,19 @@ class CustomizeModeView extends StatelessWidget {
   final List<Dough> doughs;
   final Dough selectedDough;
 
+  final Set<String> selectedToppingIds;
+  final Set<String> removedIngredientIds;
+
   final void Function(Dough) onSelectDoughType;
+  final void Function(Topping) onSelectTopping;
+  final void Function(Ingredient) onTapIngredient;
+
   final VoidCallback onPressAddToCart;
 
   const CustomizeModeView({
     super.key,
     required this.title,
+    required this.price,
     required this.size,
     required this.onCloseView,
     required this.toppings,
@@ -34,6 +42,10 @@ class CustomizeModeView extends StatelessWidget {
     required this.ingredients,
     required this.onSelectDoughType,
     required this.onPressAddToCart,
+    required this.onSelectTopping,
+    required this.onTapIngredient,
+    this.selectedToppingIds = const {},
+    this.removedIngredientIds = const {},
   });
 
   static const TextStyle sectionTitleStyle = TextStyle(
@@ -101,8 +113,16 @@ class CustomizeModeView extends StatelessWidget {
                 onSelect: onSelectDoughType,
                 selected: selectedDough,
               ),
-              AddTopings(topings: toppings),
-              SettingsIngredients(items: ingredients),
+              AddToppings(
+                toppings: toppings,
+                onSelectTopping: onSelectTopping,
+                selectedToppingIds: selectedToppingIds,
+              ),
+              SettingsIngredients(
+                items: ingredients,
+                removedIngredientIds: removedIngredientIds,
+                onTapIngredient: onTapIngredient,
+              ),
               SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
@@ -113,7 +133,7 @@ class CustomizeModeView extends StatelessWidget {
           bottom: AppSpacing.xl * 2,
           child: Center(
             child: PriceButton(
-              label: l10n.productPrice(700),
+              label: l10n.productPrice(price),
               onPress: onPressAddToCart,
             ),
           ),

@@ -5,7 +5,7 @@ import 'package:pizza_app/features/product_details/data/models/product_size.dart
 import 'package:pizza_app/features/product_details/data/models/topping.dart';
 
 class ProductDetails {
-  const ProductDetails({
+  ProductDetails({
     required this.id,
     required this.name,
     required this.description,
@@ -16,7 +16,15 @@ class ProductDetails {
     required this.defaultDoughId,
     required this.toppings,
     required this.ingredients,
-  });
+  }) {
+    for (final topping in toppings) {
+      mapToppingsById[topping.id] = topping;
+    }
+
+    for (final ingredient in ingredients) {
+      mapIngredientById[ingredient.id] = ingredient;
+    }
+  }
 
   final String id;
   final String name;
@@ -28,6 +36,9 @@ class ProductDetails {
   final String defaultDoughId;
   final List<Topping> toppings;
   final List<Ingredient> ingredients;
+
+  final Map<String, Topping> mapToppingsById = {};
+  final Map<String, Ingredient> mapIngredientById = {};
 
   factory ProductDetails.fromFirestore(
     DocumentSnapshot snapshot,
@@ -77,17 +88,17 @@ class ProductDetails {
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toMap() {
     return {
       'name': name,
       'description': description,
       'imageAsset': imageAsset,
-      'sizes': sizes.map((s) => s.toFireStore()).toList(),
+      'sizes': sizes.map((s) => s.toMap()).toList(),
       'defaultSizeId': defaultSizeId,
-      'doughs': doughs.map((d) => d.toFireStore()).toList(),
+      'doughs': doughs.map((d) => d.toMap()).toList(),
       'defaultDoughId': defaultDoughId,
-      'toppings': toppings.map((t) => t.toFireStore()).toList(),
-      'ingredients': ingredients.map((i) => i.toFireStore()).toList(),
+      'toppings': toppings.map((t) => t.toMap()).toList(),
+      'ingredients': ingredients.map((i) => i.toMap()).toList(),
     };
   }
 }

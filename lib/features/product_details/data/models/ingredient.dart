@@ -27,7 +27,7 @@ class Ingredient {
     );
   }
 
-  Map<String, dynamic> toFireStore() => {
+  Map<String, dynamic> toMap() => {
     'id': id,
     'name': name,
     if (imgPath != null) 'imgPath': imgPath,

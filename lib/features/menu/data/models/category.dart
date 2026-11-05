@@ -21,7 +21,7 @@ class Category {
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toMap() {
     return {'id': id, 'name': name};
   }
 }

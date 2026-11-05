@@ -17,7 +17,7 @@ class FirestoreStoriesRepository implements IStoriesRepository {
       .withConverter<Story>(
         fromFirestore: ((snapshot, options) =>
             Story.fromFireStore(snapshot, options)),
-        toFirestore: (story, _) => story.toFirestore(),
+        toFirestore: (story, _) => story.toMap(),
       );
 
   @override

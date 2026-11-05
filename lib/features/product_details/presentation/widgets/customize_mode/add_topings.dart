@@ -5,10 +5,17 @@ import 'package:pizza_app/features/product_details/data/models/topping.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/show_more_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/toping_card.dart';
 
-class AddTopings extends StatelessWidget {
-  const AddTopings({super.key, required this.topings});
+class AddToppings extends StatelessWidget {
+  const AddToppings({
+    super.key,
+    required this.toppings,
+    this.selectedToppingIds = const {},
+    required this.onSelectTopping,
+  });
 
-  final List<Topping> topings;
+  final List<Topping> toppings;
+  final Set<String> selectedToppingIds;
+  final void Function(Topping) onSelectTopping;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +45,17 @@ class AddTopings extends StatelessWidget {
               crossAxisSpacing: AppSpacing.s,
               mainAxisExtent: 166,
             ),
-            itemCount: topings.length,
+            itemCount: toppings.length,
             itemBuilder: (context, index) {
-              final item = topings[index];
+              final item = toppings[index];
 
               return TopingCard(
                 title: item.name,
                 weight: item.weightGrams,
                 price: item.price,
                 imgPath: item.imageAsset,
+                onTap: () => onSelectTopping(item),
+                isSelected: selectedToppingIds.contains(item.id),
               );
             },
           ),

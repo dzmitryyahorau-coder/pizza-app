@@ -36,7 +36,7 @@ class Product {
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toMap() {
     return {
       'categoryId': categoryId,
       'name': name,

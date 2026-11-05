@@ -20,7 +20,7 @@ class FirestoreProductDetailsRepository implements IProductDetailsRepository {
           .doc(id)
           .withConverter<ProductDetails>(
             fromFirestore: ProductDetails.fromFirestore,
-            toFirestore: (details, _) => details.toFirestore(),
+            toFirestore: (details, _) => details.toMap(),
           )
           .get();
 
