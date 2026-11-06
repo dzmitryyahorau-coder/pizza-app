@@ -1,11 +1,5 @@
 import 'package:pizza_app/core/database/app_database.dart';
-
-abstract interface class ICartRepository {
-  Stream<List<CartItem>> watchCart();
-  Future<void> addToCart(CartItem item);
-  Future<void> updateQuantity(int id, int quantity);
-  Future<void> clearCart();
-}
+import 'package:pizza_app/features/cart/data/repositories/cart_repository_interface.dart';
 
 class DriftCartRepository implements ICartRepository {
   final AppDatabase _db;

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pizza_app/features/product_details/data/repository/product_details_repository.dart';
+import 'package:pizza_app/features/product_details/data/repository/product_details/product_details_repository_interface.dart';
 import 'package:pizza_app/features/product_details/domain/cart_item_draft.dart';
 
 import 'product_details_state.dart';

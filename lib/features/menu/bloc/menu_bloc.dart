@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/bloc/menu_state.dart';
 import 'package:pizza_app/features/menu/data/models/product.dart';
-import 'package:pizza_app/features/menu/data/repositories/categories_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/product_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/stories_repository.dart';
+import 'package:pizza_app/features/menu/data/repositories/categories/categories_repository_interface.dart';
+import 'package:pizza_app/features/menu/data/repositories/products/products_repository_interface.dart';
+import 'package:pizza_app/features/menu/data/repositories/stories/stories_repository_interface.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final IProductsRepository _products;

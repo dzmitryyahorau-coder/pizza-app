@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
-
-abstract interface class IIngredientsRepository {
-  Future<List<Ingredient>> getIngredients();
-}
+import 'package:pizza_app/features/product_details/data/repository/ingredients/ingredients_repository_interface.dart';
 
 class FirestoreIngredientsRepository implements IIngredientsRepository {
   final FirebaseFirestore _firestore;
@@ -17,7 +14,7 @@ class FirestoreIngredientsRepository implements IIngredientsRepository {
       .withConverter<Ingredient>(
         fromFirestore: ((snapshot, options) =>
             Ingredient.fromFireStore(snapshot, options)),
-        toMap: (product, _) => product.toMap(),
+        toFirestore: (product, _) => product.toMap(),
       );
 
   @override

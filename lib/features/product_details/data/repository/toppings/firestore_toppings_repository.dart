@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pizza_app/features/product_details/data/models/topping.dart';
-
-abstract interface class IToppingsRepository {
-  Future<List<Topping>> getToppings();
-}
+import 'package:pizza_app/features/product_details/data/repository/toppings/interface_topings_repository.dart';
 
 class FirestoreToppingsRepository implements IToppingsRepository {
   final FirebaseFirestore _firestore;
@@ -17,7 +14,7 @@ class FirestoreToppingsRepository implements IToppingsRepository {
       .withConverter<Topping>(
         fromFirestore: ((snapshot, options) =>
             Topping.fromFireStore(snapshot, options)),
-        toMap: (product, _) => product.toMap(),
+        toFirestore: (product, _) => product.toMap(),
       );
 
   @override

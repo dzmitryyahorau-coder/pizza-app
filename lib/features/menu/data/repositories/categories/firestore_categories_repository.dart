@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pizza_app/features/menu/data/models/category.dart';
 import 'package:flutter/foundation.dart' hide Category;
-
-abstract interface class ICategoriesRepository {
-  Future<List<Category>> getCategories();
-}
+import 'package:pizza_app/features/menu/data/repositories/categories/categories_repository_interface.dart';
 
 class FirestoreCategoriesRepository implements ICategoriesRepository {
   final FirebaseFirestore _firestore;

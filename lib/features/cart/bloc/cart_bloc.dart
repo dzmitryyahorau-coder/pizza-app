@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/features/cart/bloc/cart_state.dart';
-import 'package:pizza_app/features/cart/data/repositories/cart_repository.dart';
+import 'package:pizza_app/features/cart/data/repositories/cart_repository_interface.dart';
 
 class CartCubit extends Cubit<CartState> {
   final ICartRepository _repository;

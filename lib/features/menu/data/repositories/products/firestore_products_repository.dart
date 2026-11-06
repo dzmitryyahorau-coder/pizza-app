@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pizza_app/features/menu/data/models/product.dart';
 import 'package:flutter/foundation.dart';
-
-abstract interface class IProductsRepository {
-  Future<List<Product>> getProducts();
-}
+import 'package:pizza_app/features/menu/data/repositories/products/products_repository_interface.dart';
 
 class FirestoreProductsRepository implements IProductsRepository {
   final FirebaseFirestore _firestore;
