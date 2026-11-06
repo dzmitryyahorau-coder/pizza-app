@@ -22,5 +22,21 @@
   "addYourDeliveryAddressBody": "We'll deliver your order fresh and hot",
   "addAddressButton": "Add address",
   "notNowButton": "Not now",
-  "closeButton": "Close"
+  "closeButton": "Close",
+  "cartEnterDeliveryAddress": "Enter delivery address",
+  "changeButton": "Change",
+  "cartUpcellSectionHead": "Add it to your order?",
+  "proceedToCheckoutForButton": "Proceed to checkout for {price} $",
+  "enterPromoCodePlaceholder": "Enter promo code",
+  "positionsLabel": "Items: {count}",
+  "loginTitle": "Login",
+  "emailHint": "Email",
+  "passwordHint": "Password",
+  "loginButton": "Sign In",
+  "logoutButton": "Log Out",
+  "loadingText": "Loading...",
+  "errorEmptyFields": "Fields cannot be empty",
+  "errorInvalidCredentials": "Invalid email or password is too short",
+  "errorUnknown": "An unexpected error occurred",
+  "profileTitle": "Profile"
 }

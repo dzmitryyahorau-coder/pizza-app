@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
+import 'package:pizza_app/shared/widgets/custom_text_button.dart';
 import 'package:pizza_app/shared/widgets/primary_filled_button.dart';
 
 class SetDeliveryAddress extends StatelessWidget {
@@ -35,14 +36,9 @@ class SetDeliveryAddress extends StatelessWidget {
                     children: [
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: TextButton(
+                        child: CustomTextButton(
                           onPressed: () {},
-                          child: Text(
-                            l10n.closeButton,
-                            style: TextStyle(
-                              color: context.appColors.brandColor,
-                            ),
-                          ),
+                          text: l10n.closeButton,
                         ),
                       ),
                       Text(

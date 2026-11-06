@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/features/product_details/data/dough.dart';
+import 'package:pizza_app/features/product_details/data/models/dough.dart';
 
 class DoughButton extends StatelessWidget {
   const DoughButton({

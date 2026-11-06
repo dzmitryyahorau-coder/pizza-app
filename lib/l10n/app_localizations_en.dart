@@ -76,4 +76,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get closeButton => 'Close';
+
+  @override
+  String get cartEnterDeliveryAddress => 'Enter delivery address';
+
+  @override
+  String get changeButton => 'Change';
+
+  @override
+  String get cartUpcellSectionHead => 'Add it to your order?';
+
+  @override
+  String proceedToCheckoutForButton(Object price) {
+    return 'Proceed to checkout for $price \$';
+  }
+
+  @override
+  String get enterPromoCodePlaceholder => 'Enter promo code';
+
+  @override
+  String positionsLabel(Object count) {
+    return 'Items: $count';
+  }
+
+  @override
+  String get loginTitle => 'Login';
+
+  @override
+  String get emailHint => 'Email';
+
+  @override
+  String get passwordHint => 'Password';
+
+  @override
+  String get loginButton => 'Sign In';
+
+  @override
+  String get logoutButton => 'Log Out';
+
+  @override
+  String get loadingText => 'Loading...';
+
+  @override
+  String get errorEmptyFields => 'Fields cannot be empty';
+
+  @override
+  String get errorInvalidCredentials =>
+      'Invalid email or password is too short';
+
+  @override
+  String get errorUnknown => 'An unexpected error occurred';
+
+  @override
+  String get profileTitle => 'Profile';
 }
