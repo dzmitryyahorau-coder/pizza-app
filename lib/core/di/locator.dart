@@ -41,9 +41,9 @@ Future<void> initLocator(String environment) async {
 
   sl.registerLazySingleton<AppRouter>(() => AppRouter(sl<AuthCubit>()));
 
-  // --- РАЗДЕЛЕНИЕ ПО ОКРУЖЕНИЯМ (FLAVORS) ---
+  // --- Flavors ---
   if (environment == 'dev') {
-    // DEV окружение: подставляем in-memory репозитории
+    // DEV env: use in-memory impls
     sl.registerLazySingleton<IProductsRepository>(
       () => InmemoryProductsRepository(),
     );
