@@ -1,13 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/core/di/locator.dart';
+import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
-// import 'package:pizza_app/features/delivery/presentation/set_delivery_address.dart';
-import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
-// import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
-// import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
+import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
+import 'package:pizza_app/firebase_options.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 
 import 'l10n/app_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const env = String.fromEnvironment('ENV', defaultValue: 'prod');
+
+  if (env == 'prod') {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
+  await initLocator(env);
+
   runApp(const MainApp());
 }
 
@@ -16,14 +31,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: ProductDetailsScreen(productId: 'p4'),
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>.value(value: sl<AuthCubit>()),
+        BlocProvider<CartCubit>.value(value: sl<CartCubit>()),
+      ],
+      child: MaterialApp.router(
+        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
+        routerConfig: sl<AppRouter>().router,
+      ),
     );
   }
 }

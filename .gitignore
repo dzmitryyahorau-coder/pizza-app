@@ -48,4 +48,6 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 
-/lib/l10n/*.dart
+# Generated files
+lib/l10n/**/*.dart
+lib/firebase_options.dart

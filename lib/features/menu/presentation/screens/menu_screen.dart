@@ -1,34 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/menu/data/product.dart';
-import 'package:pizza_app/features/menu/mock/menu_mock_data.dart' as mocks;
+import 'package:pizza_app/features/cart/presentation/widgets/cart_floating_button.dart';
+import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
+import 'package:pizza_app/features/menu/bloc/menu_event.dart';
+import 'package:pizza_app/features/menu/bloc/menu_state.dart';
+import 'package:pizza_app/features/menu/data/models/product.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/categories_list.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_header.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_sheet.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/product_item.dart';
 
-class MenuScreen extends StatefulWidget {
+class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
 
   @override
-  State<MenuScreen> createState() => _MenuScreenState();
+  Widget build(BuildContext context) {
+    return BlocConsumer<MenuBloc, MenuState>(
+      builder: ((context, state) {
+        if ([
+          MenuStatus.loading,
+          MenuStatus.refreshing,
+        ].contains(state.status)) {
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
+        }
+
+        if (state.status == MenuStatus.failure && state.categories.isEmpty) {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                spacing: AppSpacing.l,
+                children: [
+                  const Text('Error during the loading of menu data'),
+                  FilledButton(
+                    onPressed: () =>
+                        context.read<MenuBloc>().add(const MenuLoadRequested()),
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return MenuView(state: state);
+      }),
+      listener: (BuildContext context, MenuState state) {},
+    );
+  }
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class MenuView extends StatefulWidget {
+  final MenuState state;
+
+  const MenuView({super.key, required this.state});
+
+  @override
+  State<MenuView> createState() => _MenuViewState();
+}
+
+class _MenuViewState extends State<MenuView> {
   static const double _tabsHeight = 56;
 
   late final ScrollController _controller;
 
   final Map<String, double> _sectionOffsets = {};
-
-  /// Products by category, calculated once
-  late final _productsByCategory = {
-    for (final category in mocks.categories)
-      category.id: mocks.products
-          .where((p) => p.categoryId == category.id)
-          .toList(),
-  };
 
   String? selectedCategoryId;
   bool _isProgrammaticScroll = false;
@@ -37,13 +76,21 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     super.initState();
     _controller = ScrollController()..addListener(_onScroll);
-    selectedCategoryId = mocks.categories.firstOrNull?.id;
+    selectedCategoryId = widget.state.categories.firstOrNull?.id;
   }
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  Future<void> _onRefresh() async {
+    final bloc = context.read<MenuBloc>();
+    if (bloc.state.status == MenuStatus.refreshing) return;
+
+    bloc.add(const MenuLoadRequested());
+    await bloc.stream.firstWhere((s) => s.status != MenuStatus.refreshing);
   }
 
   void _onScroll() {
@@ -58,7 +105,7 @@ class _MenuScreenState extends State<MenuScreen> {
     final atBottom = position.pixels >= position.maxScrollExtent - 1;
 
     String? activeId;
-    for (final category in mocks.categories) {
+    for (final category in widget.state.categories) {
       final start = _sectionOffsets[category.id];
       if (start == null) continue;
 
@@ -69,7 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
       }
     }
 
-    activeId ??= mocks.categories.firstOrNull?.id;
+    activeId ??= widget.state.categories.firstOrNull?.id;
     if (activeId != null && activeId != selectedCategoryId) {
       setState(() => selectedCategoryId = activeId);
     }
@@ -101,52 +148,61 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     final surface = context.appColors.surface;
+    final menu = widget.state;
 
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: CustomScrollView(
-          controller: _controller,
-          slivers: [
-            const SliverToBoxAdapter(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [MenuHeader(), MenuSheet()],
-              ),
-            ),
-            PinnedHeaderSliver(
-              child: ColoredBox(
-                color: surface,
-                child: CategoriesList(
-                  categories: mocks.categories,
-                  activeCategoryId: selectedCategoryId,
-                  onChangeActiveCategoryId: _scrollToCategory,
-                ),
-              ),
-            ),
-            for (final category in mocks.categories)
-              DecoratedSliver(
-                decoration: BoxDecoration(color: surface),
-                sliver: SliverMainAxisGroup(
-                  slivers: [
-                    SliverLayoutBuilder(
-                      builder: (context, constraints) {
-                        _sectionOffsets[category.id] =
-                            constraints.precedingScrollExtent;
-                        return const SliverToBoxAdapter(
-                          child: SizedBox.shrink(),
-                        );
-                      },
-                    ),
-                    _ProductsSliver(
-                      products: _productsByCategory[category.id] ?? const [],
-                    ),
+        child: RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: CustomScrollView(
+            controller: _controller,
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const MenuHeader(),
+                    MenuSheet(storiesList: menu.stories),
                   ],
                 ),
               ),
-          ],
+              PinnedHeaderSliver(
+                child: ColoredBox(
+                  color: surface,
+                  child: CategoriesList(
+                    categories: menu.categories,
+                    activeCategoryId: selectedCategoryId,
+                    onChangeActiveCategoryId: _scrollToCategory,
+                  ),
+                ),
+              ),
+              for (final category in menu.categories)
+                DecoratedSliver(
+                  decoration: BoxDecoration(color: surface),
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      SliverLayoutBuilder(
+                        builder: (context, constraints) {
+                          _sectionOffsets[category.id] =
+                              constraints.precedingScrollExtent;
+                          return const SliverToBoxAdapter(
+                            child: SizedBox.shrink(),
+                          );
+                        },
+                      ),
+                      _ProductsSliver(
+                        products:
+                            menu.productsByCategory[category.id] ?? const [],
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
+      floatingActionButton: CartFloatingButton(),
     );
   }
 }
@@ -165,7 +221,10 @@ class _ProductsSliver extends StatelessWidget {
           horizontal: AppSpacing.l,
           vertical: 8,
         ),
-        child: ProductItem(product: products[index]),
+        child: InkWell(
+          child: ProductItem(product: products[index]),
+          onTap: () => context.push('/products/${products[index].id}'),
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/features/menu/data/product.dart';
+import 'package:pizza_app/features/menu/data/models/product.dart';
 import 'package:pizza_app/shared/widgets/price_chip.dart';
 
 class ProductItem extends StatelessWidget {

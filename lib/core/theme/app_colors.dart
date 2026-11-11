@@ -11,6 +11,8 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.chipBackground,
     required this.onChip,
     required this.accentGreen,
+    required this.cardBackground,
+    required this.inputBackground,
   });
 
   final Color brandColor;
@@ -22,6 +24,9 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color onChip;
   final Color accentGreen;
 
+  final Color cardBackground;
+  final Color inputBackground;
+
   static const light = AppColors(
     brandColor: Color(0xFFFF6400),
     scaffoldBackground: Color(0xFFF1F3F6),
@@ -31,6 +36,8 @@ class AppColors extends ThemeExtension<AppColors> {
     chipBackground: Color(0xFFF1F3F6),
     onChip: Color(0xFF000000),
     accentGreen: Color(0xFF00AB48),
+    cardBackground: Color(0xFFFFFFFF),
+    inputBackground: Color(0xFFE5E5EA),
   );
 
   static const dark = AppColors(
@@ -42,6 +49,8 @@ class AppColors extends ThemeExtension<AppColors> {
     chipBackground: Color(0xFF2A2A2A),
     onChip: Color(0xFFFFFFFF),
     accentGreen: Color(0xFF1EA557),
+    cardBackground: Color(0xFF1A1B1E),
+    inputBackground: Color(0xFF222428),
   );
 
   @override
@@ -54,6 +63,8 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? chipBackground,
     Color? onChip,
     Color? accentGreen,
+    Color? cardBackground,
+    Color? inputBackground,
   }) => AppColors(
     brandColor: brandColor ?? this.brandColor,
     scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
@@ -63,6 +74,8 @@ class AppColors extends ThemeExtension<AppColors> {
     chipBackground: chipBackground ?? this.chipBackground,
     onChip: onChip ?? this.onChip,
     accentGreen: accentGreen ?? this.accentGreen,
+    cardBackground: cardBackground ?? this.cardBackground,
+    inputBackground: inputBackground ?? this.inputBackground,
   );
 
   @override
@@ -85,6 +98,8 @@ class AppColors extends ThemeExtension<AppColors> {
       chipBackground: Color.lerp(chipBackground, other.chipBackground, t)!,
       onChip: Color.lerp(onChip, other.onChip, t)!,
       accentGreen: Color.lerp(accentGreen, other.accentGreen, t)!,
+      cardBackground: Color.lerp(cardBackground, other.cardBackground, t)!,
+      inputBackground: Color.lerp(inputBackground, other.inputBackground, t)!,
     );
   }
 }

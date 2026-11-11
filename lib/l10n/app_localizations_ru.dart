@@ -77,4 +77,57 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get closeButton => 'Закрыть';
+
+  @override
+  String get cartEnterDeliveryAddress => 'Ввести адресс доставки';
+
+  @override
+  String get changeButton => 'Изменить';
+
+  @override
+  String get cartUpcellSectionHead => 'Добавим в заказ?';
+
+  @override
+  String proceedToCheckoutForButton(Object price) {
+    return 'Перейти к оплате $price ₽';
+  }
+
+  @override
+  String get enterPromoCodePlaceholder => 'Ввести промокод';
+
+  @override
+  String positionsLabel(Object count) {
+    return 'Позиций: $count';
+  }
+
+  @override
+  String get loginTitle => 'Вход';
+
+  @override
+  String get emailHint => 'Email';
+
+  @override
+  String get passwordHint => 'Пароль';
+
+  @override
+  String get loginButton => 'Войти';
+
+  @override
+  String get logoutButton => 'Выйти';
+
+  @override
+  String get loadingText => 'Загрузка...';
+
+  @override
+  String get errorEmptyFields => 'Поля не могут быть пустыми';
+
+  @override
+  String get errorInvalidCredentials =>
+      'Неверный email или слишком короткий пароль';
+
+  @override
+  String get errorUnknown => 'Произошла непредвиденная ошибка';
+
+  @override
+  String get profileTitle => 'Профиль';
 }

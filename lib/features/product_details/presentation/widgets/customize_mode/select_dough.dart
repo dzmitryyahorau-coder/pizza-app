@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/product_details/data/dough.dart';
+import 'package:pizza_app/features/product_details/data/models/dough.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/dough_button.dart';
 
 class SelectDough extends StatelessWidget {

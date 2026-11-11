@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/product_details/data/product_size.dart';
+import 'package:pizza_app/features/product_details/data/models/product_size.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/close_icon_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/background.dart';
@@ -12,12 +12,14 @@ class DefaultModeView extends StatelessWidget {
   final String title;
   final String description;
   final List<ProductSize> sizes;
-  final double price;
+  final int price;
 
   final ProductSize selectedSize;
 
   final void Function(ProductSize) onSelectedSize;
-  final void Function() onPressCustomizationButton;
+  final VoidCallback onPressCustomizationButton;
+  final VoidCallback onPressAddToCart;
+  final VoidCallback onClose;
 
   const DefaultModeView({
     super.key,
@@ -28,6 +30,8 @@ class DefaultModeView extends StatelessWidget {
     required this.selectedSize,
     required this.onSelectedSize,
     required this.onPressCustomizationButton,
+    required this.onClose,
+    required this.onPressAddToCart,
   });
 
   @override
@@ -44,7 +48,7 @@ class DefaultModeView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsetsGeometry.all(AppSpacing.l),
-                  child: CloseIconButton(onPress: () {}),
+                  child: CloseIconButton(onPress: onClose),
                 ),
               ),
               Column(
@@ -86,8 +90,8 @@ class DefaultModeView extends StatelessWidget {
                               context.l10n.productSizeCm(p.cm),
                         ),
                         PriceButton(
-                          label: context.l10n.productPrice(549),
-                          onPress: () {},
+                          label: context.l10n.productPrice(price),
+                          onPress: onPressAddToCart,
                         ),
                       ],
                     ),

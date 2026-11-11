@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/product_details/data/dough.dart';
-import 'package:pizza_app/features/product_details/data/ingredient.dart';
-import 'package:pizza_app/features/product_details/data/product_size.dart';
+import 'package:pizza_app/features/product_details/data/models/dough.dart';
+import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
+import 'package:pizza_app/features/product_details/data/models/product_size.dart';
+import 'package:pizza_app/features/product_details/data/models/topping.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/close_icon_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/add_topings.dart';
@@ -12,23 +13,39 @@ import 'package:pizza_app/features/product_details/presentation/widgets/customiz
 
 class CustomizeModeView extends StatelessWidget {
   final String title;
+  final int price;
   final ProductSize size;
   final void Function() onCloseView;
+  final List<Topping> toppings;
   final List<Ingredient> ingredients;
   final List<Dough> doughs;
   final Dough selectedDough;
 
+  final Set<String> selectedToppingIds;
+  final Set<String> removedIngredientIds;
+
   final void Function(Dough) onSelectDoughType;
+  final void Function(Topping) onSelectTopping;
+  final void Function(Ingredient) onTapIngredient;
+
+  final VoidCallback onPressAddToCart;
 
   const CustomizeModeView({
     super.key,
     required this.title,
+    required this.price,
     required this.size,
     required this.onCloseView,
-    required this.ingredients,
+    required this.toppings,
     required this.selectedDough,
     required this.doughs,
+    required this.ingredients,
     required this.onSelectDoughType,
+    required this.onPressAddToCart,
+    required this.onSelectTopping,
+    required this.onTapIngredient,
+    this.selectedToppingIds = const {},
+    this.removedIngredientIds = const {},
   });
 
   static const TextStyle sectionTitleStyle = TextStyle(
@@ -96,8 +113,16 @@ class CustomizeModeView extends StatelessWidget {
                 onSelect: onSelectDoughType,
                 selected: selectedDough,
               ),
-              AddTopings(),
-              SettingsIngredients(items: ingredients),
+              AddToppings(
+                toppings: toppings,
+                onSelectTopping: onSelectTopping,
+                selectedToppingIds: selectedToppingIds,
+              ),
+              SettingsIngredients(
+                items: ingredients,
+                removedIngredientIds: removedIngredientIds,
+                onTapIngredient: onTapIngredient,
+              ),
               SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
@@ -107,7 +132,10 @@ class CustomizeModeView extends StatelessWidget {
           right: 0,
           bottom: AppSpacing.xl * 2,
           child: Center(
-            child: PriceButton(label: l10n.productPrice(700), onPress: () {}),
+            child: PriceButton(
+              label: l10n.productPrice(price),
+              onPress: onPressAddToCart,
+            ),
           ),
         ),
       ],

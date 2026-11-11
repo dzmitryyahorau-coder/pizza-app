@@ -199,6 +199,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get closeButton;
+
+  /// No description provided for @cartEnterDeliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter delivery address'**
+  String get cartEnterDeliveryAddress;
+
+  /// No description provided for @changeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeButton;
+
+  /// No description provided for @cartUpcellSectionHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Add it to your order?'**
+  String get cartUpcellSectionHead;
+
+  /// No description provided for @proceedToCheckoutForButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to checkout for {price} \$'**
+  String proceedToCheckoutForButton(Object price);
+
+  /// No description provided for @enterPromoCodePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter promo code'**
+  String get enterPromoCodePlaceholder;
+
+  /// No description provided for @positionsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Items: {count}'**
+  String positionsLabel(Object count);
+
+  /// No description provided for @loginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get loginTitle;
+
+  /// No description provided for @emailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailHint;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordHint;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get loginButton;
+
+  /// No description provided for @logoutButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logoutButton;
+
+  /// No description provided for @loadingText.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingText;
+
+  /// No description provided for @errorEmptyFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Fields cannot be empty'**
+  String get errorEmptyFields;
+
+  /// No description provided for @errorInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password is too short'**
+  String get errorInvalidCredentials;
+
+  /// No description provided for @errorUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred'**
+  String get errorUnknown;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTitle;
 }
 
 class _AppLocalizationsDelegate
