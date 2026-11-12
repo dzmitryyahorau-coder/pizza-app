@@ -43,4 +43,10 @@ class FirebaseAuthRepository implements IAuthRepository {
       rethrow;
     }
   }
+
+  @override
+  String? get currentUserId => _firebaseAuth.currentUser?.uid;
+
+  @override
+  Future<void> signOut() => _firebaseAuth.signOut();
 }

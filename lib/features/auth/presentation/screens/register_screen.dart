@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/features/auth/bloc/auth_cubit.dart';
-import 'package:pizza_app/features/auth/bloc/auth_state.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
 import 'package:pizza_app/shared/widgets/primary_filled_button.dart';
 
 class RegisterScreen extends StatefulWidget {

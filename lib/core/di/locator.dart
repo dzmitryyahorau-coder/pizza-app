@@ -6,28 +6,30 @@ import 'package:pizza_app/features/auth/data/repositories/firebase_auth_reposito
 import 'package:pizza_app/features/auth/data/repositories/supabase_user_repository.dart';
 import 'package:pizza_app/features/auth/domain/repositories/auth_repository_interface.dart';
 import 'package:pizza_app/features/auth/domain/repositories/user_repository_interface.dart';
+import 'package:pizza_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:pizza_app/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:pizza_app/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:pizza_app/features/cart/data/repositories/drift_cart_depository.dart';
 import 'package:pizza_app/features/cart/data/repositories/inmemory_cart_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/categories/categories_repository_interface.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories/inmemory_categories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories/supabase_categories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/products/inmemory_products_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/products/products_repository_interface.dart';
 import 'package:pizza_app/features/menu/data/repositories/products/supabase_products_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/stories/inmemory_stories_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/stories/stories_repository_interface.dart';
 import 'package:pizza_app/features/menu/data/repositories/stories/supabase_stories_repository.dart';
+import 'package:pizza_app/features/menu/domain/repositories/categories/categories_repository_interface.dart';
+import 'package:pizza_app/features/menu/domain/repositories/products/products_repository_interface.dart';
+import 'package:pizza_app/features/menu/domain/repositories/stories/stories_repository_interface.dart';
 import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/inmemory_product_details_repository.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/product_details_repository_interface.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/supabase_product_details_repository.dart';
-import 'package:pizza_app/features/auth/bloc/auth_cubit.dart';
 
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/features/cart/data/repositories/cart_repository_interface.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/shared/service/push_notifications_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final sl = GetIt.instance;
@@ -37,6 +39,7 @@ Future<void> initLocator(String environment) async {
     () => AuthCubit(
       signUpUsecase: sl<SignUpUsecase>(),
       signInUsecase: sl<SignInUsecase>(),
+      logoutUseCase: sl<LogoutUseCase>(),
     ),
   );
   sl.registerLazySingleton<CartCubit>(() => CartCubit(sl<ICartRepository>()));
@@ -71,6 +74,10 @@ Future<void> initLocator(String environment) async {
     );
     sl.registerLazySingleton<ICartRepository>(() => InmemoryCartRepository());
   } else {
+    sl.registerLazySingleton<PushNotificationService>(
+      () => PushNotificationService(),
+    );
+
     sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
 
     sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
@@ -103,5 +110,8 @@ Future<void> initLocator(String environment) async {
       () => SignUpUsecase(sl<IAuthRepository>(), sl<IUserRepository>()),
     );
     sl.registerFactory(() => SignInUsecase(sl<IAuthRepository>()));
+    sl.registerFactory(
+      () => LogoutUseCase(sl<IAuthRepository>(), sl<IUserRepository>()),
+    );
   }
 }

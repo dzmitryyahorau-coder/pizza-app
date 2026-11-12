@@ -23,4 +23,16 @@ class SupabaseUserRepository implements IUserRepository {
       throw Exception('Failed to create user: $e');
     }
   }
+
+  @override
+  Future<void> updateFID(String userId, String? token) async {
+    try {
+      await _supabase
+          .from('users')
+          .update({'fcm_token': token})
+          .eq('id', userId);
+    } on PostgrestException catch (e) {
+      throw Exception('Failed to update FCM token: ${e.message}');
+    }
+  }
 }

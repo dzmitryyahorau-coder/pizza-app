@@ -1,5 +1,5 @@
 import 'package:pizza_app/features/menu/data/models/product.dart';
-import 'package:pizza_app/features/menu/data/repositories/products/products_repository_interface.dart';
+import 'package:pizza_app/features/menu/domain/repositories/products/products_repository_interface.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 const tableName = 'product';

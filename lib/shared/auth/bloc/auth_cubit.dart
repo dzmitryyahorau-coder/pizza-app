@@ -1,16 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/features/auth/data/models/user.dart';
+import 'package:pizza_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:pizza_app/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:pizza_app/features/auth/domain/usecases/sign_up_usecase.dart';
-import 'package:pizza_app/features/auth/bloc/auth_state.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final SignUpUsecase _signUpUsecase;
   final SignInUsecase _signInUsecase;
+  final LogoutUseCase _logoutUseCase;
 
-  AuthCubit({required this._signUpUsecase, required this._signInUsecase})
-    : super(const AuthInitial()) {
+  AuthCubit({
+    required this._signUpUsecase,
+    required this._signInUsecase,
+    required this._logoutUseCase,
+  }) : super(const AuthInitial()) {
     checkAuth();
   }
 
@@ -85,7 +90,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     emit(const AuthLoading());
-    await Future.delayed(const Duration(milliseconds: 500));
-    emit(const Unauthenticated());
+
+    try {
+      await _logoutUseCase();
+      emit(const Unauthenticated());
+    } catch (e) {
+      emit(const Unauthenticated());
+    }
   }
 }

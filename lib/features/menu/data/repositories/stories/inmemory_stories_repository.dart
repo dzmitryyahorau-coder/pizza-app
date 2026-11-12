@@ -1,5 +1,5 @@
 import 'package:pizza_app/features/menu/data/models/story.dart';
-import 'package:pizza_app/features/menu/data/repositories/stories/stories_repository_interface.dart';
+import 'package:pizza_app/features/menu/domain/repositories/stories/stories_repository_interface.dart';
 
 class InmemoryStoriesRepository implements IStoriesRepository {
   final List<Story> _store;

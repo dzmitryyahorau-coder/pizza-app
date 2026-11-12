@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 
 class MenuHeader extends StatelessWidget {
   const MenuHeader({super.key});
@@ -54,7 +56,14 @@ class MenuHeader extends StatelessWidget {
               ],
             ),
           ),
-          SvgPicture.asset('assets/icons/avatar.svg', width: 36, height: 36),
+          InkWell(
+            child: SvgPicture.asset(
+              'assets/icons/avatar.svg',
+              width: 36,
+              height: 36,
+            ),
+            onTap: () => context.read<AuthCubit>().logout(),
+          ),
         ],
       ),
     );
