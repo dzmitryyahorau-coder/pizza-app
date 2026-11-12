@@ -9,9 +9,10 @@ import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
-import 'package:pizza_app/features/profile/screens/login_screen.dart';
-import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
-import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
+import 'package:pizza_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:pizza_app/features/auth/presentation/screens/register_screen.dart';
+import 'package:pizza_app/features/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/features/auth/bloc/auth_state.dart';
 
 class AppRouter {
   final AuthCubit authCubit;
@@ -24,9 +25,10 @@ class AppRouter {
     redirect: (context, state) {
       final authState = authCubit.state;
       final isLoggingIn = state.matchedLocation == '/login';
+      final isSignUp = state.matchedLocation == '/register';
       final isLoggedIn = authState is Authenticated;
 
-      if (!isLoggedIn && !isLoggingIn) return '/login';
+      if (!isLoggedIn && !isLoggingIn && !isSignUp) return '/login';
       if (isLoggedIn && isLoggingIn) return '/';
       return null;
     },
@@ -58,6 +60,10 @@ class AppRouter {
         builder: (context, state) => const CartScreen(),
       ),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: '/register',
+        builder: (context, state) => const RegisterScreen(),
+      ),
     ],
   );
 }

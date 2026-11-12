@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
-import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
-import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
+import 'package:pizza_app/features/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/features/auth/bloc/auth_state.dart';
+import 'package:pizza_app/shared/widgets/custom_text_button.dart';
 import 'package:pizza_app/shared/widgets/primary_filled_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -98,6 +100,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       PrimaryFilledButton(
                         onPressed: _submit,
                         label: l10n.loginButton,
+                      ),
+                      const SizedBox(height: AppSpacing.s),
+                      CustomTextButton(
+                        onPressed: () => context.go('/register'),
+                        text: l10n.registerButton,
                       ),
                     ],
                   ),

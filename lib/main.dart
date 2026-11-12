@@ -6,7 +6,7 @@ import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/firebase_options.dart';
-import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/features/auth/bloc/auth_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';

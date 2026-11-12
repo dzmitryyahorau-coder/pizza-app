@@ -248,6 +248,12 @@ abstract class AppLocalizations {
   /// **'Email'**
   String get emailHint;
 
+  /// No description provided for @nameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameHint;
+
   /// No description provided for @passwordHint.
   ///
   /// In en, this message translates to:
@@ -266,6 +272,18 @@ abstract class AppLocalizations {
   /// **'Log Out'**
   String get logoutButton;
 
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get registerButton;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get registerTitle;
+
   /// No description provided for @loadingText.
   ///
   /// In en, this message translates to:
@@ -281,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @errorInvalidCredentials.
   ///
   /// In en, this message translates to:
-  /// **'Invalid email or password is too short'**
+  /// **'Invalid email or password'**
   String get errorInvalidCredentials;
 
   /// No description provided for @errorUnknown.
@@ -289,6 +307,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred'**
   String get errorUnknown;
+
+  /// No description provided for @errorUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'An user with such credentials is not found'**
+  String get errorUserNotFound;
+
+  /// No description provided for @errorTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too much requests sent. Relax'**
+  String get errorTooManyRequests;
 
   /// No description provided for @profileTitle.
   ///

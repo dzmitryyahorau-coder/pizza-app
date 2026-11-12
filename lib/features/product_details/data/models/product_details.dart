@@ -54,35 +54,45 @@ class ProductDetails {
   }
 
   factory ProductDetails.fromMap(Map<String, dynamic> map) {
-    List<T> parseList<T>(
+    List<T> parseNestedList<T>(
       dynamic rawList,
+      String relationName,
       T Function(Map<String, dynamic>) fromMap,
     ) {
       if (rawList is! List) return const [];
       return rawList
-          .whereType()
-          .map((item) => fromMap(Map<String, dynamic>.from(item)))
+          .where((e) => e is Map && e[relationName] != null)
+          .map((e) => fromMap(Map<String, dynamic>.from(e[relationName])))
           .toList();
     }
 
-    final sizes = parseList(map['sizes'], ProductSize.fromMap);
-    final doughs = parseList(map['doughs'], Dough.fromMap);
-    final toppings = parseList(map['toppings'], Topping.fromMap);
-    final ingredients = parseList(map['ingredients'], Ingredient.fromMap);
+    final sizes = parseNestedList(
+      map['sizes'],
+      'product_size',
+      ProductSize.fromMap,
+    );
+    final toppings = parseNestedList(
+      map['toppings'],
+      'toppings',
+      Topping.fromMap,
+    );
+    final ingredients = parseNestedList(
+      map['ingredients'],
+      'ingredient',
+      Ingredient.fromMap,
+    );
 
     return ProductDetails(
       id: map['id']?.toString() ?? '',
       name: map['name']?.toString() ?? '',
       description: map['description']?.toString() ?? '',
-      imageAsset: map['imageAsset']?.toString() ?? '',
+      imageAsset: map['image_asset']?.toString() ?? '',
       sizes: sizes,
       defaultSizeId:
-          map['defaultSizeId']?.toString() ??
+          map['default_size']?['id']?.toString() ??
           (sizes.isNotEmpty ? sizes.first.id : ''),
-      doughs: doughs,
-      defaultDoughId:
-          map['defaultDoughId']?.toString() ??
-          (doughs.isNotEmpty ? doughs.first.id : ''),
+      doughs: const [],
+      defaultDoughId: '',
       toppings: toppings,
       ingredients: ingredients,
     );

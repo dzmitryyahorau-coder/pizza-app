@@ -1,3 +1,5 @@
+import 'package:pizza_app/features/auth/data/models/user.dart';
+
 abstract class AuthState {
   const AuthState();
 }
@@ -11,8 +13,8 @@ class AuthLoading extends AuthState {
 }
 
 class Authenticated extends AuthState {
-  final String email;
-  const Authenticated({required this.email});
+  final User user;
+  const Authenticated({required this.user});
 }
 
 class Unauthenticated extends AuthState {

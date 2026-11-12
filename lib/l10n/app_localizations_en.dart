@@ -106,6 +106,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailHint => 'Email';
 
   @override
+  String get nameHint => 'Name';
+
+  @override
   String get passwordHint => 'Password';
 
   @override
@@ -115,17 +118,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutButton => 'Log Out';
 
   @override
+  String get registerButton => 'Sign Up';
+
+  @override
+  String get registerTitle => 'Sign Up';
+
+  @override
   String get loadingText => 'Loading...';
 
   @override
   String get errorEmptyFields => 'Fields cannot be empty';
 
   @override
-  String get errorInvalidCredentials =>
-      'Invalid email or password is too short';
+  String get errorInvalidCredentials => 'Invalid email or password';
 
   @override
   String get errorUnknown => 'An unexpected error occurred';
+
+  @override
+  String get errorUserNotFound => 'An user with such credentials is not found';
+
+  @override
+  String get errorTooManyRequests => 'Too much requests sent. Relax';
 
   @override
   String get profileTitle => 'Profile';

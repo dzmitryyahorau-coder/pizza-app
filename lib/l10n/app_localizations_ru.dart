@@ -107,6 +107,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get emailHint => 'Email';
 
   @override
+  String get nameHint => 'Имя';
+
+  @override
   String get passwordHint => 'Пароль';
 
   @override
@@ -116,17 +119,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get logoutButton => 'Выйти';
 
   @override
+  String get registerButton => 'Создать аккаунт';
+
+  @override
+  String get registerTitle => 'Регистрация';
+
+  @override
   String get loadingText => 'Загрузка...';
 
   @override
   String get errorEmptyFields => 'Поля не могут быть пустыми';
 
   @override
-  String get errorInvalidCredentials =>
-      'Неверный email или слишком короткий пароль';
+  String get errorInvalidCredentials => 'Неверный email или пароль';
 
   @override
   String get errorUnknown => 'Произошла непредвиденная ошибка';
+
+  @override
+  String get errorUserNotFound =>
+      'Пользователь с таким email не зарегистрирован';
+
+  @override
+  String get errorTooManyRequests => 'Too much requests sent. Relax';
 
   @override
   String get profileTitle => 'Профиль';
