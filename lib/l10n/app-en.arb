@@ -38,5 +38,11 @@
   "errorEmptyFields": "Fields cannot be empty",
   "errorInvalidCredentials": "Invalid email or password is too short",
   "errorUnknown": "An unexpected error occurred",
-  "profileTitle": "Profile"
+  "profileTitle": "Profile",
+  "categoryPizza": "Pizza",
+  "categorySnacks": "Snacks",
+  "categoryDrinks": "Drinks",
+  "categoryDesserts": "Desserts",
+  "categoryBreakfast": "Breackfasts",
+  "categoryCombo": "Combo"
 }

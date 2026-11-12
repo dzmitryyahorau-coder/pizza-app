@@ -7,6 +7,9 @@ import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/firebase_options.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'l10n/app_localizations.dart';
 
@@ -15,9 +18,18 @@ void main() async {
 
   const env = String.fromEnvironment('ENV', defaultValue: 'prod');
 
+  await dotenv.load();
+
   if (env == 'prod') {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    await Supabase.initialize(
+      url:
+          dotenv.env['SUPABASE_URL']!, //String.fromEnvironment('SUPABASE_URL'),
+      publishableKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY'],
+      debug: true,
     );
   }
 

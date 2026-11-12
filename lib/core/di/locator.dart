@@ -4,14 +4,14 @@ import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/features/cart/data/repositories/drift_cart_depository.dart';
 import 'package:pizza_app/features/cart/data/repositories/inmemory_cart_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories/categories_repository_interface.dart';
-import 'package:pizza_app/features/menu/data/repositories/categories/firestore_categories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories/inmemory_categories_repository.dart';
-import 'package:pizza_app/features/menu/data/repositories/products/firestore_products_repository.dart';
+import 'package:pizza_app/features/menu/data/repositories/categories/supabase_categories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/products/inmemory_products_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/products/products_repository_interface.dart';
-import 'package:pizza_app/features/menu/data/repositories/stories/firestore_stories_repository.dart';
+import 'package:pizza_app/features/menu/data/repositories/products/supabase_products_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/stories/inmemory_stories_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/stories/stories_repository_interface.dart';
+import 'package:pizza_app/features/menu/data/repositories/stories/supabase_stories_repository.dart';
 import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/firestore_product_details_repository.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/inmemory_product_details_repository.dart';
@@ -61,13 +61,13 @@ Future<void> initLocator(String environment) async {
     sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
 
     sl.registerLazySingleton<IProductsRepository>(
-      () => FirestoreProductsRepository(),
+      () => SupabaseProductsRepository(),
     );
     sl.registerLazySingleton<ICategoriesRepository>(
-      () => FirestoreCategoriesRepository(),
+      () => SupabaseCategoriesRepository(),
     );
     sl.registerLazySingleton<IStoriesRepository>(
-      () => FirestoreStoriesRepository(),
+      () => SupabaseStoriesRepository(),
     );
     sl.registerLazySingleton<IProductDetailsRepository>(
       () => FirestoreProductDetailsRepository(),

@@ -130,4 +130,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileTitle => 'Профиль';
+
+  @override
+  String get categoryPizza => 'Пицца';
+
+  @override
+  String get categorySnacks => 'Закуски';
+
+  @override
+  String get categoryDrinks => 'Напитки';
+
+  @override
+  String get categoryDesserts => 'Десерты';
+
+  @override
+  String get categoryBreakfast => 'Завтраки';
+
+  @override
+  String get categoryCombo => 'Комбо';
 }

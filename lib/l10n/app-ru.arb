@@ -32,5 +32,12 @@
   "errorEmptyFields": "Поля не могут быть пустыми",
   "errorInvalidCredentials": "Неверный email или слишком короткий пароль",
   "errorUnknown": "Произошла непредвиденная ошибка",
-  "profileTitle": "Профиль"
+  "profileTitle": "Профиль",
+
+  "categoryPizza": "Пицца",
+  "categorySnacks": "Закуски",
+  "categoryDrinks": "Напитки",
+  "categoryDesserts": "Десерты",
+  "categoryBreakfast": "Завтраки",
+  "categoryCombo": "Комбо"
 }

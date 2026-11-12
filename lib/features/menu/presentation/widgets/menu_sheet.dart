@@ -22,13 +22,14 @@ class MenuSheet extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsetsGeometry.directional(
-                start: AppSpacing.l,
-                top: AppSpacing.l,
+            if (storiesList.isNotEmpty)
+              Padding(
+                padding: EdgeInsetsGeometry.directional(
+                  start: AppSpacing.l,
+                  top: AppSpacing.l,
+                ),
+                child: StoriesList(stories: storiesList),
               ),
-              child: StoriesList(stories: storiesList),
-            ),
             Padding(
               padding: EdgeInsetsGeometry.directional(
                 start: AppSpacing.l,

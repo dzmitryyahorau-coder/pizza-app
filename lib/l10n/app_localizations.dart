@@ -295,6 +295,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profileTitle;
+
+  /// No description provided for @categoryPizza.
+  ///
+  /// In en, this message translates to:
+  /// **'Pizza'**
+  String get categoryPizza;
+
+  /// No description provided for @categorySnacks.
+  ///
+  /// In en, this message translates to:
+  /// **'Snacks'**
+  String get categorySnacks;
+
+  /// No description provided for @categoryDrinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Drinks'**
+  String get categoryDrinks;
+
+  /// No description provided for @categoryDesserts.
+  ///
+  /// In en, this message translates to:
+  /// **'Desserts'**
+  String get categoryDesserts;
+
+  /// No description provided for @categoryBreakfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Breackfasts'**
+  String get categoryBreakfast;
+
+  /// No description provided for @categoryCombo.
+  ///
+  /// In en, this message translates to:
+  /// **'Combo'**
+  String get categoryCombo;
 }
 
 class _AppLocalizationsDelegate

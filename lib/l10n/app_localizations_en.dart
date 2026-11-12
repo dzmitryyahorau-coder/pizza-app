@@ -129,4 +129,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileTitle => 'Profile';
+
+  @override
+  String get categoryPizza => 'Pizza';
+
+  @override
+  String get categorySnacks => 'Snacks';
+
+  @override
+  String get categoryDrinks => 'Drinks';
+
+  @override
+  String get categoryDesserts => 'Desserts';
+
+  @override
+  String get categoryBreakfast => 'Breackfasts';
+
+  @override
+  String get categoryCombo => 'Combo';
 }
