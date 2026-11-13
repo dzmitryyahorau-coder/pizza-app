@@ -3,14 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/di/locator.dart';
 import 'package:pizza_app/core/navigation/cubit_refresh_listenable.dart';
-import 'package:pizza_app/features/auth/presentation/screens/login_screen.dart';
-import 'package:pizza_app/features/auth/presentation/screens/register_screen.dart';
+import 'package:pizza_app/features/profile/presentation/bloc/profile_cubit.dart';
+import 'package:pizza_app/features/profile/presentation/screens/login_screen.dart';
+import 'package:pizza_app/features/profile/presentation/screens/register_screen.dart';
 import 'package:pizza_app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
+import 'package:pizza_app/features/profile/presentation/screens/profile_settings_screen.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
 
@@ -58,6 +60,14 @@ class AppRouter {
         path: '/cart',
         name: 'cart',
         builder: (context, state) => const CartScreen(),
+      ),
+      GoRoute(
+        path: '/profile-settings',
+        name: 'profile-settings',
+        builder: (context, state) => BlocProvider(
+          create: (_) => sl<ProfileCubit>(),
+          child: const ProfileSettingsScreen(),
+        ),
       ),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       GoRoute(

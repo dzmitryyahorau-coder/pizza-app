@@ -1,7 +1,8 @@
 import 'package:pizza_app/core/domain/usecase.dart';
-import 'package:pizza_app/features/auth/data/models/user.dart';
-import 'package:pizza_app/features/auth/domain/repositories/auth_repository_interface.dart';
-import 'package:pizza_app/features/auth/domain/repositories/user_repository_interface.dart';
+import 'package:pizza_app/features/profile/domain/repositories/auth_repository_interface.dart';
+import 'package:pizza_app/features/profile/domain/repositories/user_repository_interface.dart';
+import 'package:pizza_app/shared/auth/current_user_store.dart';
+import 'package:pizza_app/shared/auth/models/user.dart';
 
 class SignUpParams {
   const SignUpParams({
@@ -18,8 +19,13 @@ class SignUpParams {
 class SignUpUsecase extends Usecase<User, SignUpParams> {
   final IAuthRepository _authRepository;
   final IUserRepository _userRepository;
+  final CurrentUserStore _currentUserStore;
 
-  SignUpUsecase(this._authRepository, this._userRepository);
+  SignUpUsecase(
+    this._authRepository,
+    this._userRepository,
+    this._currentUserStore,
+  );
 
   @override
   Future<User> call(SignUpParams params) async {
@@ -30,6 +36,8 @@ class SignUpUsecase extends Usecase<User, SignUpParams> {
     );
 
     await _userRepository.create(user);
+
+    _currentUserStore.set(user);
 
     return user;
   }

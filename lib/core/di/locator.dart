@@ -2,13 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/core/navigation/app_router.dart';
-import 'package:pizza_app/features/auth/data/repositories/firebase_auth_repository.dart';
-import 'package:pizza_app/features/auth/data/repositories/supabase_user_repository.dart';
-import 'package:pizza_app/features/auth/domain/repositories/auth_repository_interface.dart';
-import 'package:pizza_app/features/auth/domain/repositories/user_repository_interface.dart';
-import 'package:pizza_app/features/auth/domain/usecases/logout_usecase.dart';
-import 'package:pizza_app/features/auth/domain/usecases/sign_in_usecase.dart';
-import 'package:pizza_app/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:pizza_app/features/profile/data/repositories/firebase_auth_repository.dart';
+import 'package:pizza_app/features/profile/data/repositories/supabase_storage_repository.dart';
+import 'package:pizza_app/features/profile/data/repositories/supabase_user_repository.dart';
+import 'package:pizza_app/features/profile/domain/repositories/auth_repository_interface.dart';
+import 'package:pizza_app/features/profile/domain/repositories/storage_repository_interface.dart';
+import 'package:pizza_app/features/profile/domain/repositories/user_repository_interface.dart';
+import 'package:pizza_app/features/profile/domain/usecases/logout_usecase.dart';
+import 'package:pizza_app/features/profile/domain/usecases/sign_in_usecase.dart';
+import 'package:pizza_app/features/profile/domain/usecases/sign_up_usecase.dart';
 import 'package:pizza_app/features/cart/data/repositories/drift_cart_depository.dart';
 import 'package:pizza_app/features/cart/data/repositories/inmemory_cart_repository.dart';
 import 'package:pizza_app/features/menu/data/repositories/categories/inmemory_categories_repository.dart';
@@ -28,7 +30,12 @@ import 'package:pizza_app/features/product_details/data/repository/product_detai
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/features/cart/data/repositories/cart_repository_interface.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
+import 'package:pizza_app/features/profile/domain/usecases/update_avatar_usecase.dart';
+import 'package:pizza_app/features/profile/domain/usecases/update_profile_usecase.dart';
+import 'package:pizza_app/features/profile/presentation/bloc/profile_cubit.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/shared/auth/current_user_store.dart';
+import 'package:pizza_app/shared/service/permission_handler.dart';
 import 'package:pizza_app/shared/service/push_notifications_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -40,12 +47,19 @@ Future<void> initLocator(String environment) async {
       signUpUsecase: sl<SignUpUsecase>(),
       signInUsecase: sl<SignInUsecase>(),
       logoutUseCase: sl<LogoutUseCase>(),
+      currentUserStore: sl<CurrentUserStore>(),
     ),
   );
   sl.registerLazySingleton<CartCubit>(() => CartCubit(sl<ICartRepository>()));
-
   sl.registerFactory<ProductDetailsCubit>(
     () => ProductDetailsCubit(sl<IProductDetailsRepository>()),
+  );
+  sl.registerFactory<ProfileCubit>(
+    () => ProfileCubit(
+      updateAvatarUsecase: sl<UpdateAvatarUsecase>(),
+      updateProfileUsecase: sl<UpdateProfileUsecase>(),
+      currentUserStore: sl<CurrentUserStore>(),
+    ),
   );
   sl.registerFactory<MenuBloc>(
     () => MenuBloc(
@@ -56,6 +70,9 @@ Future<void> initLocator(String environment) async {
   );
 
   sl.registerLazySingleton<AppRouter>(() => AppRouter(sl<AuthCubit>()));
+
+  sl.registerSingleton<CurrentUserStore>(CurrentUserStore());
+  sl.registerSingleton<PermissionHandler>(PermissionHandler());
 
   // --- Flavors ---
   if (environment == 'dev') {
@@ -83,6 +100,10 @@ Future<void> initLocator(String environment) async {
     sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     sl.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
 
+    sl.registerLazySingleton<IStorageRepository>(
+      () => SupabaseStorageRepository(sl<SupabaseClient>()),
+    );
+
     sl.registerLazySingleton<IAuthRepository>(
       () => FirebaseAuthRepository(sl()),
     );
@@ -107,11 +128,39 @@ Future<void> initLocator(String environment) async {
     );
 
     sl.registerFactory(
-      () => SignUpUsecase(sl<IAuthRepository>(), sl<IUserRepository>()),
+      () => SignUpUsecase(
+        sl<IAuthRepository>(),
+        sl<IUserRepository>(),
+        sl<CurrentUserStore>(),
+      ),
     );
-    sl.registerFactory(() => SignInUsecase(sl<IAuthRepository>()));
     sl.registerFactory(
-      () => LogoutUseCase(sl<IAuthRepository>(), sl<IUserRepository>()),
+      () => SignInUsecase(
+        sl<IAuthRepository>(),
+        sl<IUserRepository>(),
+        sl<CurrentUserStore>(),
+      ),
+    );
+    sl.registerFactory(
+      () => LogoutUseCase(
+        sl<IAuthRepository>(),
+        sl<IUserRepository>(),
+        sl<CurrentUserStore>(),
+      ),
+    );
+    sl.registerFactory<UpdateAvatarUsecase>(
+      () => UpdateAvatarUsecase(
+        sl<IStorageRepository>(),
+        sl<IUserRepository>(),
+        sl<CurrentUserStore>(),
+      ),
+    );
+    sl.registerFactory<UpdateProfileUsecase>(
+      () => UpdateProfileUsecase(
+        authRepository: sl<IAuthRepository>(),
+        userRepository: sl<IUserRepository>(),
+        currentUserStore: sl<CurrentUserStore>(),
+      ),
     );
   }
 }

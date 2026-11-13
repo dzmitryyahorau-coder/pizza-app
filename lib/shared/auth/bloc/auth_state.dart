@@ -1,4 +1,4 @@
-import 'package:pizza_app/features/auth/data/models/user.dart';
+import 'package:pizza_app/shared/auth/models/user.dart';
 
 abstract class AuthState {
   const AuthState();

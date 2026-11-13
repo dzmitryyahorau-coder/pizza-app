@@ -1,5 +1,5 @@
-import 'package:pizza_app/features/auth/data/models/user.dart';
-import 'package:pizza_app/features/auth/domain/repositories/auth_repository_interface.dart';
+import 'package:pizza_app/shared/auth/models/user.dart';
+import 'package:pizza_app/features/profile/domain/repositories/auth_repository_interface.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 
 class FirebaseAuthRepository implements IAuthRepository {
@@ -34,6 +34,8 @@ class FirebaseAuthRepository implements IAuthRepository {
         throw Exception('User is null after sign in');
       }
 
+      await credential.user?.getIdToken(true);
+
       return User(
         id: fbUser.uid,
         name: fbUser.displayName ?? '',
@@ -49,4 +51,22 @@ class FirebaseAuthRepository implements IAuthRepository {
 
   @override
   Future<void> signOut() => _firebaseAuth.signOut();
+
+  @override
+  Future<void> reauthenticate(String password) async {
+    final user = _firebaseAuth.currentUser!;
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: password,
+    );
+    await user.reauthenticateWithCredential(credential);
+  }
+
+  @override
+  Future<void> updatePassword(String newPassword) =>
+      _firebaseAuth.currentUser!.updatePassword(newPassword);
+
+  @override
+  Future<void> verifyBeforeUpdateEmail(String newEmail) =>
+      _firebaseAuth.currentUser!.verifyBeforeUpdateEmail(newEmail);
 }

@@ -142,9 +142,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorTooManyRequests => 'Too much requests sent. Relax';
 
   @override
-  String get profileTitle => 'Profile';
-
-  @override
   String get categoryPizza => 'Pizza';
 
   @override
@@ -161,4 +158,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categoryCombo => 'Combo';
+
+  @override
+  String get profileSettingsHead => 'Profile Settings';
+
+  @override
+  String get saveButton => 'Save';
+
+  @override
+  String get permissionDeniedTitle => 'No access';
+
+  @override
+  String get permissionDeniedMessage =>
+      'You have denied access. Allow it in the app settings to continue.';
+
+  @override
+  String get openSettings => 'Open settings';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get permissionRestrictedTitle => 'Access restricted';
+
+  @override
+  String get permissionRestrictedMessage =>
+      'Access to this feature is restricted by your device settings, so it can\'t be changed from the app.';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get cameraDenied => 'You can\'t take a photo without camera access';
+
+  @override
+  String get avatarFromCamera => 'Take a photo';
+
+  @override
+  String get avatarFromGallery => 'Choose from gallery';
+
+  @override
+  String get profileSaved => 'Changes saved';
+
+  @override
+  String get emailVerificationSent =>
+      'We sent an email to your new address. Follow the link in it to confirm the change';
+
+  @override
+  String get errorEmailInUse => 'This email is already in use';
+
+  @override
+  String get errorInvalidEmail => 'Invalid email';
 }

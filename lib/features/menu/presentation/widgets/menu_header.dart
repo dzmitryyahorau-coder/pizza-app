@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
+import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
 
 class MenuHeader extends StatelessWidget {
   const MenuHeader({super.key});
@@ -56,13 +58,33 @@ class MenuHeader extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            child: SvgPicture.asset(
-              'assets/icons/avatar.svg',
-              width: 36,
-              height: 36,
-            ),
-            onTap: () => context.read<AuthCubit>().logout(),
+          BlocSelector<AuthCubit, AuthState, String?>(
+            selector: (state) =>
+                state is Authenticated ? state.user.avatarSrc : null,
+            builder: (context, avatarSrc) {
+              const size = 36.0;
+              final placeholder = SvgPicture.asset(
+                'assets/icons/avatar.svg',
+                width: size,
+                height: size,
+              );
+
+              return InkWell(
+                customBorder: const CircleBorder(),
+                onTap: () => context.push('/profile-settings'),
+                child: avatarSrc == null
+                    ? placeholder
+                    : ClipOval(
+                        child: Image.network(
+                          avatarSrc,
+                          width: size,
+                          height: size,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, _, _) => placeholder,
+                        ),
+                      ),
+              );
+            },
           ),
         ],
       ),

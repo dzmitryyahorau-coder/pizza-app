@@ -37,12 +37,29 @@
   "errorUnknown": "Произошла непредвиденная ошибка",
   "errorUserNotFound": "Пользователь с таким email не зарегистрирован",
   "errorTooManyRequests": "Too much requests sent. Relax",
-  "profileTitle": "Профиль",
 
   "categoryPizza": "Пицца",
   "categorySnacks": "Закуски",
   "categoryDrinks": "Напитки",
   "categoryDesserts": "Десерты",
   "categoryBreakfast": "Завтраки",
-  "categoryCombo": "Комбо"
+  "categoryCombo": "Комбо",
+
+  "profileSettingsHead": "Настройки профиля",
+  "saveButton": "Сохранить",
+
+  "permissionDeniedTitle": "Нет доступа",
+  "permissionDeniedMessage": "Вы запретили доступ. Разрешите его в настройках приложения, чтобы продолжить.",
+  "openSettings": "Открыть настройки",
+  "cancel": "Отмена",
+  "permissionRestrictedTitle": "Доступ ограничен",
+  "permissionRestrictedMessage": "Доступ к этой функции ограничен настройками устройства, поэтому изменить его из приложения нельзя.",
+  "ok": "ОК",
+  "cameraDenied": "Без доступа к камере сделать фото не получится",
+  "avatarFromCamera": "Сделать фото",
+  "avatarFromGallery": "Выбрать из галереи",
+  "profileSaved": "Изменения сохранены",
+  "emailVerificationSent": "Мы отправили письмо на новый адрес. Перейдите по ссылке в нём, чтобы подтвердить смену email",
+  "errorEmailInUse": "Этот email уже используется",
+  "errorInvalidEmail": "Некорректный email"
 }

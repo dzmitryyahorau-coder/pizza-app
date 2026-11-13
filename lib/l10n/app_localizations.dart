@@ -320,12 +320,6 @@ abstract class AppLocalizations {
   /// **'Too much requests sent. Relax'**
   String get errorTooManyRequests;
 
-  /// No description provided for @profileTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get profileTitle;
-
   /// No description provided for @categoryPizza.
   ///
   /// In en, this message translates to:
@@ -361,6 +355,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Combo'**
   String get categoryCombo;
+
+  /// No description provided for @profileSettingsHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Settings'**
+  String get profileSettingsHead;
+
+  /// No description provided for @saveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveButton;
+
+  /// No description provided for @permissionDeniedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No access'**
+  String get permissionDeniedTitle;
+
+  /// No description provided for @permissionDeniedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have denied access. Allow it in the app settings to continue.'**
+  String get permissionDeniedMessage;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get openSettings;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @permissionRestrictedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access restricted'**
+  String get permissionRestrictedTitle;
+
+  /// No description provided for @permissionRestrictedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Access to this feature is restricted by your device settings, so it can\'t be changed from the app.'**
+  String get permissionRestrictedMessage;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @cameraDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'You can\'t take a photo without camera access'**
+  String get cameraDenied;
+
+  /// No description provided for @avatarFromCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get avatarFromCamera;
+
+  /// No description provided for @avatarFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get avatarFromGallery;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes saved'**
+  String get profileSaved;
+
+  /// No description provided for @emailVerificationSent.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent an email to your new address. Follow the link in it to confirm the change'**
+  String get emailVerificationSent;
+
+  /// No description provided for @errorEmailInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use'**
+  String get errorEmailInUse;
+
+  /// No description provided for @errorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email'**
+  String get errorInvalidEmail;
 }
 
 class _AppLocalizationsDelegate

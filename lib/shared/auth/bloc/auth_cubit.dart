@@ -1,42 +1,31 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pizza_app/features/auth/data/models/user.dart';
-import 'package:pizza_app/features/auth/domain/usecases/logout_usecase.dart';
-import 'package:pizza_app/features/auth/domain/usecases/sign_in_usecase.dart';
-import 'package:pizza_app/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:pizza_app/features/profile/domain/usecases/logout_usecase.dart';
+import 'package:pizza_app/features/profile/domain/usecases/sign_in_usecase.dart';
+import 'package:pizza_app/features/profile/domain/usecases/sign_up_usecase.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
+import 'package:pizza_app/shared/auth/current_user_store.dart';
+import 'package:pizza_app/shared/auth/models/user.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final SignUpUsecase _signUpUsecase;
   final SignInUsecase _signInUsecase;
   final LogoutUseCase _logoutUseCase;
+  final CurrentUserStore _currentUserStore;
+
+  StreamSubscription<User?>? _userSub;
 
   AuthCubit({
     required this._signUpUsecase,
     required this._signInUsecase,
     required this._logoutUseCase,
+    required this._currentUserStore,
   }) : super(const AuthInitial()) {
-    checkAuth();
-  }
-
-  void checkAuth() {
-    emit(const AuthLoading());
-
-    final fbUser = FirebaseAuth.instance.currentUser;
-
-    if (fbUser != null) {
-      emit(
-        Authenticated(
-          user: User(
-            id: fbUser.uid,
-            name: fbUser.displayName ?? '',
-            email: fbUser.email ?? '',
-          ),
-        ),
-      );
-    } else {
-      emit(const Unauthenticated());
-    }
+    _userSub = _currentUserStore.stream.listen((user) {
+      emit(user != null ? Authenticated(user: user) : const Unauthenticated());
+    });
   }
 
   Future<void> register({
@@ -49,14 +38,12 @@ class AuthCubit extends Cubit<AuthState> {
       return;
     }
 
-    emit(AuthLoading());
+    emit(const AuthLoading());
 
     try {
-      final user = await _signUpUsecase(
+      await _signUpUsecase(
         SignUpParams(email: email, password: password, name: name),
       );
-
-      emit(Authenticated(user: user));
     } catch (e) {
       emit(const AuthError(messageKey: 'errorUnknown'));
     }
@@ -71,10 +58,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthLoading());
 
     try {
-      final user = await _signInUsecase(
-        SignInParams(email: email, password: password),
-      );
-      emit(Authenticated(user: user));
+      await _signInUsecase(SignInParams(email: email, password: password));
     } on FirebaseAuthException catch (e) {
       final messageKey = switch (e.code) {
         'user-not-found' => 'errorUserNotFound',
@@ -93,9 +77,15 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       await _logoutUseCase();
-      emit(const Unauthenticated());
     } catch (e) {
-      emit(const Unauthenticated());
+      final user = _currentUserStore.value;
+      emit(user != null ? Authenticated(user: user) : const Unauthenticated());
     }
+  }
+
+  @override
+  Future<void> close() {
+    _userSub?.cancel();
+    return super.close();
   }
 }
