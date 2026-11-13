@@ -451,6 +451,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid email'**
   String get errorInvalidEmail;
+
+  /// No description provided for @lowBatteryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Low battery'**
+  String get lowBatteryTitle;
+
+  /// No description provided for @lowBatteryMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery level: {level}%. On OLED screens, dark theme helps save power. Turn it on?'**
+  String lowBatteryMessage(int level);
+
+  /// No description provided for @enableDarkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable dark theme'**
+  String get enableDarkTheme;
+
+  /// No description provided for @notNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNow;
 }
 
 class _AppLocalizationsDelegate

@@ -27,6 +27,7 @@ dependencies:
   image_picker: ^1.2.4
   permission_handler: ^13.0.2
   rxdart: ^0.28.0
+  shared_preferences: ^2.5.6
   supabase_flutter: ^2.18.3
 
 dev_dependencies:

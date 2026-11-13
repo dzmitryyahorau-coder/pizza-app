@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/core/di/locator.dart';
 import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
+import 'package:pizza_app/core/theme/theme_cubit.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/features/profile/domain/repositories/user_repository_interface.dart';
 import 'package:pizza_app/firebase_options.dart';
@@ -47,8 +48,6 @@ void main() async {
     await _restoreUser();
 
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  } else {
-    // sl<CurrentUserStore>().set(null);
   }
 
   runApp(const MainApp());
@@ -93,6 +92,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthCubit>.value(value: sl<AuthCubit>()),
         BlocProvider<CartCubit>.value(value: sl<CartCubit>()),
+        BlocProvider<ThemeCubit>.value(value: sl<ThemeCubit>()),
       ],
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -100,14 +100,16 @@ class MainApp extends StatelessWidget {
             sl<PushNotificationService>().init();
           }
         },
-        child: MaterialApp.router(
-          onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          theme: AppTheme.light,
-          darkTheme: AppTheme.dark,
-          themeMode: ThemeMode.system,
-          routerConfig: sl<AppRouter>().router,
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, themeMode) => MaterialApp.router(
+            onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: themeMode,
+            routerConfig: sl<AppRouter>().router,
+          ),
         ),
       ),
     );

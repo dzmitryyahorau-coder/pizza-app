@@ -211,4 +211,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get errorInvalidEmail => 'Некорректный email';
+
+  @override
+  String get lowBatteryTitle => 'Низкий заряд батареи';
+
+  @override
+  String lowBatteryMessage(int level) {
+    return 'Заряд батареи: $level%. На экранах OLED тёмная тема помогает экономить энергию. Включить её?';
+  }
+
+  @override
+  String get enableDarkTheme => 'Включить тёмную тему';
+
+  @override
+  String get notNow => 'Не сейчас';
 }

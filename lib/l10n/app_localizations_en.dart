@@ -209,4 +209,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorInvalidEmail => 'Invalid email';
+
+  @override
+  String get lowBatteryTitle => 'Low battery';
+
+  @override
+  String lowBatteryMessage(int level) {
+    return 'Battery level: $level%. On OLED screens, dark theme helps save power. Turn it on?';
+  }
+
+  @override
+  String get enableDarkTheme => 'Enable dark theme';
+
+  @override
+  String get notNow => 'Not now';
 }

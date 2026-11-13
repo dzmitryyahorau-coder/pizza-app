@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/core/navigation/app_router.dart';
+import 'package:pizza_app/core/theme/theme_cubit.dart';
 import 'package:pizza_app/features/profile/data/repositories/firebase_auth_repository.dart';
 import 'package:pizza_app/features/profile/data/repositories/supabase_storage_repository.dart';
 import 'package:pizza_app/features/profile/data/repositories/supabase_user_repository.dart';
@@ -35,13 +36,18 @@ import 'package:pizza_app/features/profile/domain/usecases/update_profile_usecas
 import 'package:pizza_app/features/profile/presentation/bloc/profile_cubit.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 import 'package:pizza_app/shared/auth/current_user_store.dart';
+import 'package:pizza_app/shared/service/battery_service.dart';
 import 'package:pizza_app/shared/service/permission_handler.dart';
 import 'package:pizza_app/shared/service/push_notifications_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initLocator(String environment) async {
+  final prefs = await SharedPreferences.getInstance();
+  sl.registerSingleton<ThemeCubit>(ThemeCubit(prefs));
+
   sl.registerLazySingleton<AuthCubit>(
     () => AuthCubit(
       signUpUsecase: sl<SignUpUsecase>(),
@@ -68,6 +74,7 @@ Future<void> initLocator(String environment) async {
       stories: sl<IStoriesRepository>(),
     ),
   );
+  sl.registerSingleton<BatteryService>(BatteryService());
 
   sl.registerLazySingleton<AppRouter>(() => AppRouter(sl<AuthCubit>()));
 

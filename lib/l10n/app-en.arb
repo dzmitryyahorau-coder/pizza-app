@@ -65,5 +65,17 @@
   "profileSaved": "Changes saved",
   "emailVerificationSent": "We sent an email to your new address. Follow the link in it to confirm the change",
   "errorEmailInUse": "This email is already in use",
-  "errorInvalidEmail": "Invalid email"
+  "errorInvalidEmail": "Invalid email",
+
+  "lowBatteryTitle": "Low battery",
+  "lowBatteryMessage": "Battery level: {level}%. On OLED screens, dark theme helps save power. Turn it on?",
+  "@lowBatteryMessage": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "enableDarkTheme": "Enable dark theme",
+  "notNow": "Not now"
 }

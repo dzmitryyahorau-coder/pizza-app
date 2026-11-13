@@ -61,5 +61,10 @@
   "profileSaved": "Изменения сохранены",
   "emailVerificationSent": "Мы отправили письмо на новый адрес. Перейдите по ссылке в нём, чтобы подтвердить смену email",
   "errorEmailInUse": "Этот email уже используется",
-  "errorInvalidEmail": "Некорректный email"
+  "errorInvalidEmail": "Некорректный email",
+
+  "lowBatteryTitle": "Низкий заряд батареи",
+  "lowBatteryMessage": "Заряд батареи: {level}%. На экранах OLED тёмная тема помогает экономить энергию. Включить её?",
+  "enableDarkTheme": "Включить тёмную тему",
+  "notNow": "Не сейчас"
 }
