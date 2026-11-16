@@ -31,8 +31,13 @@ class AppRouter {
       final isSignUp = state.matchedLocation == '/register';
       final isLoggedIn = authState is Authenticated;
 
-      if (!isLoggedIn && !isLoggingIn && !isSignUp) return '/login';
-      if (isLoggedIn && isLoggingIn) return '/';
+      if (!isLoggedIn && !isLoggingIn && !isSignUp) {
+        return '/login?from=${Uri.encodeComponent(state.uri.toString())}';
+      }
+      if (isLoggedIn && isLoggingIn) {
+        return state.uri.queryParameters['from'] ?? '/';
+      }
+
       return null;
     },
     routes: <RouteBase>[
