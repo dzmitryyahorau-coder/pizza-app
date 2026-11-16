@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
+import 'package:pizza_app/core/theme/app_spacing.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -45,7 +46,7 @@ class CustomTextField extends StatelessWidget {
           ),
           border: InputBorder.none,
           isDense: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
         ),
       ),
     );

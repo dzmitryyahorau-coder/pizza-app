@@ -3,7 +3,7 @@ import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/product_details/data/models/product_size.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
-import 'package:pizza_app/features/product_details/presentation/widgets/common/close_icon_button.dart';
+import 'package:pizza_app/shared/widgets/close_icon_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/background.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/default_mode/customize_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/horizontal_selector.dart';

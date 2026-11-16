@@ -26,13 +26,17 @@ class Product {
       throw StateError("Document is empty: ${snapshot.id}");
     }
 
+    return Product.fromMap(data);
+  }
+
+  factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      id: snapshot.id,
-      categoryId: data['categoryId'] as String? ?? '',
-      name: data['name'] as String? ?? '',
-      description: data['description'] as String? ?? '',
-      price: (data['price'] as num?)?.toInt() ?? 0,
-      badge: data['badge'] as String?,
+      id: map['id'].toString(),
+      categoryId: map['category_id'].toString(),
+      name: map['name'] as String? ?? '',
+      description: map['description'] as String? ?? '',
+      price: (map['price'] as num?)?.toInt() ?? 0,
+      badge: map['badge'] as String?,
     );
   }
 

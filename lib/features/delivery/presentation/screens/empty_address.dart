@@ -5,8 +5,8 @@ import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/shared/widgets/custom_text_button.dart';
 import 'package:pizza_app/shared/widgets/primary_filled_button.dart';
 
-class SetDeliveryAddress extends StatelessWidget {
-  const SetDeliveryAddress({super.key});
+class EmptyAddresses extends StatelessWidget {
+  const EmptyAddresses({super.key});
 
   @override
   Widget build(BuildContext context) {

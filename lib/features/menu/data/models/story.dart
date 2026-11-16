@@ -3,12 +3,14 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Story {
+  final String id;
   final String label;
   final String image;
   final Color? bgColor;
   final String? badge;
 
   const Story({
+    required this.id,
     required this.label,
     required this.image,
     this.badge,
@@ -24,16 +26,22 @@ class Story {
       throw StateError('Document is empty');
     }
 
+    return Story.fromMap(data);
+  }
+
+  factory Story.fromMap(Map<String, dynamic> map) {
     return Story(
-      label: data['label'] as String,
-      image: data['image'] as String,
-      badge: data['badge'] as String?,
-      bgColor: _colorFromHex(data['bgColor'] as String?),
+      id: map['id']?.toString() ?? '0',
+      label: map['label'] as String,
+      image: map['image'] as String,
+      badge: map['badge'] as String?,
+      bgColor: _colorFromHex(map['bgColor'] as String?),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'label': label,
       'image': image,
       if (bgColor != null) 'bgColor': _colorToHex(bgColor!),

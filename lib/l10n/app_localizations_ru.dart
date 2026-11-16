@@ -107,6 +107,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get emailHint => 'Email';
 
   @override
+  String get nameHint => 'Имя';
+
+  @override
   String get passwordHint => 'Пароль';
 
   @override
@@ -116,18 +119,188 @@ class AppLocalizationsRu extends AppLocalizations {
   String get logoutButton => 'Выйти';
 
   @override
+  String get registerButton => 'Создать аккаунт';
+
+  @override
+  String get registerTitle => 'Регистрация';
+
+  @override
   String get loadingText => 'Загрузка...';
 
   @override
   String get errorEmptyFields => 'Поля не могут быть пустыми';
 
   @override
-  String get errorInvalidCredentials =>
-      'Неверный email или слишком короткий пароль';
+  String get errorInvalidCredentials => 'Неверный email или пароль';
 
   @override
   String get errorUnknown => 'Произошла непредвиденная ошибка';
 
   @override
-  String get profileTitle => 'Профиль';
+  String get errorUserNotFound =>
+      'Пользователь с таким email не зарегистрирован';
+
+  @override
+  String get errorTooManyRequests => 'Too much requests sent. Relax';
+
+  @override
+  String get categoryPizza => 'Пицца';
+
+  @override
+  String get categorySnacks => 'Закуски';
+
+  @override
+  String get categoryDrinks => 'Напитки';
+
+  @override
+  String get categoryDesserts => 'Десерты';
+
+  @override
+  String get categoryBreakfast => 'Завтраки';
+
+  @override
+  String get categoryCombo => 'Комбо';
+
+  @override
+  String get profileSettingsHead => 'Настройки профиля';
+
+  @override
+  String get saveButton => 'Сохранить';
+
+  @override
+  String get permissionDeniedTitle => 'Нет доступа';
+
+  @override
+  String get permissionDeniedMessage =>
+      'Вы запретили доступ. Разрешите его в настройках приложения, чтобы продолжить.';
+
+  @override
+  String get openSettings => 'Открыть настройки';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get permissionRestrictedTitle => 'Доступ ограничен';
+
+  @override
+  String get permissionRestrictedMessage =>
+      'Доступ к этой функции ограничен настройками устройства, поэтому изменить его из приложения нельзя.';
+
+  @override
+  String get ok => 'ОК';
+
+  @override
+  String get cameraDenied => 'Без доступа к камере сделать фото не получится';
+
+  @override
+  String get avatarFromCamera => 'Сделать фото';
+
+  @override
+  String get avatarFromGallery => 'Выбрать из галереи';
+
+  @override
+  String get profileSaved => 'Изменения сохранены';
+
+  @override
+  String get emailVerificationSent =>
+      'Мы отправили письмо на новый адрес. Перейдите по ссылке в нём, чтобы подтвердить смену email';
+
+  @override
+  String get errorEmailInUse => 'Этот email уже используется';
+
+  @override
+  String get errorInvalidEmail => 'Некорректный email';
+
+  @override
+  String get lowBatteryTitle => 'Низкий заряд батареи';
+
+  @override
+  String lowBatteryMessage(int level) {
+    return 'Заряд батареи: $level%. На экранах OLED тёмная тема помогает экономить энергию. Включить её?';
+  }
+
+  @override
+  String get enableDarkTheme => 'Включить тёмную тему';
+
+  @override
+  String get notNow => 'Не сейчас';
+
+  @override
+  String get ingredientTomatoes => 'Помидоры';
+
+  @override
+  String get ingredientMozzarella => 'Моцарелла';
+
+  @override
+  String get ingredientTomatoSauce => 'Томатный соус';
+
+  @override
+  String get ingredientSweetPepper => 'Сладкий перец';
+
+  @override
+  String get ingredientRedOnion => 'Красный лук';
+
+  @override
+  String get toppingPepperoni => 'Пепперони';
+
+  @override
+  String get toppingPineapple => 'Ананас';
+
+  @override
+  String get toppingMushrooms => 'Шампиньоны';
+
+  @override
+  String get toppingCheddarParmesan => 'Сыр';
+
+  @override
+  String get toppingBacon => 'Бекон';
+
+  @override
+  String get permissionDeniedLocation => 'У нас нет доступа к вашей геолокации';
+
+  @override
+  String get myAddressesHead => 'Мои адреса';
+
+  @override
+  String get newAddressButton => 'Новый адрес';
+
+  @override
+  String get orderHereButton => 'Заказать сюда';
+
+  @override
+  String get addressFieldHint => 'Город, улица и дом';
+
+  @override
+  String get entranceHint => 'Подъезд';
+
+  @override
+  String get intercomHint => 'Домофон';
+
+  @override
+  String get floorHint => 'Этаж';
+
+  @override
+  String get apartmentHint => 'Квартира';
+
+  @override
+  String get courierCommentHint => 'Комментарий для курьера';
+
+  @override
+  String get addressLabelHome => 'Дом';
+
+  @override
+  String get addressLabelWork => 'Работа';
+
+  @override
+  String get addressLabelOther => 'Другое';
+
+  @override
+  String get deliverHereButton => 'Доставить сюда';
+
+  @override
+  String get addressFormatError => 'Введите город, улицу и дом через запятую';
+
+  @override
+  String get addressLocateFailed => 'Не удалось определить адрес';
 }

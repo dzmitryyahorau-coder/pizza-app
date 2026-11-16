@@ -5,7 +5,7 @@ import 'package:pizza_app/features/product_details/data/models/dough.dart';
 import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
 import 'package:pizza_app/features/product_details/data/models/product_size.dart';
 import 'package:pizza_app/features/product_details/data/models/topping.dart';
-import 'package:pizza_app/features/product_details/presentation/widgets/common/close_icon_button.dart';
+import 'package:pizza_app/shared/widgets/close_icon_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/price_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/add_topings.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/select_dough.dart';

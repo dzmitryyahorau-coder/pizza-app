@@ -15,9 +15,13 @@ class Category {
       throw StateError("Document is empty: ${snapshot.id}");
     }
 
+    return Category.fromMap(data);
+  }
+
+  factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
-      id: data['id'] as String? ?? '',
-      name: data['name'] as String? ?? '',
+      id: map['id'].toString(),
+      name: map['category_key'] as String? ?? '',
     );
   }
 

@@ -248,6 +248,12 @@ abstract class AppLocalizations {
   /// **'Email'**
   String get emailHint;
 
+  /// No description provided for @nameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameHint;
+
   /// No description provided for @passwordHint.
   ///
   /// In en, this message translates to:
@@ -266,6 +272,18 @@ abstract class AppLocalizations {
   /// **'Log Out'**
   String get logoutButton;
 
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get registerButton;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get registerTitle;
+
   /// No description provided for @loadingText.
   ///
   /// In en, this message translates to:
@@ -281,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @errorInvalidCredentials.
   ///
   /// In en, this message translates to:
-  /// **'Invalid email or password is too short'**
+  /// **'Invalid email or password'**
   String get errorInvalidCredentials;
 
   /// No description provided for @errorUnknown.
@@ -290,11 +308,329 @@ abstract class AppLocalizations {
   /// **'An unexpected error occurred'**
   String get errorUnknown;
 
-  /// No description provided for @profileTitle.
+  /// No description provided for @errorUserNotFound.
   ///
   /// In en, this message translates to:
-  /// **'Profile'**
-  String get profileTitle;
+  /// **'An user with such credentials is not found'**
+  String get errorUserNotFound;
+
+  /// No description provided for @errorTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too much requests sent. Relax'**
+  String get errorTooManyRequests;
+
+  /// No description provided for @categoryPizza.
+  ///
+  /// In en, this message translates to:
+  /// **'Pizza'**
+  String get categoryPizza;
+
+  /// No description provided for @categorySnacks.
+  ///
+  /// In en, this message translates to:
+  /// **'Snacks'**
+  String get categorySnacks;
+
+  /// No description provided for @categoryDrinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Drinks'**
+  String get categoryDrinks;
+
+  /// No description provided for @categoryDesserts.
+  ///
+  /// In en, this message translates to:
+  /// **'Desserts'**
+  String get categoryDesserts;
+
+  /// No description provided for @categoryBreakfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Breackfasts'**
+  String get categoryBreakfast;
+
+  /// No description provided for @categoryCombo.
+  ///
+  /// In en, this message translates to:
+  /// **'Combo'**
+  String get categoryCombo;
+
+  /// No description provided for @profileSettingsHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Settings'**
+  String get profileSettingsHead;
+
+  /// No description provided for @saveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveButton;
+
+  /// No description provided for @permissionDeniedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No access'**
+  String get permissionDeniedTitle;
+
+  /// No description provided for @permissionDeniedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have denied access. Allow it in the app settings to continue.'**
+  String get permissionDeniedMessage;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get openSettings;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @permissionRestrictedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access restricted'**
+  String get permissionRestrictedTitle;
+
+  /// No description provided for @permissionRestrictedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Access to this feature is restricted by your device settings, so it can\'t be changed from the app.'**
+  String get permissionRestrictedMessage;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @cameraDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'You can\'t take a photo without camera access'**
+  String get cameraDenied;
+
+  /// No description provided for @avatarFromCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get avatarFromCamera;
+
+  /// No description provided for @avatarFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get avatarFromGallery;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes saved'**
+  String get profileSaved;
+
+  /// No description provided for @emailVerificationSent.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent an email to your new address. Follow the link in it to confirm the change'**
+  String get emailVerificationSent;
+
+  /// No description provided for @errorEmailInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use'**
+  String get errorEmailInUse;
+
+  /// No description provided for @errorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email'**
+  String get errorInvalidEmail;
+
+  /// No description provided for @lowBatteryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Low battery'**
+  String get lowBatteryTitle;
+
+  /// No description provided for @lowBatteryMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery level: {level}%. On OLED screens, dark theme helps save power. Turn it on?'**
+  String lowBatteryMessage(int level);
+
+  /// No description provided for @enableDarkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable dark theme'**
+  String get enableDarkTheme;
+
+  /// No description provided for @notNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNow;
+
+  /// No description provided for @ingredientTomatoes.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomatoes'**
+  String get ingredientTomatoes;
+
+  /// No description provided for @ingredientMozzarella.
+  ///
+  /// In en, this message translates to:
+  /// **'Mozzarella'**
+  String get ingredientMozzarella;
+
+  /// No description provided for @ingredientTomatoSauce.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomato sauce'**
+  String get ingredientTomatoSauce;
+
+  /// No description provided for @ingredientSweetPepper.
+  ///
+  /// In en, this message translates to:
+  /// **'Sweet pepper'**
+  String get ingredientSweetPepper;
+
+  /// No description provided for @ingredientRedOnion.
+  ///
+  /// In en, this message translates to:
+  /// **'Red onion'**
+  String get ingredientRedOnion;
+
+  /// No description provided for @toppingPepperoni.
+  ///
+  /// In en, this message translates to:
+  /// **'Pepperoni'**
+  String get toppingPepperoni;
+
+  /// No description provided for @toppingPineapple.
+  ///
+  /// In en, this message translates to:
+  /// **'Pineapple'**
+  String get toppingPineapple;
+
+  /// No description provided for @toppingMushrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Mooshrooms'**
+  String get toppingMushrooms;
+
+  /// No description provided for @toppingCheddarParmesan.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheddar Parmesan'**
+  String get toppingCheddarParmesan;
+
+  /// No description provided for @toppingBacon.
+  ///
+  /// In en, this message translates to:
+  /// **'Bacon'**
+  String get toppingBacon;
+
+  /// No description provided for @permissionDeniedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'We can not have access to your geolocation'**
+  String get permissionDeniedLocation;
+
+  /// No description provided for @myAddressesHead.
+  ///
+  /// In en, this message translates to:
+  /// **'My addresses'**
+  String get myAddressesHead;
+
+  /// No description provided for @newAddressButton.
+  ///
+  /// In en, this message translates to:
+  /// **'New address'**
+  String get newAddressButton;
+
+  /// No description provided for @orderHereButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Order here'**
+  String get orderHereButton;
+
+  /// No description provided for @addressFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'City, street and house'**
+  String get addressFieldHint;
+
+  /// No description provided for @entranceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Entrance'**
+  String get entranceHint;
+
+  /// No description provided for @intercomHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Intercom'**
+  String get intercomHint;
+
+  /// No description provided for @floorHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Floor'**
+  String get floorHint;
+
+  /// No description provided for @apartmentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Apartment'**
+  String get apartmentHint;
+
+  /// No description provided for @courierCommentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment for the courier'**
+  String get courierCommentHint;
+
+  /// No description provided for @addressLabelHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get addressLabelHome;
+
+  /// No description provided for @addressLabelWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get addressLabelWork;
+
+  /// No description provided for @addressLabelOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get addressLabelOther;
+
+  /// No description provided for @deliverHereButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver here'**
+  String get deliverHereButton;
+
+  /// No description provided for @addressFormatError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter city, street and house, separated by commas'**
+  String get addressFormatError;
+
+  /// No description provided for @addressLocateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not detect your address'**
+  String get addressLocateFailed;
 }
 
 class _AppLocalizationsDelegate

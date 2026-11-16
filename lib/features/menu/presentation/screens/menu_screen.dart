@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pizza_app/core/di/locator.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
+import 'package:pizza_app/core/theme/theme_cubit.dart';
 import 'package:pizza_app/features/cart/presentation/widgets/cart_floating_button.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
@@ -12,6 +15,7 @@ import 'package:pizza_app/features/menu/presentation/widgets/categories_list.dar
 import 'package:pizza_app/features/menu/presentation/widgets/menu_header.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/menu_sheet.dart';
 import 'package:pizza_app/features/menu/presentation/widgets/product_item.dart';
+import 'package:pizza_app/shared/service/battery_service.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -77,6 +81,51 @@ class _MenuViewState extends State<MenuView> {
     super.initState();
     _controller = ScrollController()..addListener(_onScroll);
     selectedCategoryId = widget.state.categories.firstOrNull?.id;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkBattery());
+  }
+
+  Future<void> _checkBattery() async {
+    final battery = sl<BatteryService>();
+    if (battery.promptShown) return;
+
+    final level = await battery.getBatteryLevel();
+    if (level == null || level >= 20) return;
+    if (!mounted) return;
+
+    final themeCubit = context.read<ThemeCubit>();
+    final isDarkNow =
+        themeCubit.state == ThemeMode.dark ||
+        (themeCubit.state == ThemeMode.system &&
+            MediaQuery.platformBrightnessOf(context) == Brightness.dark);
+    if (isDarkNow) return;
+
+    battery.promptShown = true;
+
+    final l10n = context.l10n;
+
+    final enable = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        icon: const Icon(Icons.battery_alert),
+        title: Text(l10n.lowBatteryTitle),
+        content: Text(l10n.lowBatteryMessage(level)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.notNow),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.enableDarkTheme),
+          ),
+        ],
+      ),
+    );
+
+    if (enable == true) themeCubit.setDark();
+
+    if (enable == true) themeCubit.setDark();
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
@@ -13,6 +14,7 @@ class EnterDeliveryAddress extends StatelessWidget {
     final colors = context.appColors;
 
     return InkWell(
+      onTap: () => context.push('/addresses-list'),
       child: Row(
         children: [
           Padding(
