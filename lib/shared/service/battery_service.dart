@@ -10,7 +10,7 @@ class BatteryService {
       final level = await _channel.invokeMethod<int>('getBatteryLevel');
 
       return (level == null || level < 0) ? null : level;
-    } on PlatformException catch (e) {
+    } on PlatformException {
       return null;
     } on MissingPluginException {
       return null;

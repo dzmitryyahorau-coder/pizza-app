@@ -77,5 +77,38 @@
     }
   },
   "enableDarkTheme": "Enable dark theme",
-  "notNow": "Not now"
+  "notNow": "Not now",
+
+  "ingredientTomatoes": "Tomatoes",
+  "ingredientMozzarella": "Mozzarella",
+  "ingredientTomatoSauce": "Tomato sauce",
+  "ingredientSweetPepper": "Sweet pepper",
+  "ingredientRedOnion": "Red onion",
+
+  "toppingPepperoni": "Pepperoni",
+  "toppingPineapple": "Pineapple",
+  "toppingMushrooms": "Mooshrooms",
+  "toppingCheddarParmesan": "Cheddar Parmesan",
+  "toppingBacon": "Bacon",
+
+  "permissionDeniedLocation": "We can not have access to your geolocation",
+  "myAddressesHead": "My addresses",
+  "newAddressButton": "New address",
+  "orderHereButton": "Order here",
+
+  "addressFieldHint": "City, street and house",
+  "entranceHint": "Entrance",
+  "intercomHint": "Intercom",
+  "floorHint": "Floor",
+  "apartmentHint": "Apartment",
+  "courierCommentHint": "Comment for the courier",
+
+  "addressLabelHome": "Home",
+  "addressLabelWork": "Work",
+  "addressLabelOther": "Other",
+
+  "deliverHereButton": "Deliver here",
+  "addressFormatError": "Enter city, street and house, separated by commas",
+  "addressLocateFailed": "Could not detect your address"
+
 }

@@ -475,6 +475,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not now'**
   String get notNow;
+
+  /// No description provided for @ingredientTomatoes.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomatoes'**
+  String get ingredientTomatoes;
+
+  /// No description provided for @ingredientMozzarella.
+  ///
+  /// In en, this message translates to:
+  /// **'Mozzarella'**
+  String get ingredientMozzarella;
+
+  /// No description provided for @ingredientTomatoSauce.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomato sauce'**
+  String get ingredientTomatoSauce;
+
+  /// No description provided for @ingredientSweetPepper.
+  ///
+  /// In en, this message translates to:
+  /// **'Sweet pepper'**
+  String get ingredientSweetPepper;
+
+  /// No description provided for @ingredientRedOnion.
+  ///
+  /// In en, this message translates to:
+  /// **'Red onion'**
+  String get ingredientRedOnion;
+
+  /// No description provided for @toppingPepperoni.
+  ///
+  /// In en, this message translates to:
+  /// **'Pepperoni'**
+  String get toppingPepperoni;
+
+  /// No description provided for @toppingPineapple.
+  ///
+  /// In en, this message translates to:
+  /// **'Pineapple'**
+  String get toppingPineapple;
+
+  /// No description provided for @toppingMushrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Mooshrooms'**
+  String get toppingMushrooms;
+
+  /// No description provided for @toppingCheddarParmesan.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheddar Parmesan'**
+  String get toppingCheddarParmesan;
+
+  /// No description provided for @toppingBacon.
+  ///
+  /// In en, this message translates to:
+  /// **'Bacon'**
+  String get toppingBacon;
+
+  /// No description provided for @permissionDeniedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'We can not have access to your geolocation'**
+  String get permissionDeniedLocation;
+
+  /// No description provided for @myAddressesHead.
+  ///
+  /// In en, this message translates to:
+  /// **'My addresses'**
+  String get myAddressesHead;
+
+  /// No description provided for @newAddressButton.
+  ///
+  /// In en, this message translates to:
+  /// **'New address'**
+  String get newAddressButton;
+
+  /// No description provided for @orderHereButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Order here'**
+  String get orderHereButton;
+
+  /// No description provided for @addressFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'City, street and house'**
+  String get addressFieldHint;
+
+  /// No description provided for @entranceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Entrance'**
+  String get entranceHint;
+
+  /// No description provided for @intercomHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Intercom'**
+  String get intercomHint;
+
+  /// No description provided for @floorHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Floor'**
+  String get floorHint;
+
+  /// No description provided for @apartmentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Apartment'**
+  String get apartmentHint;
+
+  /// No description provided for @courierCommentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment for the courier'**
+  String get courierCommentHint;
+
+  /// No description provided for @addressLabelHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get addressLabelHome;
+
+  /// No description provided for @addressLabelWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get addressLabelWork;
+
+  /// No description provided for @addressLabelOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get addressLabelOther;
+
+  /// No description provided for @deliverHereButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver here'**
+  String get deliverHereButton;
+
+  /// No description provided for @addressFormatError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter city, street and house, separated by commas'**
+  String get addressFormatError;
+
+  /// No description provided for @addressLocateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not detect your address'**
+  String get addressLocateFailed;
 }
 
 class _AppLocalizationsDelegate

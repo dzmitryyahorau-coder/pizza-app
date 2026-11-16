@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Topping {
   const Topping({
     required this.id,
-    required this.name,
+    required this.toppingKey,
     required this.weightGrams,
     required this.price,
     required this.imageAsset,
   });
 
   final String id;
-  final String name;
+  final String toppingKey;
   final int weightGrams;
   final int price;
   final String imageAsset;
@@ -30,16 +30,16 @@ class Topping {
   factory Topping.fromMap(Map<String, dynamic> data) {
     return Topping(
       id: data['id']?.toString() ?? '',
-      name: data['name']?.toString() ?? '',
-      weightGrams: (data['weightGrams'] as num?)?.toInt() ?? 0,
+      toppingKey: data['toppings_key']?.toString() ?? '',
+      weightGrams: (data['weight_grams'] as num?)?.toInt() ?? 0,
       price: (data['price'] as num?)?.toInt() ?? 0,
-      imageAsset: data['imageAsset']?.toString() ?? '',
+      imageAsset: data['image_asset']?.toString() ?? '',
     );
   }
 
   Map<String, dynamic> toMap() => {
     'id': id,
-    'name': name,
+    'toppings_key': toppingKey,
     'weightGrams': weightGrams,
     'price': price,
     'imageAsset': imageAsset,

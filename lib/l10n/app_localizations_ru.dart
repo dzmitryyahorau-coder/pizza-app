@@ -225,4 +225,82 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notNow => 'Не сейчас';
+
+  @override
+  String get ingredientTomatoes => 'Помидоры';
+
+  @override
+  String get ingredientMozzarella => 'Моцарелла';
+
+  @override
+  String get ingredientTomatoSauce => 'Томатный соус';
+
+  @override
+  String get ingredientSweetPepper => 'Сладкий перец';
+
+  @override
+  String get ingredientRedOnion => 'Красный лук';
+
+  @override
+  String get toppingPepperoni => 'Пепперони';
+
+  @override
+  String get toppingPineapple => 'Ананас';
+
+  @override
+  String get toppingMushrooms => 'Шампиньоны';
+
+  @override
+  String get toppingCheddarParmesan => 'Сыр';
+
+  @override
+  String get toppingBacon => 'Бекон';
+
+  @override
+  String get permissionDeniedLocation => 'У нас нет доступа к вашей геолокации';
+
+  @override
+  String get myAddressesHead => 'Мои адреса';
+
+  @override
+  String get newAddressButton => 'Новый адрес';
+
+  @override
+  String get orderHereButton => 'Заказать сюда';
+
+  @override
+  String get addressFieldHint => 'Город, улица и дом';
+
+  @override
+  String get entranceHint => 'Подъезд';
+
+  @override
+  String get intercomHint => 'Домофон';
+
+  @override
+  String get floorHint => 'Этаж';
+
+  @override
+  String get apartmentHint => 'Квартира';
+
+  @override
+  String get courierCommentHint => 'Комментарий для курьера';
+
+  @override
+  String get addressLabelHome => 'Дом';
+
+  @override
+  String get addressLabelWork => 'Работа';
+
+  @override
+  String get addressLabelOther => 'Другое';
+
+  @override
+  String get deliverHereButton => 'Доставить сюда';
+
+  @override
+  String get addressFormatError => 'Введите город, улицу и дом через запятую';
+
+  @override
+  String get addressLocateFailed => 'Не удалось определить адрес';
 }

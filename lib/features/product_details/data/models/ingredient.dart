@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Ingredient {
-  const Ingredient({required this.id, required this.name, this.imgPath});
+  const Ingredient({
+    required this.id,
+    required this.ingredientKey,
+    this.imgPath,
+  });
 
   final String id;
-  final String name;
+  final String ingredientKey;
   final String? imgPath;
 
   factory Ingredient.fromFireStore(
@@ -22,14 +26,14 @@ class Ingredient {
   factory Ingredient.fromMap(Map<String, dynamic> data) {
     return Ingredient(
       id: data['id']?.toString() ?? '',
-      name: data['name']?.toString() ?? '',
+      ingredientKey: data['ingredient_key']?.toString() ?? '',
       imgPath: data['imgPath']?.toString(),
     );
   }
 
   Map<String, dynamic> toMap() => {
     'id': id,
-    'name': name,
+    'ingredient_key': ingredientKey,
     if (imgPath != null) 'imgPath': imgPath,
   };
 }

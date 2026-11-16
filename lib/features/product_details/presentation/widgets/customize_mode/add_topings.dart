@@ -4,6 +4,7 @@ import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/product_details/data/models/topping.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/common/show_more_button.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/toping_card.dart';
+import 'package:pizza_app/features/product_details/presentation/l10n/topping_l10n.dart';
 
 class AddToppings extends StatelessWidget {
   const AddToppings({
@@ -50,7 +51,7 @@ class AddToppings extends StatelessWidget {
               final item = toppings[index];
 
               return TopingCard(
-                title: item.name,
+                title: l10n.toppingName(item.toppingKey),
                 weight: item.weightGrams,
                 price: item.price,
                 imgPath: item.imageAsset,

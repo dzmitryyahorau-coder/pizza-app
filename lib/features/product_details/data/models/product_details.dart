@@ -81,6 +81,7 @@ class ProductDetails {
       'ingredient',
       Ingredient.fromMap,
     );
+    final doughs = parseNestedList(map['doughs'], 'dough', Dough.fromMap);
 
     return ProductDetails(
       id: map['id']?.toString() ?? '',
@@ -91,7 +92,7 @@ class ProductDetails {
       defaultSizeId:
           map['default_size']?['id']?.toString() ??
           (sizes.isNotEmpty ? sizes.first.id : ''),
-      doughs: const [],
+      doughs: doughs,
       defaultDoughId: '',
       toppings: toppings,
       ingredients: ingredients,

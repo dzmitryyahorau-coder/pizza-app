@@ -66,5 +66,38 @@
   "lowBatteryTitle": "Низкий заряд батареи",
   "lowBatteryMessage": "Заряд батареи: {level}%. На экранах OLED тёмная тема помогает экономить энергию. Включить её?",
   "enableDarkTheme": "Включить тёмную тему",
-  "notNow": "Не сейчас"
+  "notNow": "Не сейчас",
+
+  "ingredientTomatoes": "Помидоры",
+  "ingredientMozzarella": "Моцарелла",
+  "ingredientTomatoSauce": "Томатный соус",
+  "ingredientSweetPepper": "Сладкий перец",
+  "ingredientRedOnion": "Красный лук",
+
+  "toppingPepperoni": "Пепперони",
+  "toppingPineapple": "Ананас",
+  "toppingMushrooms": "Шампиньоны",
+  "toppingCheddarParmesan": "Сыр",
+  "toppingBacon": "Бекон",
+
+  "permissionDeniedLocation": "У нас нет доступа к вашей геолокации",
+  "myAddressesHead": "Мои адреса",
+
+  "newAddressButton": "Новый адрес",
+  "orderHereButton": "Заказать сюда",
+
+  "addressFieldHint": "Город, улица и дом",
+  "entranceHint": "Подъезд",
+  "intercomHint": "Домофон",
+  "floorHint": "Этаж",
+  "apartmentHint": "Квартира",
+  "courierCommentHint": "Комментарий для курьера",
+
+  "addressLabelHome": "Дом",
+  "addressLabelWork": "Работа",
+  "addressLabelOther": "Другое",
+
+  "deliverHereButton": "Доставить сюда",
+  "addressFormatError": "Введите город, улицу и дом через запятую",
+  "addressLocateFailed": "Не удалось определить адрес"
 }

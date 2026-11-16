@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/features/product_details/presentation/widgets/common/blured_surface.dart';
+import 'package:pizza_app/shared/widgets/blured_surface.dart';
 
 class CloseIconButton extends StatelessWidget {
   final void Function() onPress;

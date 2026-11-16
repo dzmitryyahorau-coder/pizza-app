@@ -48,7 +48,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   void _submit() {
     final name = _nameController.text.trim();
     final email = _emailController.text.trim();
-    // final password = _passwordController.text.trim(); [TODO]
 
     final user = context.read<ProfileCubit>().state.user;
     final changedName = name != (user?.name ?? '') ? name : null;

@@ -223,4 +223,84 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notNow => 'Not now';
+
+  @override
+  String get ingredientTomatoes => 'Tomatoes';
+
+  @override
+  String get ingredientMozzarella => 'Mozzarella';
+
+  @override
+  String get ingredientTomatoSauce => 'Tomato sauce';
+
+  @override
+  String get ingredientSweetPepper => 'Sweet pepper';
+
+  @override
+  String get ingredientRedOnion => 'Red onion';
+
+  @override
+  String get toppingPepperoni => 'Pepperoni';
+
+  @override
+  String get toppingPineapple => 'Pineapple';
+
+  @override
+  String get toppingMushrooms => 'Mooshrooms';
+
+  @override
+  String get toppingCheddarParmesan => 'Cheddar Parmesan';
+
+  @override
+  String get toppingBacon => 'Bacon';
+
+  @override
+  String get permissionDeniedLocation =>
+      'We can not have access to your geolocation';
+
+  @override
+  String get myAddressesHead => 'My addresses';
+
+  @override
+  String get newAddressButton => 'New address';
+
+  @override
+  String get orderHereButton => 'Order here';
+
+  @override
+  String get addressFieldHint => 'City, street and house';
+
+  @override
+  String get entranceHint => 'Entrance';
+
+  @override
+  String get intercomHint => 'Intercom';
+
+  @override
+  String get floorHint => 'Floor';
+
+  @override
+  String get apartmentHint => 'Apartment';
+
+  @override
+  String get courierCommentHint => 'Comment for the courier';
+
+  @override
+  String get addressLabelHome => 'Home';
+
+  @override
+  String get addressLabelWork => 'Work';
+
+  @override
+  String get addressLabelOther => 'Other';
+
+  @override
+  String get deliverHereButton => 'Deliver here';
+
+  @override
+  String get addressFormatError =>
+      'Enter city, street and house, separated by commas';
+
+  @override
+  String get addressLocateFailed => 'Could not detect your address';
 }

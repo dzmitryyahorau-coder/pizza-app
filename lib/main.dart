@@ -8,6 +8,7 @@ import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
 import 'package:pizza_app/core/theme/theme_cubit.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
+import 'package:pizza_app/features/delivery/presentation/bloc/addresses_cubit.dart';
 import 'package:pizza_app/features/profile/domain/repositories/user_repository_interface.dart';
 import 'package:pizza_app/firebase_options.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
@@ -93,6 +94,7 @@ class MainApp extends StatelessWidget {
         BlocProvider<AuthCubit>.value(value: sl<AuthCubit>()),
         BlocProvider<CartCubit>.value(value: sl<CartCubit>()),
         BlocProvider<ThemeCubit>.value(value: sl<ThemeCubit>()),
+        BlocProvider<AddressesCubit>.value(value: sl<AddressesCubit>()),
       ],
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {

@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:pizza_app/core/database/app_database.dart';
 import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/theme_cubit.dart';
+import 'package:pizza_app/features/delivery/presentation/bloc/addresses_cubit.dart';
 import 'package:pizza_app/features/profile/data/repositories/firebase_auth_repository.dart';
 import 'package:pizza_app/features/profile/data/repositories/supabase_storage_repository.dart';
 import 'package:pizza_app/features/profile/data/repositories/supabase_user_repository.dart';
@@ -46,6 +47,7 @@ final sl = GetIt.instance;
 
 Future<void> initLocator(String environment) async {
   final prefs = await SharedPreferences.getInstance();
+
   sl.registerSingleton<ThemeCubit>(ThemeCubit(prefs));
 
   sl.registerLazySingleton<AuthCubit>(
@@ -66,6 +68,9 @@ Future<void> initLocator(String environment) async {
       updateProfileUsecase: sl<UpdateProfileUsecase>(),
       currentUserStore: sl<CurrentUserStore>(),
     ),
+  );
+  sl.registerFactory<AddressesCubit>(
+    () => AddressesCubit(currentUserStore: sl<CurrentUserStore>()),
   );
   sl.registerFactory<MenuBloc>(
     () => MenuBloc(

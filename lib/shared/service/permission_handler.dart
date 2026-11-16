@@ -1,15 +1,39 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 enum PermissionResult { granted, denied, permanentlyDenied, restricted }
 
 class PermissionHandler {
-  Future<PermissionResult> request(Permission permision) async {
-    PermissionStatus status = await permision.status;
+  Future<PermissionResult> request(Permission permission) {
+    if (permission == Permission.location ||
+        permission == Permission.locationWhenInUse) {
+      return _requestViaGeolocator();
+    }
+    return _requestViaPermissionHandler(permission);
+  }
+
+  Future<PermissionResult> _requestViaPermissionHandler(
+    Permission permission,
+  ) async {
+    PermissionStatus status = await permission.status;
     if (status.isDenied) {
-      status = await permision.request();
+      status = await permission.request();
+    }
+    return _map(status);
+  }
+
+  Future<PermissionResult> _requestViaGeolocator() async {
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
     }
 
-    return _map(status);
+    return switch (permission) {
+      LocationPermission.whileInUse ||
+      LocationPermission.always => PermissionResult.granted,
+      LocationPermission.deniedForever => PermissionResult.permanentlyDenied,
+      _ => PermissionResult.denied,
+    };
   }
 
   PermissionResult _map(PermissionStatus s) {

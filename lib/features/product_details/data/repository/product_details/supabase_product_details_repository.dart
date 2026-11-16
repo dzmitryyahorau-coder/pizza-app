@@ -26,6 +26,12 @@ class SupabaseProductDetailsRepository implements IProductDetailsRepository {
 
     if (data == null) return null;
 
-    return ProductDetails.fromMap(data);
+    final doughs = await Supabase.instance.client.from('dough').select();
+    final map = {
+      ...data,
+      'doughs': doughs.map((d) => {'dough': d}).toList(),
+    };
+
+    return ProductDetails.fromMap(map);
   }
 }
