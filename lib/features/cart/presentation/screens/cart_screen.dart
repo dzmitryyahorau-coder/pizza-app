@@ -122,14 +122,11 @@ class _CartScreenState extends State<CartScreen> {
           bottomNavigationBar: SafeArea(
             child: Padding(
               padding: EdgeInsets.all(AppSpacing.xl),
-              child: ColoredBox(
-                color: Colors.black,
-                child: SizedBox(
-                  height: 56,
-                  child: PrimaryFilledButton(
-                    onPressed: () {},
-                    label: l10n.proceedToCheckoutForButton(totalPrice),
-                  ),
+              child: SizedBox(
+                height: 56,
+                child: PrimaryFilledButton(
+                  onPressed: () {},
+                  label: l10n.proceedToCheckoutForButton(totalPrice),
                 ),
               ),
             ),

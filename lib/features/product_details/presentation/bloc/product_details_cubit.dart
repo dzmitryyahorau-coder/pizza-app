@@ -1,13 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/product_details_repository_interface.dart';
 import 'package:pizza_app/features/product_details/domain/cart_item_draft.dart';
+import 'package:pizza_app/shared/service/analytics_service.dart';
 
 import 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
-  ProductDetailsCubit(this._repository) : super(const ProductDetailsLoading());
+  ProductDetailsCubit(this._repository, this._analyticsService)
+    : super(const ProductDetailsLoading());
 
   final IProductDetailsRepository _repository;
+  final AnalyticsService _analyticsService;
 
   Future<void> load(String productId) async {
     emit(const ProductDetailsLoading());
@@ -20,11 +23,14 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       } else if (product.sizes.isEmpty || product.doughs.isEmpty) {
         emit(const ProductDetailsFailure(ProductDetailsError.notCustomizable));
       } else {
-        emit(
-          ProductDetailsLoaded(
-            product: product,
-            draft: CartItemDraft.initial(product),
-          ),
+        final draft = CartItemDraft.initial(product);
+        emit(ProductDetailsLoaded(product: product, draft: draft));
+
+        await _analyticsService.logViewItem(
+          id: product.id,
+          name: product.name,
+          category: product.category?.name ?? 'unknown',
+          price: 0, //state is ProductDetailsLoaded ? (state as ProductDetailsLoaded)?.unitPrice : 0,
         );
       }
     } catch (e, stackTrace) {

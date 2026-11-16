@@ -24,7 +24,7 @@ import 'package:pizza_app/features/menu/data/repositories/stories/supabase_stori
 import 'package:pizza_app/features/menu/domain/repositories/categories/categories_repository_interface.dart';
 import 'package:pizza_app/features/menu/domain/repositories/products/products_repository_interface.dart';
 import 'package:pizza_app/features/menu/domain/repositories/stories/stories_repository_interface.dart';
-import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
+import 'package:pizza_app/features/product_details/presentation/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/inmemory_product_details_repository.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/product_details_repository_interface.dart';
 import 'package:pizza_app/features/product_details/data/repository/product_details/supabase_product_details_repository.dart';
@@ -37,6 +37,7 @@ import 'package:pizza_app/features/profile/domain/usecases/update_profile_usecas
 import 'package:pizza_app/features/profile/presentation/bloc/profile_cubit.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 import 'package:pizza_app/shared/auth/current_user_store.dart';
+import 'package:pizza_app/shared/service/analytics_service.dart';
 import 'package:pizza_app/shared/service/battery_service.dart';
 import 'package:pizza_app/shared/service/permission_handler.dart';
 import 'package:pizza_app/shared/service/push_notifications_service.dart';
@@ -49,6 +50,7 @@ Future<void> initLocator(String environment) async {
   final prefs = await SharedPreferences.getInstance();
 
   sl.registerSingleton<ThemeCubit>(ThemeCubit(prefs));
+  sl.registerSingleton<AnalyticsService>(AnalyticsService());
 
   sl.registerLazySingleton<AuthCubit>(
     () => AuthCubit(
@@ -60,7 +62,10 @@ Future<void> initLocator(String environment) async {
   );
   sl.registerLazySingleton<CartCubit>(() => CartCubit(sl<ICartRepository>()));
   sl.registerFactory<ProductDetailsCubit>(
-    () => ProductDetailsCubit(sl<IProductDetailsRepository>()),
+    () => ProductDetailsCubit(
+      sl<IProductDetailsRepository>(),
+      sl<AnalyticsService>(),
+    ),
   );
   sl.registerFactory<ProfileCubit>(
     () => ProfileCubit(

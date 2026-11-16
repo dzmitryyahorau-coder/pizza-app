@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/database/app_database.dart';
+import 'package:pizza_app/core/di/locator.dart';
 import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
-import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
-import 'package:pizza_app/features/product_details/bloc/product_details_state.dart';
+import 'package:pizza_app/features/product_details/presentation/bloc/product_details_cubit.dart';
+import 'package:pizza_app/features/product_details/presentation/bloc/product_details_state.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/customize_mode_view.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/default_mode/default_mode_view.dart';
+import 'package:pizza_app/shared/service/analytics_service.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final String productId;
@@ -72,7 +74,7 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
     setState(() => _isCustomizeMode = !_isCustomizeMode);
   }
 
-  void _addProductToCart(ProductDetailsLoaded state) {
+  Future<void> _addProductToCart(ProductDetailsLoaded state) async {
     final selectedToppings = jsonEncode(
       state.draft.toppingIds
           .map((id) => state.product.mapToppingsById[id]?.toMap())
@@ -100,6 +102,15 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
 
     context.read<CartCubit>().addToCart(newItemToCart);
     context.pop();
+
+    await sl<AnalyticsService>().logAddToCart(
+      id: state.product.id,
+      name: state.product.name,
+      category: state.product.category?.name ?? 'unknown',
+      variant: context.l10n.productSizeCm(state.selectedSize.cm),
+      price: state.unitPrice,
+      quantity: 1,
+    );
   }
 
   @override

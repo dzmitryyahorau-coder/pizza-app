@@ -3,6 +3,7 @@ import 'package:pizza_app/features/product_details/data/models/dough.dart';
 import 'package:pizza_app/features/product_details/data/models/ingredient.dart';
 import 'package:pizza_app/features/product_details/data/models/product_size.dart';
 import 'package:pizza_app/features/product_details/data/models/topping.dart';
+import 'package:pizza_app/features/product_details/data/models/category.dart';
 
 class ProductDetails {
   ProductDetails({
@@ -14,8 +15,10 @@ class ProductDetails {
     required this.defaultSizeId,
     required this.doughs,
     required this.defaultDoughId,
+    required this.categoryId,
     required this.toppings,
     required this.ingredients,
+    this.category,
   }) {
     for (final topping in toppings) {
       mapToppingsById[topping.id] = topping;
@@ -30,12 +33,15 @@ class ProductDetails {
   final String name;
   final String description;
   final String imageAsset;
+  final String categoryId;
   final List<ProductSize> sizes;
   final String defaultSizeId;
   final List<Dough> doughs;
   final String defaultDoughId;
   final List<Topping> toppings;
   final List<Ingredient> ingredients;
+
+  final Category? category;
 
   final Map<String, Topping> mapToppingsById = {};
   final Map<String, Ingredient> mapIngredientById = {};
@@ -82,6 +88,7 @@ class ProductDetails {
       Ingredient.fromMap,
     );
     final doughs = parseNestedList(map['doughs'], 'dough', Dough.fromMap);
+    final category = Category.fromMap(map['category']);
 
     return ProductDetails(
       id: map['id']?.toString() ?? '',
@@ -96,6 +103,8 @@ class ProductDetails {
       defaultDoughId: '',
       toppings: toppings,
       ingredients: ingredients,
+      category: category,
+      categoryId: category.id,
     );
   }
 

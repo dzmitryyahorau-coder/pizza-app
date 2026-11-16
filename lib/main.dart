@@ -35,6 +35,7 @@ void main() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+
     await Supabase.initialize(
       url: dotenv.env['SUPABASE_URL']!,
       publishableKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY'],

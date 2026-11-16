@@ -11,7 +11,7 @@ import 'package:pizza_app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:pizza_app/features/menu/bloc/menu_bloc.dart';
 import 'package:pizza_app/features/menu/bloc/menu_event.dart';
 import 'package:pizza_app/features/menu/presentation/screens/menu_screen.dart';
-import 'package:pizza_app/features/product_details/bloc/product_details_cubit.dart';
+import 'package:pizza_app/features/product_details/presentation/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:pizza_app/features/profile/presentation/screens/profile_settings_screen.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
