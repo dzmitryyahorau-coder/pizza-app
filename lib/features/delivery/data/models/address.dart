@@ -11,6 +11,11 @@ enum AddressLabel {
       orElse: () => AddressLabel.other,
     );
   }
+
+  @override
+  String toString() {
+    return name.toUpperCase();
+  }
 }
 
 class Address extends Equatable {

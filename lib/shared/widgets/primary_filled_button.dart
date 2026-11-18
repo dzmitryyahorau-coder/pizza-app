@@ -4,12 +4,12 @@ import 'package:pizza_app/core/theme/app_colors.dart';
 class PrimaryFilledButton extends StatelessWidget {
   const PrimaryFilledButton({
     super.key,
-    required this.onPressed,
+    this.onPressed,
     required this.label,
     this.icon,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String label;
   final Icon? icon;
   static const Size _size = Size(235, 52);

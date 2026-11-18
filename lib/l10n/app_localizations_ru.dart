@@ -303,4 +303,20 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get addressLocateFailed => 'Не удалось определить адрес';
+
+  @override
+  String get addressNotFound =>
+      'Не получилось распознать адресс, проверьте пожалуйста, может есть ошибки..';
+
+  @override
+  String get addressSaveFailed => 'Не получилось сохранить адрес';
+
+  @override
+  String get orderCreated => 'Заказ оформлен';
+
+  @override
+  String get orderEmptyCart => 'Корзина пуста';
+
+  @override
+  String get orderFailed => 'Не удалось оформить заказ. Попробуйте ещё раз';
 }

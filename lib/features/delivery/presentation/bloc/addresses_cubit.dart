@@ -3,17 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:pizza_app/features/delivery/data/models/address_model.dart';
+import 'package:pizza_app/features/delivery/data/models/address.dart';
+import 'package:pizza_app/features/delivery/domain/usecases/add_new_user_address_usecase.dart';
+import 'package:pizza_app/features/delivery/domain/usecases/get_all_users_addresses.dart';
 import 'package:pizza_app/features/delivery/presentation/bloc/addresses_state.dart';
 import 'package:pizza_app/shared/auth/current_user_store.dart';
 
 class AddressesCubit extends Cubit<AddressesState> {
   final CurrentUserStore _currentUserStore;
+  final AddNewUserAddressUsecase _addNewAddress;
+  final GetAllUserAddressesUsecase _getAllUserAddressesUsecase;
 
   late final _geocoding = Geocoding();
 
-  AddressesCubit({required this._currentUserStore})
-    : super(const AddressesState());
+  AddressesCubit({
+    required this._currentUserStore,
+    required this._addNewAddress,
+    required this._getAllUserAddressesUsecase,
+  }) : super(const AddressesState());
 
   Future<Address?> locateAddress() async {
     try {
@@ -74,13 +81,33 @@ class AddressesCubit extends Cubit<AddressesState> {
     }
   }
 
-  void addAndSelect(Address draft) {
-    emit(
-      state.copyWith(
-        addresses: [...state.addresses, draft],
-        selectedId: draft.id,
-      ),
-    );
+  Future<bool> addAddress(Address draft) async {
+    try {
+      final userId = _currentUserStore.value!.id;
+      final saved = await _addNewAddress(
+        AddNewUserAddressParams(data: draft, userId: userId),
+      );
+      emit(
+        state.copyWith(
+          addresses: [...state.addresses, saved],
+          selectedId: saved.id,
+        ),
+      );
+      return true;
+    } catch (e) {
+      debugPrint('addAddress failed: $e');
+      return false;
+    }
+  }
+
+  Future<void> fetchUserAddresses() async {
+    try {
+      final userId = _currentUserStore.value!.id;
+      final userAddresses = await _getAllUserAddressesUsecase(userId);
+      emit(state.copyWith(addresses: userAddresses));
+    } catch (e) {
+      debugPrint('fetchUserAddresses failed: $e');
+    }
   }
 
   void selectAddress(String id) {

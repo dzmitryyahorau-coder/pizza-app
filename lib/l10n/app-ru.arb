@@ -99,5 +99,12 @@
 
   "deliverHereButton": "Доставить сюда",
   "addressFormatError": "Введите город, улицу и дом через запятую",
-  "addressLocateFailed": "Не удалось определить адрес"
+  "addressLocateFailed": "Не удалось определить адрес",
+
+  "addressNotFound": "Не получилось распознать адресс, проверьте пожалуйста, может есть ошибки..",
+  "addressSaveFailed": "Не получилось сохранить адрес",
+
+  "orderCreated": "Заказ оформлен",
+  "orderEmptyCart": "Корзина пуста",
+  "orderFailed": "Не удалось оформить заказ. Попробуйте ещё раз"
 }

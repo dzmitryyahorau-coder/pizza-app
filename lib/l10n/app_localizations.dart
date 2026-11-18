@@ -631,6 +631,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not detect your address'**
   String get addressLocateFailed;
+
+  /// No description provided for @addressNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not find this address on the map. Check the city, street and house'**
+  String get addressNotFound;
+
+  /// No description provided for @addressSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the address'**
+  String get addressSaveFailed;
+
+  /// No description provided for @orderCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed'**
+  String get orderCreated;
+
+  /// No description provided for @orderEmptyCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get orderEmptyCart;
+
+  /// No description provided for @orderFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not place the order. Please try again'**
+  String get orderFailed;
 }
 
 class _AppLocalizationsDelegate

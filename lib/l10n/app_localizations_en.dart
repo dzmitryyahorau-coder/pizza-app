@@ -303,4 +303,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addressLocateFailed => 'Could not detect your address';
+
+  @override
+  String get addressNotFound =>
+      'Could not find this address on the map. Check the city, street and house';
+
+  @override
+  String get addressSaveFailed => 'Could not save the address';
+
+  @override
+  String get orderCreated => 'Order placed';
+
+  @override
+  String get orderEmptyCart => 'Your cart is empty';
+
+  @override
+  String get orderFailed => 'Could not place the order. Please try again';
 }

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pizza_app/core/di/locator.dart';
 import 'package:pizza_app/core/navigation/app_router.dart';
 import 'package:pizza_app/core/theme/app_theme.dart';
@@ -14,45 +16,56 @@ import 'package:pizza_app/firebase_options.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_cubit.dart';
 import 'package:pizza_app/shared/auth/bloc/auth_state.dart';
 import 'package:pizza_app/shared/auth/current_user_store.dart';
+import 'package:pizza_app/shared/auth/models/user.dart';
 import 'package:pizza_app/shared/service/fcm_background_handler.dart';
 import 'package:pizza_app/shared/service/push_notifications_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState, User;
-import 'package:pizza_app/shared/auth/models/user.dart';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'l10n/app_localizations.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   const env = String.fromEnvironment('ENV', defaultValue: 'prod');
+  final isProd = env == 'prod';
 
   await dotenv.load();
+
+  // 1. Внешние сервисы (до локатора: AnalyticsService и др. трогают Firebase)
+  if (isProd) {
+    await _initFirebase();
+    await _initSupabase();
+  }
+
+  // 2. Зависимости
   await initLocator(env);
 
-  if (env == 'prod') {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    await Supabase.initialize(
-      url: dotenv.env['SUPABASE_URL']!,
-      publishableKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY'],
-      debug: true,
-      accessToken: () async {
-        final user = FirebaseAuth.instance.currentUser;
-        if (user == null) return null;
-        return await user.getIdToken();
-      },
-    );
-
+  // 3. Всё, что использует зависимости
+  if (isProd) {
     await _restoreUser();
-
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
 
   runApp(const MainApp());
+}
+
+Future<void> _initFirebase() {
+  return Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+}
+
+Future<void> _initSupabase() {
+  return Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    publishableKey: dotenv.env['SUPABASE_PUBLISHABLE_KEY'],
+    debug: kDebugMode,
+    accessToken: () async {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) return null;
+      return await user.getIdToken();
+    },
+  );
 }
 
 Future<void> _restoreUser() async {
@@ -80,7 +93,8 @@ Future<void> _restoreUser() async {
       await repo.create(fallback);
       store.set(fallback);
     }
-  } catch (_) {
+  } catch (e) {
+    debugPrint('_restoreUser failed: $e');
     store.set(fallback);
   }
 }

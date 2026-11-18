@@ -109,6 +109,13 @@
 
   "deliverHereButton": "Deliver here",
   "addressFormatError": "Enter city, street and house, separated by commas",
-  "addressLocateFailed": "Could not detect your address"
+  "addressLocateFailed": "Could not detect your address",
+
+  "addressNotFound": "Could not find this address on the map. Check the city, street and house",
+  "addressSaveFailed": "Could not save the address",
+
+  "orderCreated": "Order placed",
+  "orderEmptyCart": "Your cart is empty",
+  "orderFailed": "Could not place the order. Please try again"
 
 }

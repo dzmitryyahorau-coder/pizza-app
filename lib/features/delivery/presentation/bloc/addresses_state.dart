@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:pizza_app/features/delivery/data/models/address_model.dart';
+import 'package:pizza_app/features/delivery/data/models/address.dart';
 
 class AddressesState extends Equatable {
   const AddressesState({

@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:pizza_app/core/di/locator.dart';
 import 'package:pizza_app/core/navigation/cubit_refresh_listenable.dart';
 import 'package:pizza_app/features/delivery/presentation/screens/map_with_addresses_list_screen.dart';
+import 'package:pizza_app/features/delivery/presentation/widgets/enter_delivery_address.dart';
+import 'package:pizza_app/features/order/presentations/widgets/order_button.dart';
 import 'package:pizza_app/features/profile/presentation/bloc/profile_cubit.dart';
 import 'package:pizza_app/features/profile/presentation/screens/login_screen.dart';
 import 'package:pizza_app/features/profile/presentation/screens/register_screen.dart';
@@ -63,7 +65,10 @@ class AppRouter {
           GoRoute(
             path: 'cart',
             name: 'cart',
-            builder: (context, state) => const CartScreen(),
+            builder: (context, state) => CartScreen(
+              deliverySection: EnterDeliveryAddress(),
+              orderButton: OrderButton(),
+            ),
           ),
           GoRoute(
             path: 'profile-settings',
