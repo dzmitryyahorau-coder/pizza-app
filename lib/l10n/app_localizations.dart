@@ -661,6 +661,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not place the order. Please try again'**
   String get orderFailed;
+
+  /// No description provided for @doughTraditional.
+  ///
+  /// In en, this message translates to:
+  /// **'Traditional'**
+  String get doughTraditional;
+
+  /// No description provided for @doughThin.
+  ///
+  /// In en, this message translates to:
+  /// **'Thin'**
+  String get doughThin;
 }
 
 class _AppLocalizationsDelegate

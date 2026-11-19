@@ -20,6 +20,7 @@ class SupabaseProductDetailsRepository implements IProductDetailsRepository {
           sizes:products_product_sizes ( product_size ( id, cm, price ) ),
           toppings:products_toppings ( toppings ( id, toppings_key, weight_grams, price, image_asset ) ),
           ingredients:products_ingredients ( ingredient ( id, ingredient_key ) )
+          doughs:dough ( id, name_key, image_asset )
         ''')
         .eq('id', id)
         .maybeSingle();

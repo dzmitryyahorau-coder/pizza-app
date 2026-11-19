@@ -319,4 +319,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get orderFailed => 'Не удалось оформить заказ. Попробуйте ещё раз';
+
+  @override
+  String get doughTraditional => 'Традиционное';
+
+  @override
+  String get doughThin => 'Тонкое';
 }

@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Dough {
   const Dough({
     required this.id,
-    required this.name,
+    required this.nameKey,
     required this.imageAsset,
     this.extraPrice = 0,
   });
 
   final String id;
-  final String name;
+  final String nameKey;
   final String imageAsset;
   final int extraPrice;
 
@@ -28,16 +28,16 @@ class Dough {
   factory Dough.fromMap(Map<String, dynamic> data) {
     return Dough(
       id: data['id']?.toString() ?? '',
-      name: data['name']?.toString() ?? '',
-      imageAsset: data['imageAsset']?.toString() ?? '',
-      extraPrice: (data['extraPrice'] as num?)?.toInt() ?? 0,
+      nameKey: data['name_key']?.toString() ?? '',
+      imageAsset: data['image_asset']?.toString() ?? '',
+      extraPrice: (data['extra_price'] as num?)?.toInt() ?? 0,
     );
   }
 
   Map<String, dynamic> toMap() => {
     'id': id,
-    'name': name,
-    'imageAsset': imageAsset,
-    'extraPrice': extraPrice,
+    'name_key': nameKey,
+    'image_asset': imageAsset,
+    'extra_price': extraPrice,
   };
 }

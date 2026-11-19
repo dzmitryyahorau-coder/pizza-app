@@ -24,6 +24,8 @@ class TopingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
+    print(imgPath);
+
     return InkWell(
       onTap: onTap,
       child: SizedBox(

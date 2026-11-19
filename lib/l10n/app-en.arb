@@ -116,6 +116,9 @@
 
   "orderCreated": "Order placed",
   "orderEmptyCart": "Your cart is empty",
-  "orderFailed": "Could not place the order. Please try again"
+  "orderFailed": "Could not place the order. Please try again",
+
+  "doughTraditional": "Traditional",
+  "doughThin": "Thin"
 
 }

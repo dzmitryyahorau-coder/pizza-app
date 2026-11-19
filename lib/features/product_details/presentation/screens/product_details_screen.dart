@@ -9,6 +9,7 @@ import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/features/cart/bloc/cart_bloc.dart';
 import 'package:pizza_app/features/product_details/presentation/bloc/product_details_cubit.dart';
 import 'package:pizza_app/features/product_details/presentation/bloc/product_details_state.dart';
+import 'package:pizza_app/features/product_details/presentation/l10n/dough_l10n.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/customize_mode/customize_mode_view.dart';
 import 'package:pizza_app/features/product_details/presentation/widgets/default_mode/default_mode_view.dart';
 import 'package:pizza_app/shared/service/analytics_service.dart';
@@ -97,7 +98,7 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
       selectedToppingsJson: selectedToppings,
       removedIngredientsJson: removedIngredientsJson,
       sizeName: context.l10n.productSizeCm(state.selectedSize.cm),
-      doughName: state.selectedDough.name,
+      doughName: context.l10n.doughName(state.selectedDough.nameKey),
     );
 
     context.read<CartCubit>().addToCart(newItemToCart);
@@ -118,39 +119,42 @@ class _ProductDetailsViewState extends State<_ProductDetailsView> {
     final (draft, product) = (widget._state.draft, widget._state.product);
     final state = widget._state;
 
-    final body = _isCustomizeMode
-        ? CustomizeModeView(
-            title: product.name,
-            size: state.selectedSize,
-            toppings: product.toppings,
-            ingredients: product.ingredients,
-            selectedDough: state.selectedDough,
-            doughs: product.doughs,
-            price: state.unitPrice,
-            selectedToppingIds: state.draft.toppingIds,
-            removedIngredientIds: state.draft.removedIngredientIds,
-            onSelectDoughType: (d) =>
-                context.read<ProductDetailsCubit>().selectDough(d.id),
-            onSelectTopping: (t) =>
-                context.read<ProductDetailsCubit>().toggleTopping(t.id),
-            onTapIngredient: (i) =>
-                context.read<ProductDetailsCubit>().toggleIngredient(i.id),
-            onCloseView: _toggleCustomizationMode,
-            onPressAddToCart: () => _addProductToCart(state),
-          )
-        : DefaultModeView(
-            title: product.name,
-            description: product.description,
-            sizes: product.sizes,
-            selectedSize: state.selectedSize,
-            price: state.unitPrice,
-            onSelectedSize: (s) =>
-                context.read<ProductDetailsCubit>().selectSize(s.id),
-            onPressCustomizationButton: _toggleCustomizationMode,
-            onClose: () => context.pop(),
-            onPressAddToCart: () => _addProductToCart(state),
-          );
-
-    return Scaffold(body: body);
+    return Scaffold(
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 200),
+        child: _isCustomizeMode
+            ? CustomizeModeView(
+                title: product.name,
+                size: state.selectedSize,
+                toppings: product.toppings,
+                ingredients: product.ingredients,
+                selectedDough: state.selectedDough,
+                doughs: product.doughs,
+                price: state.unitPrice,
+                selectedToppingIds: state.draft.toppingIds,
+                removedIngredientIds: state.draft.removedIngredientIds,
+                onSelectDoughType: (d) =>
+                    context.read<ProductDetailsCubit>().selectDough(d.id),
+                onSelectTopping: (t) =>
+                    context.read<ProductDetailsCubit>().toggleTopping(t.id),
+                onTapIngredient: (i) =>
+                    context.read<ProductDetailsCubit>().toggleIngredient(i.id),
+                onCloseView: _toggleCustomizationMode,
+                onPressAddToCart: () => _addProductToCart(state),
+              )
+            : DefaultModeView(
+                title: product.name,
+                description: product.description,
+                sizes: product.sizes,
+                selectedSize: state.selectedSize,
+                price: state.unitPrice,
+                onSelectedSize: (s) =>
+                    context.read<ProductDetailsCubit>().selectSize(s.id),
+                onPressCustomizationButton: _toggleCustomizationMode,
+                onClose: () => context.pop(),
+                onPressAddToCart: () => _addProductToCart(state),
+              ),
+      ),
+    );
   }
 }

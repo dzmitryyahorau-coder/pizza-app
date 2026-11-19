@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/core/l10n_x.dart';
 import 'package:pizza_app/features/product_details/data/models/dough.dart';
+import 'package:pizza_app/features/product_details/presentation/l10n/dough_l10n.dart';
 
 class DoughButton extends StatelessWidget {
   const DoughButton({
@@ -21,6 +23,8 @@ class DoughButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Semantics(
       button: true,
       selected: isActive,
@@ -71,7 +75,7 @@ class DoughButton extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: isActive ? Colors.black : Colors.white,
                   ),
-                  child: Text(dough.name),
+                  child: Text(l10n.doughName(dough.nameKey)),
                 ),
               ),
             ],

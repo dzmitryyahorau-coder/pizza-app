@@ -88,6 +88,7 @@ class ProductDetails {
       Ingredient.fromMap,
     );
     final doughs = parseNestedList(map['doughs'], 'dough', Dough.fromMap);
+    print(doughs.first.nameKey);
     final category = Category.fromMap(map['category']);
 
     return ProductDetails(

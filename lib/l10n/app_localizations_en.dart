@@ -319,4 +319,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orderFailed => 'Could not place the order. Please try again';
+
+  @override
+  String get doughTraditional => 'Traditional';
+
+  @override
+  String get doughThin => 'Thin';
 }
