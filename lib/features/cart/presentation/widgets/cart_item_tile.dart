@@ -47,12 +47,18 @@ class CartItemTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                item.imageAsset,
-                width: _imageSize,
-                height: _imageSize,
-                fit: BoxFit.contain,
-              ),
+              item.imageAsset.isEmpty
+                  ? SizedBox(
+                      width: _imageSize,
+                      height: _imageSize,
+                      child: Icon(Icons.local_pizza, size: _imageSize * 0.6),
+                    )
+                  : Image.asset(
+                      item.imageAsset,
+                      width: _imageSize,
+                      height: _imageSize,
+                      fit: BoxFit.contain,
+                    ),
               const SizedBox(width: _imageGap),
               Expanded(
                 child: Padding(

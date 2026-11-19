@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza_app/core/l10n_x.dart';
+import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/delivery/presentation/bloc/addresses_cubit.dart';
 import 'package:pizza_app/features/delivery/presentation/bloc/addresses_state.dart';
 import 'package:pizza_app/features/delivery/presentation/widgets/addresses_list.dart';
 import 'package:pizza_app/features/delivery/presentation/widgets/new_address_form.dart';
-
-// TODO: перенести в тему приложения
-const _panelColor = Color(0xFF111318);
-const _chipColor = Color(0xFF282D39);
 
 class AddressesListPanelWidget extends StatefulWidget {
   const AddressesListPanelWidget({super.key});
@@ -31,6 +28,8 @@ class _AddressesListPanelState extends State<AddressesListPanelWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return PopScope(
       canPop: !_isAddingMode,
       onPopInvokedWithResult: (didPop, _) {
@@ -39,9 +38,9 @@ class _AddressesListPanelState extends State<AddressesListPanelWidget> {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          decoration: const BoxDecoration(
-            color: _panelColor,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          decoration: BoxDecoration(
+            color: colors.surface,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           ),
           padding: const EdgeInsets.only(
             top: AppSpacing.l,
@@ -63,7 +62,22 @@ class _AddressesListPanelState extends State<AddressesListPanelWidget> {
               Flexible(
                 child: SingleChildScrollView(
                   child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 300),
+                    reverseDuration: const Duration(milliseconds: 200),
+                    switchInCurve: Curves.easeOutCubic,
+                    switchOutCurve: Curves.easeInCubic,
+                    transitionBuilder: (child, animation) => FadeTransition(
+                      opacity: animation,
+                      child: SizeTransition(
+                        sizeFactor: animation,
+                        child: child,
+                      ),
+                    ),
+                    layoutBuilder: (currentChild, previousChildren) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [...previousChildren, ?currentChild],
+                    ),
                     child: _isAddingMode
                         ? NewAddressForm(
                             key: const ValueKey('form'),
@@ -90,7 +104,7 @@ class _PanelHandle extends StatelessWidget {
       width: 40,
       height: 4,
       decoration: BoxDecoration(
-        color: Colors.grey[700],
+        color: context.appColors.onSurfaceVariant,
         borderRadius: BorderRadius.circular(2),
       ),
     );
@@ -111,34 +125,43 @@ class _PanelHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final colors = context.appColors;
 
     return Row(
       children: [
         if (isAddingMode)
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            icon: Icon(Icons.arrow_back, color: colors.onSurface),
             onPressed: onBack,
           ),
         Expanded(
-          child: Text(
-            isAddingMode ? l10n.newAddressButton : l10n.myAddressesHead,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            layoutBuilder: (currentChild, previousChildren) => Stack(
+              alignment: Alignment.centerLeft,
+              children: [...previousChildren, ?currentChild],
+            ),
+            child: Text(
+              isAddingMode ? l10n.newAddressButton : l10n.myAddressesHead,
+              key: ValueKey(isAddingMode),
+              style: TextStyle(
+                color: colors.onSurface,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
         if (!isAddingMode)
           TextButton.icon(
             onPressed: onNewAddress,
-            icon: const Icon(Icons.add, color: Colors.white, size: 16),
+            icon: Icon(Icons.add, color: colors.onChip, size: 16),
             label: Text(
               l10n.newAddressButton,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: colors.onChip),
             ),
             style: TextButton.styleFrom(
-              backgroundColor: _chipColor,
+              backgroundColor: colors.chipBackground,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),

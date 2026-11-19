@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pizza_app/core/l10n_x.dart';
+import 'package:pizza_app/core/theme/app_colors.dart';
 import 'package:pizza_app/core/theme/app_spacing.dart';
 import 'package:pizza_app/features/delivery/data/models/address.dart';
 import 'package:pizza_app/features/delivery/presentation/bloc/addresses_cubit.dart';
@@ -106,7 +107,7 @@ class _NewAddressFormState extends State<NewAddressForm> {
     final l10n = context.l10n;
 
     final text = _addressCtrl.text.trim();
-    final parsed = _parseAddress(text)!; // валидатор это гарантирует
+    final parsed = _parseAddress(text)!;
 
     setState(() => _isSaving = true);
 
@@ -120,7 +121,7 @@ class _NewAddressFormState extends State<NewAddressForm> {
     }
 
     final address = Address(
-      userId: '', // repository will set real user Id
+      userId: '',
       label: AddressLabel.other,
       city: parsed.city,
       street: parsed.street,
@@ -148,7 +149,11 @@ class _NewAddressFormState extends State<NewAddressForm> {
   @override
   void dispose() {
     _addressCtrl.dispose();
-
+    _entranceCtrl.dispose();
+    _floorCtrl.dispose();
+    _intercomCtrl.dispose();
+    _flatCtrl.dispose();
+    _commentCtrl.dispose();
     super.dispose();
   }
 
@@ -159,12 +164,14 @@ class _NewAddressFormState extends State<NewAddressForm> {
     int maxLines = 1,
     String? Function(String?)? validator,
   }) {
+    final colors = context.appColors;
+
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(color: colors.onSurface),
       decoration: InputDecoration(hintText: hint),
     );
   }
@@ -183,9 +190,8 @@ class _NewAddressFormState extends State<NewAddressForm> {
           _buildField(
             controller: _addressCtrl,
             hint: l10n.addressFieldHint,
-            validator: (v) => _parseAddress(v ?? '') == null
-                ? context.l10n.addressFormatError
-                : null,
+            validator: (v) =>
+                _parseAddress(v ?? '') == null ? l10n.addressFormatError : null,
           ),
           Row(
             spacing: 12,
@@ -223,11 +229,10 @@ class _NewAddressFormState extends State<NewAddressForm> {
           ),
           _buildField(controller: _commentCtrl, hint: l10n.courierCommentHint),
           const SizedBox(height: AppSpacing.xl),
-
           Padding(
-            padding: EdgeInsetsGeometry.directional(bottom: AppSpacing.l),
+            padding: const EdgeInsetsDirectional.only(bottom: AppSpacing.l),
             child: PrimaryFilledButton(
-              onPressed: _onSavePressed,
+              onPressed: _isSaving ? null : _onSavePressed,
               label: l10n.deliverHereButton,
             ),
           ),
